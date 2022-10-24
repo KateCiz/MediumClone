@@ -58,7 +58,7 @@ const SignUpForm = () => {
         <label>First Name</label>
         <input
           type='text'
-          name='firstName'
+          name='first_name'
           onChange={updateFirstName}
           value={first_name}
         ></input>
@@ -67,7 +67,7 @@ const SignUpForm = () => {
         <label>Last Name</label>
         <input
           type='text'
-          name='lastName'
+          name='last_name'
           onChange={updateLastName}
           value={last_name}
         ></input>
