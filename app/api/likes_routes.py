@@ -49,7 +49,7 @@ def like_a_comment(comment_Id):
     comment = bool(Comment.query.filter_by(id=comment_Id).first())
 
     # check if like already exists
-    like = Like.query.filter(Like.user_Id == cur_user,
+    like = Like.query.filter(Like.user_id == cur_user,
                                Like.comment_id == int(comment_Id))
     exists = [likes.to_dict_comment() for likes in like]
 
@@ -74,4 +74,3 @@ def like_a_comment(comment_Id):
                 return jsonify({'message': 'Like could not be found'}), 404
         else:
             return jsonify({'message': 'Comment could not be found'}), 404
-
