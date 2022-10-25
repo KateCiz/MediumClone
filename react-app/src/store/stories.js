@@ -65,4 +65,98 @@ export const getAllStories = () => async (dispatch) => {
 };
 
     //GET User Stories
-export const getUserStories
+export const userStories = () => async (dispatch) => {
+    const res = await fetch('/api/profiles/:userId');
+
+    if(res.ok){
+        const data = await res.json();
+        dispatch(getUserStories(data.Stories));
+    }
+};
+
+    //Get SINGLE STORY
+export const getSingleStory = (storyId) => async(dispatch) =>  {
+    const res = await fetch(`/api/stories/${storyId}`);
+
+    if(res.ok){
+        const story = await res.json();
+        dispatch(getStoryDetails(story));
+        return res
+    }
+};
+
+    //CREATE STORY
+export const createNewStory = (story) => async(dispatch) =>  {
+    const {title, content, image_url} =  story;
+
+    const res = await fetch('/api/stories', {
+        method: 'POST',
+        body: JSON.stringify({
+            title,
+            content,
+            image_url
+        }),
+    });
+
+    if(res.ok){
+        const newStory = await res.json();
+        dispatch(addStory(newStory));
+        return res
+    }
+};
+
+    //UPDATE STORY
+export const editStory = (story, id) => async(dispatch) =>  {
+    const res = await fetch(`/api/stories/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(story),
+    });
+
+    if(res.ok){
+        const updatedStory = await res.json();
+        dispatch(updateStory(updatedStory));
+        return res
+    }
+};
+
+    //DELETE STORY
+export const deleteAStory = (storyId) => async (dispatch) => {
+    const res = await fetch(`/api/stories/${storyId}`, {
+        method: 'DELETE'
+    });
+    const response = await res.json();
+    if(res.status === 200){
+        dispatch(deleteStory(storyId));
+    }
+    return response;
+};
+
+const initialState = {};
+
+//Stories REDUCER
+export default function storyReducer(state = initialState, action){
+    let newState = {...state}
+    switch(action.type){
+        case  GET_ALL_STORIES:
+            action.stories.forEach((story) => newState[story.id] = story);
+            return newState;
+        case GET_USER_STORIES:
+            let userStories = {};
+            action.stories.forEach((story) => userStories[story.id] = story);
+            return userStories;
+        case GET_STORY_DETAILS:
+            newState[action.story.id] = action.story
+            return newState;
+        case CREATE_STORY:
+            newState[action.story.id] = action.story
+            return newState;
+        case UPDATE_STORY:
+            newState[action.story.id] = action.story
+            return  newState;
+        case DELETE_STORY:
+            delete newState[action.storyId];
+            return newState;
+        default:
+            return state;
+        };
+};
