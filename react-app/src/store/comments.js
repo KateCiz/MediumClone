@@ -1,11 +1,17 @@
 //all actions specific to COMMENTS Resource
 
+//imports
+import { csrfFetch } from "./csrf";
+
 //constants
 const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
 const SINGLE_COMMENT = 'GET_SINGLE_COMMENT'
 const CREATE_COMMENT = 'CREATE_COMMENT';
 const UPDATE_COMMENT = 'UPDATE_COMMENT';
 const DELETE_COMMENT = 'DELETE_COMMENT';
+const LIKE_COMMENT = 'LIKE_COMMENT';
+const DISLIKE_COMMENT = 'DISLIKE_COMMENT';
+
 
 //ACTION CREATORS
 const getComments = (comments) => {
@@ -43,11 +49,25 @@ const deleteComment = (commentId) => {
     }
 };
 
+const LikeComment = (commentId) => {
+    return {
+        type: LIKE_COMMENT,
+        commentId
+    }
+};
+
+const DisLikeComment = (commentId) => {
+    return {
+        type: DISLIKE_COMMENT,
+        commentId
+    }
+};
+
 //Thunks
 
     //GET ALL Comments
 export const getAllComments = (storyId) => async (dispatch) => {
-    const res = await fetch(`/api/stories/${storyId}/comments`);
+    const res = await csrfFetch(`/api/stories/${storyId}/comments`);
 
     if(res.ok){
         const comments = await res.json();
@@ -58,7 +78,7 @@ export const getAllComments = (storyId) => async (dispatch) => {
 
 //SINGLE COMMENT
 export const getComment = (commentId) => async(dispatch) => {
-    const res = await fetch(`/api/comments/${commentId}`)
+    const res = await csrfFetch(`/api/comments/${commentId}`)
 
     if(res.ok){
         const comment =  await res.json();
@@ -70,7 +90,7 @@ export const getComment = (commentId) => async(dispatch) => {
 export const createComment = (comment, storyId) => async(dispatch) =>  {
     const {content} =  comment;
 
-    const res = await fetch(`/api/stories/${storyId}/comments`, {
+    const res = await csrfFetch(`/api/stories/${storyId}/comments`, {
         method: 'POST',
         body: JSON.stringify({
             content
@@ -88,7 +108,7 @@ export const createComment = (comment, storyId) => async(dispatch) =>  {
 export const editStory = (comment, commentId) => async(dispatch) =>  {
     const {content} = comment;
 
-    const res = await fetch(`/api/comments/${commentId}`, {
+    const res = await csrfFetch(`/api/comments/${commentId}`, {
         method: 'PUT',
         body: JSON.stringify(content),
     });
@@ -102,7 +122,7 @@ export const editStory = (comment, commentId) => async(dispatch) =>  {
 
     //DELETE Comment
 export const deleteAComment = (commentId) => async (dispatch) => {
-    const res = await fetch(`/api/comments/${commentId}`, {
+    const res = await csrfFetch(`/api/comments/${commentId}`, {
         method: 'DELETE'
     });
     const response = await res.json();

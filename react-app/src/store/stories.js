@@ -1,5 +1,8 @@
 //all actions specific to Stories Resource
 
+//imports
+import { csrfFetch } from "./csrf";
+
 //constants
 const GET_ALL_STORIES = 'GET_ALL_STORIES';
 const GET_USER_STORIES ='GET_USER_STORIES';
@@ -7,6 +10,8 @@ const GET_STORY_DETAILS = 'GET_STORY_DETAILS';
 const CREATE_STORY = 'CREATE_STORY';
 const UPDATE_STORY = 'UPDATE_STORY';
 const DELETE_STORY = 'DELETE_STORY';
+const LIKE_STORY = 'LIKE_STORY';
+const DISLIKE_STORY = 'DISLIKE_STORY';
 
 //ACTION CREATORS
 const getStories = (stories) => {
@@ -51,11 +56,25 @@ const deleteStory = (storyId) => {
     }
 };
 
+const LikeStory = (storyId) => {
+    return {
+        type: LIKE_STORY,
+        storyId
+    }
+};
+
+const DisLikeStory = (storyId) => {
+    return {
+        type: DISLIKE_STORY,
+        storyId
+    }
+};
+
 //Thunks
 
     //GET ALL STORIES
 export const getAllStories = () => async (dispatch) => {
-    const res = await fetch('/api/stories');
+    const res = await csrfFetch('/api/stories');
 
     if(res.ok){
         const data = await res.json();
@@ -66,7 +85,7 @@ export const getAllStories = () => async (dispatch) => {
 
     //GET User Stories
 export const userStories = () => async (dispatch) => {
-    const res = await fetch('/api/profiles/:userId');
+    const res = await csrfFetch('/api/profiles/:userId');
 
     if(res.ok){
         const data = await res.json();
@@ -76,7 +95,7 @@ export const userStories = () => async (dispatch) => {
 
     //Get SINGLE STORY
 export const getSingleStory = (storyId) => async(dispatch) =>  {
-    const res = await fetch(`/api/stories/${storyId}`);
+    const res = await csrfFetch(`/api/stories/${storyId}`);
 
     if(res.ok){
         const story = await res.json();
@@ -89,7 +108,7 @@ export const getSingleStory = (storyId) => async(dispatch) =>  {
 export const createNewStory = (story) => async(dispatch) =>  {
     const {title, content, image_url} =  story;
 
-    const res = await fetch('/api/stories', {
+    const res = await csrfFetch('/api/stories', {
         method: 'POST',
         body: JSON.stringify({
             title,
@@ -107,7 +126,7 @@ export const createNewStory = (story) => async(dispatch) =>  {
 
     //UPDATE STORY
 export const editStory = (story, id) => async(dispatch) =>  {
-    const res = await fetch(`/api/stories/${id}`, {
+    const res = await csrfFetch(`/api/stories/${id}`, {
         method: 'PUT',
         body: JSON.stringify(story),
     });
@@ -121,7 +140,7 @@ export const editStory = (story, id) => async(dispatch) =>  {
 
     //DELETE STORY
 export const deleteAStory = (storyId) => async (dispatch) => {
-    const res = await fetch(`/api/stories/${storyId}`, {
+    const res = await csrfFetch(`/api/stories/${storyId}`, {
         method: 'DELETE'
     });
     const response = await res.json();

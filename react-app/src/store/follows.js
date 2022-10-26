@@ -1,5 +1,8 @@
 //FOLLOWS RESOURCE
 
+//imports
+import { csrfFetch } from "./csrf";
+
 //Constants
 const GET_MY_FOLLOWING = 'GET_MY_FOLLOWING'
 const GET_FOLLOWING = 'GET_FOLLOWING'
@@ -30,14 +33,14 @@ const getFollowers = (follows)  => {
     }
 };
 
-const followUser = (follow, userId) => {
+const followUser = (userId) => {
     return {
         type: FOLLOW,
-        payload: follow, userId
+        payload: userId
     }
 };
 
-const unFollowUser = (follow, userId) => {
+const unFollowUser = (userId) => {
     return {
         type: UNFOLLOW,
         userId
@@ -45,5 +48,28 @@ const unFollowUser = (follow, userId) => {
 
 };
 //Thunks
+//Logged in User's follows
+
+//FOLLOW User
+export const followAUser = (userId) => async(dispatch) => {
+    const res  = await csrfFetch(`/profiles/${userId}/follows`, {
+        method: 'POST'
+    });
+
+    if(res.ok){
+        dispatch(followUser(userId))
+    }
+};
+
+//UNFOLLOW user
+export const unFollowAUser = (userId) => async(dispatch) => {
+    const res  = await csrfFetch(`/profiles/${userId}/follows`, {
+        method: 'PUT'
+    });
+
+    if(res.ok){
+        dispatch(unFollowUser(userId))
+    }
+};
 
 //Reducer
