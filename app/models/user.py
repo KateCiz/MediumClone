@@ -56,3 +56,35 @@ class User(db.Model, UserMixin):
             'image_profile_url': self.image_profile_url,
             'created_date': self.created_date
         }
+
+    def author_preview_to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'image_profile_url': self.image_profile_url
+        }
+
+    def author_side_bar_to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'bio': self.bio,
+            'image_profile_url': self.image_profile_url,
+            'num_followers': self.num_followers(),
+            'num_follows': self.num_follows()
+        }
+
+    def list_followers(self):
+        return self.followed.all()
+
+    def list_follows(self):
+        return self.follows.all()
+
+    def num_followers(self):
+        return len(self.list_followers())
+    
+    def num_follows(self):
+        return len(self.list_follows())
+    
