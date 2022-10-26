@@ -1,0 +1,24 @@
+.user-pic {
+  height: 50px;
+  width: auto;
+}
+
+.SideBar {
+  
+  position: fixed;
+  height: 100%;
+  width: 75px;
+  z-index: 1;
+  top: 3.4em;
+  background-color: aqua;
+  padding-top: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    list-style: none;
+}
+
+.navbaricon {
+    color: #292929;
+}
