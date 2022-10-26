@@ -9,7 +9,7 @@ story_routes = Blueprint('stories', __name__)
 
 #DONE
 # get all stories
-@story_routes.route('/stories')
+@story_routes.route('/')
 def get_all_stories():
     stories = Story.query.order_by(Story.created_date.desc()).all()
     if not bool(stories): 
@@ -18,7 +18,7 @@ def get_all_stories():
 
 #DONE
 # create a story
-@story_routes.route('/stories', methods=['POST'])
+@story_routes.route('', methods=['POST'])
 @login_required
 def create_story():
     form = StoryEditorForm()
@@ -39,7 +39,7 @@ def create_story():
 
 #DONE
 # get a single story
-@story_routes.route('/stories/<int:story_id>')
+@story_routes.route('/<int:story_id>')
 def get_one_story(story_id):
     story = Story.query.filter(Story.id == story_id).first()
     if story:
@@ -50,7 +50,7 @@ def get_one_story(story_id):
 
 #DELETE IS DONE, EDIT IS DONE
 # edit & delete a single story 
-@story_routes.route('/stories/<int:story_id>', methods=['PUT', 'DELETE'])
+@story_routes.route('/<int:story_id>', methods=['PUT', 'DELETE'])
 @login_required
 def update_one_story(story_id):
     if request.method == 'PUT':

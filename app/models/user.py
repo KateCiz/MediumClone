@@ -100,12 +100,6 @@ class User(db.Model, UserMixin):
             'num_follows': self.num_follows()
         }
 
-    def list_followers(self):
-        return self.followed.all()
-
-    def list_follows(self):
-        return self.follows.all()
-
     def num_followers(self):
         return len(self.list_followers())
     
