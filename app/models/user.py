@@ -2,6 +2,7 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 import datetime
+from .story import Story
 
 follows = db.Table(
     "follows",
@@ -46,6 +47,29 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def is_following(self, user):
+        return self.followed.filter(follows.c.followed_user_id == user.id).count() > 0
+
+    def unfollow(self, user):
+        if(self.is_following(user)):
+            self.followed.remove(user)
+
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def list_followers(self):
+        return self.followed.all()
+
+    def list_follows(self):
+        return self.follows.all()
+
+    def followed_stories(self):
+        return Story.query.join(
+            follows, (follows.c.followed_user_id == Story.user_id)).filter(
+                follows.c.user_id == self.id).order_by(
+                    Story.created_date.desc())
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -56,3 +80,29 @@ class User(db.Model, UserMixin):
             'image_profile_url': self.image_profile_url,
             'created_date': self.created_date
         }
+
+    def author_preview_to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'image_profile_url': self.image_profile_url
+        }
+
+    def author_side_bar_to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'bio': self.bio,
+            'image_profile_url': self.image_profile_url,
+            'num_followers': self.num_followers(),
+            'num_follows': self.num_follows()
+        }
+
+    def num_followers(self):
+        return len(self.list_followers())
+    
+    def num_follows(self):
+        return len(self.list_follows())
+    
