@@ -2,6 +2,7 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 import datetime
+from .story import Story
 
 follows = db.Table(
     "follows",
@@ -45,6 +46,29 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+    def is_following(self, user):
+        return self.followed.filter(follows.c.followed_user_id == user.id).count() > 0
+
+    def unfollow(self, user):
+        if(self.is_following(user)):
+            self.followed.remove(user)
+
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def list_followers(self):
+        return self.followed.all()
+
+    def list_follows(self):
+        return self.follows.all()
+
+    def followed_stories(self):
+        return Story.query.join(
+            follows, (follows.c.followed_user_id == Story.user_id)).filter(
+                follows.c.user_id == self.id).order_by(
+                    Story.created_date.desc())
 
     def to_dict(self):
         return {

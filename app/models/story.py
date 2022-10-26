@@ -14,3 +14,13 @@ class Story(db.Model):
     story_likes = db.relationship("Like", back_populates = 'story')
     comments = db.relationship("Comment", back_populates = 'story')
     user = db.relationship("User", back_populates = 'my_stories')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'title': self.title,
+            'content': self.content,
+            'image_url': self.image_url,
+            'created_date': self.created_date
+        }
