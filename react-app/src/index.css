@@ -1,1 +1,8 @@
 /* TODO Add site wide styles */
+
+* {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px;
+}
+
+
