@@ -1,0 +1,15 @@
+.global-logout-btn {
+  align-items: center;
+  background-color: #292929;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  justify-content: center;
+  border-radius: 100px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  font-family: 'Roboto Condensed', sans-serif;
+}

@@ -1,0 +1,100 @@
+.signup-container {
+  height: 100% !important;
+  width: 100% !important;
+  background-color: white;
+  margin: auto;
+  box-shadow: 0px 3px 3px darkgray;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.signup-modal-heading {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 28px;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.exit-icon {
+  display: block;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.switch-to-signin-btn {
+    margin-top: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgb(26,137,23);
+    font-size: 16px;
+}
+
+.switch-to-login {
+    display: block;
+    margin: auto;
+    width: 100%;
+    font-size: 16px;
+}
+
+
+.fa-xmark {
+  background: none;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 20px;
+}
+
+.signup-input {
+  display: block;
+  width: 40%;
+  margin: auto;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.signup-input:focus {
+  border-bottom: 1px solid black;
+}
+
+.signup-btn-modal {
+  align-items: center;
+  background-color: #292929;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  justify-content: center;
+  border-radius: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: "Roboto Condensed", sans-serif;
+  margin-top: 40px;
+}
+
+.signup-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  margin: auto;
+}
+
+.signup-form {
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+}
