@@ -37,7 +37,7 @@ def get_follows(user_id):
         return jsonify({'message': "user could not be found"}), 404
 
 # follow a user where user_id in the route is the user to follow
-@follow_routes.route('/<int:user_id>/follow', methods=["POST"])
+@follow_routes.route('/<int:user_id>/follows', methods=["POST"])
 @login_required
 def follow_user(user_id):
     user = User.query.get(user_id)
@@ -52,7 +52,7 @@ def follow_user(user_id):
 
 
 # unfollow a user where user_id in the route is the user to unfollow
-@follow_routes.route('/<int:user_id>/unfollow', methods=["DELETE"])
+@follow_routes.route('/<int:user_id>/unfollows', methods=["DELETE"])
 @login_required
 def unfollow_user(user_id):
     user = User.query.get(user_id)
