@@ -4,23 +4,16 @@
 import { csrfFetch } from "./csrf";
 
 //Constants
-const GET_MY_FOLLOWING = 'GET_MY_FOLLOWING'
-const GET_FOLLOWING = 'GET_FOLLOWING'
+const GET_FOLLOWS = 'GET_FOLLOWS'
 const GET_FOLLOWERS = 'GET_FOLLOWERS'
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 
 //Action Creators
-const getMyFollowing = (follows) => {
-    return {
-        type: GET_MY_FOLLOWING,
-        follows
-    }
-};
 
-const getFollowing = (follows) => {
+const getFollows = (follows) => {
     return {
-        type: GET_FOLLOWING,
+        type: GET_FOLLOWS,
         follows
 
     }
@@ -48,16 +41,35 @@ const unFollowUser = (userId) => {
 
 };
 //Thunks
-//Logged in User's follows
+//GET FOLLOWS
+export const getUserFollows = (userId) => async(dispatch) => {
+    const res = await csrfFetch(`/profiles/${userId}/follows`);
+
+    if(res.ok){
+        const follows = await res.json();
+        dispatch(getFollows(follows.Follows))
+    }
+};
+
+//GET FOLLOWERS
+export const getUserFollowers = (userId) => async(dispatch) => {
+    const res = await csrfFetch(`/profiles/${userId}/follows`);
+
+    if(res.ok){
+        const followers = await res.json();
+        dispatch(getFollowers(followers.Followers))
+    }
+};
 
 //FOLLOW User
 export const followAUser = (userId) => async(dispatch) => {
     const res  = await csrfFetch(`/profiles/${userId}/follows`, {
         method: 'POST'
     });
-
     if(res.ok){
+        const data = await res.json();
         dispatch(followUser(userId))
+        return data
     }
 };
 
@@ -68,8 +80,27 @@ export const unFollowAUser = (userId) => async(dispatch) => {
     });
 
     if(res.ok){
+        const data = await res.json();
         dispatch(unFollowUser(userId))
+        return data
     }
 };
 
 //Reducer
+export default function followsReducer(state = initialState, action){
+    let newState = {...state}
+    switch(action.type){
+        case GET_FOLLOWS:
+            //TODO
+        case GET_FOLLOWERS:
+            newState[action.comment.id] = action.comment
+            return newState;
+        case FOLLOW:
+            //add this
+        case UNFOLLOW:
+            //add this
+            return state;
+        default:
+            return state
+        };
+};

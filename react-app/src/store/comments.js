@@ -10,7 +10,7 @@ const CREATE_COMMENT = 'CREATE_COMMENT';
 const UPDATE_COMMENT = 'UPDATE_COMMENT';
 const DELETE_COMMENT = 'DELETE_COMMENT';
 const LIKE_COMMENT = 'LIKE_COMMENT';
-const DISLIKE_COMMENT = 'DISLIKE_COMMENT';
+const UNLIKE_COMMENT = 'UNLIKE_COMMENT';
 
 
 //ACTION CREATORS
@@ -56,9 +56,9 @@ const LikeComment = (commentId) => {
     }
 };
 
-const DisLikeComment = (commentId) => {
+const UnLikeComment = (commentId) => {
     return {
-        type: DISLIKE_COMMENT,
+        type: UNLIKE_COMMENT,
         commentId
     }
 };
@@ -120,6 +120,32 @@ export const editStory = (comment, commentId) => async(dispatch) =>  {
     }
 };
 
+//LIKE Comment
+export const likeComment = (commentId) => async(dispatch) => {
+    const res = await csrfFetch(`/api/comments/${commentId}/likes`, {
+        method: 'POST',
+    });
+
+    if(res.ok){
+        const data = await res.json();
+        dispatch(LikeComment(data.comment_id))
+    }
+    return data
+};
+
+//UNLIKE COMMENT
+export const unlikeStory = (commentId) => async(dispatch) => {
+    const res = await csrfFetch(`/api/comments/${commentId}/likes`, {
+        method: 'DELETE',
+    });
+
+    if(res.ok){
+        const data = await res.json();
+        dispatch(UnLikeComment(data.comment_id))
+    }
+    return data
+};
+
     //DELETE Comment
 export const deleteAComment = (commentId) => async (dispatch) => {
     const res = await csrfFetch(`/api/comments/${commentId}`, {
@@ -152,6 +178,10 @@ export default function commentsReducer(state = initialState, action){
         case UPDATE_COMMENT:
             newState[action.comment.id] = action.comment
             return  newState;
+        case LIKE_COMMENT:
+            //add this
+        case UNLIKE_COMMENT:
+            //add this
         case DELETE_COMMENT:
             delete newState[action.commentId];
             return newState;
