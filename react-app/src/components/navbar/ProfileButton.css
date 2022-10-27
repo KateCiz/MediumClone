@@ -1,0 +1,48 @@
+.default-profile {
+  width: 28px;
+  height: auto;
+  margin-left: 15px;
+  margin-top: 4px;
+  margin-right: 2px;
+  margin-bottom: 4px;
+}
+
+.flyout-container {
+  display: inline-block;
+  position: relative;
+}
+
+.flyout {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.user-pic {
+  width: 40px;
+  height: auto;
+  margin-bottom: 30px;
+}
+
+.profile-dropdown {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  min-width: 200px;
+  min-height: 250px;
+  gap: 10px;
+  left: 0px;
+  bottom: 60px;
+  border: 1px lightgray solid;
+}
+
+.users-email,
+.Home-btn-link,
+.my-spots-link {
+  margin-top: 15px;
+  margin-right: 30px;
+  font-family: Tahoma;
+  color: black;
+}
