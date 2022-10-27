@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import './SignUpForm.css'
 
-const SignUpForm = ({closeModal}) => {
+const SignUpForm = ({closeModal, switchPage}) => {
   const [errors, setErrors] = useState([]);
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
@@ -48,6 +48,10 @@ const SignUpForm = ({closeModal}) => {
     closeModal();
   }
 
+  const switchToLogin = (e) => {
+    switchPage();
+  };
+
   if (user) {
     return <Redirect to='/' />;
   }
@@ -65,7 +69,7 @@ const SignUpForm = ({closeModal}) => {
           ))}
         </div>
         <div>
-          <label className="signup-label">Your Email</label>
+          <label className="signup-label">Your email</label>
           <input
             className="signup-input"
             type="text"
@@ -75,7 +79,7 @@ const SignUpForm = ({closeModal}) => {
           ></input>
         </div>
         <div>
-          <label className="signup-label">First Name</label>
+          <label className="signup-label">First name</label>
           <input
             className="signup-input"
             type="text"
@@ -85,7 +89,7 @@ const SignUpForm = ({closeModal}) => {
           ></input>
         </div>
         <div>
-          <label className="signup-label">Last Name</label>
+          <label className="signup-label">Last name</label>
           <input
             className="signup-input"
             type="text"
@@ -105,7 +109,7 @@ const SignUpForm = ({closeModal}) => {
           ></input>
         </div>
         <div>
-          <label className="signup-label">Confirm Password</label>
+          <label className="signup-label">Confirm password</label>
           <input
             className="signup-input"
             type="password"
@@ -121,7 +125,7 @@ const SignUpForm = ({closeModal}) => {
       </form>
 
       <div className='switch-to-login'>
-        <span>Already have an account ?<button className="switch-to-signin-btn">Sign in</button></span>
+        <span>Already have an account ?<button className="switch-to-signin-btn" onClick={switchToLogin}>Sign in</button></span>
       </div>
     </div>
   );

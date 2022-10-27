@@ -18,7 +18,17 @@ function SignupFormModal() {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <SignUpForm closeModal={() => setShowModal(false)} />
+          {switchPage ? (
+            <SignUpForm
+              closeModal={() => setShowModal(false)}
+              switchPage={() => setSwitchPage(!switchPage)}
+            />
+          ) : (
+            <LoginForm
+              closeModal={() => setShowModal(false)}
+              switchPage={() => setSwitchPage(!switchPage)}
+            />
+          )}
         </Modal>
       )}
     </>

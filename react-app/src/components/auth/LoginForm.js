@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css'
 
-const LoginForm = ({closeModal}) => {
+const LoginForm = ({closeModal, switchPage}) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,6 +31,12 @@ const LoginForm = ({closeModal}) => {
       closeModal();
   };
 
+  const switchToSignUp = (e) => {
+    switchPage();
+  }
+
+
+
   if (user) {
     return <Redirect to='/' />;
   }
@@ -49,7 +55,7 @@ const LoginForm = ({closeModal}) => {
         </div>
         <div>
           <label htmlFor="email" className="login-label">
-            Email
+            Your email
           </label>
           <input
             className="login-input"
@@ -78,7 +84,7 @@ const LoginForm = ({closeModal}) => {
       <div className="switch-to-signup">
         <span>
           No Account?
-          <button className="switch-to-signup-btn">Create one</button>
+          <button className="switch-to-signup-btn" onClick={switchToSignUp}>Create one</button>
         </span>
       </div>
     </div>
