@@ -9,7 +9,7 @@ const NavBar = () => {
 
   return (
     <>
-    { sessionUser ? (<VerticalNavBar />) : (<HorizontalNavBar />)}
+    { sessionUser ? (<VerticalNavBar user={sessionUser}/>) : (<HorizontalNavBar />)}
     </>
   );
 }

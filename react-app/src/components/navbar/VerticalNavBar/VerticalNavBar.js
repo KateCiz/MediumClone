@@ -1,10 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import LogoutButton from "../../auth/LogoutButton";
+import { useSelector } from "react-redux";
 import "./VerticalNavBar.css";
 import { FiEdit, FiBookmark, FiHome } from "react-icons/fi";
+import ProfileButton from "../ProfileButton"
 
-const VerticalNavBar = () => {
+const VerticalNavBar = ({user}) => {
+
   return (
     <div className="SideBar">
       <nav>
@@ -49,12 +51,7 @@ const VerticalNavBar = () => {
             </NavLink>
           </li>
         </ul>
-        <button className="profile-btn">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
-            className="user-pic"
-          ></img>
-        </button>
+        <ProfileButton user={user} />
       </nav>
     </div>
   );
