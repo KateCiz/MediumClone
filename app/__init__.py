@@ -12,6 +12,7 @@ from .api.story_routes import story_routes
 from .api.likes_routes import like_routes
 from .api.follow_routes import follow_routes
 from .api.feed_routes import feed_routes
+from .api.comment_routes import comment_routes
 
 from .seeds import seed_commands
 
@@ -37,8 +38,9 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(story_routes, url_prefix='/api/stories')
 app.register_blueprint(like_routes, url_prefix='/api')
-app.register_blueprint(follow_routes, url_prefix='/api/follows')
+app.register_blueprint(follow_routes, url_prefix='/api/profiles')
 app.register_blueprint(feed_routes, url_prefix='/api/feed')
+app.register_blueprint(comment_routes, url_prefix='/api')
 db.init_app(app)
 Migrate(app, db)
 
