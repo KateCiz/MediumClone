@@ -19,3 +19,13 @@ class Comment(db.Model):
     user = db.relationship("User", back_populates= 'my_comments')
     story = db.relationship("Story", back_populates = 'comments')
     comment_likes = db.relationship("Like", back_populates= 'comment')
+
+    def user_comments_to_dict(self):
+        return {
+            'id': self.id,
+            'content': self.content,
+            'story_id': self.story_id,
+            'parent_id': self.parent_id,
+            'created_date': self.created_date,
+            'updated_date': self.updated_date
+        }
