@@ -60,7 +60,7 @@ def create_story_comment(story_id):
     return jsonify({'message': 'Story could not be found'}), 404
 
 
-@comment_routes.route('/comments<int:comment_id>/replies', methods=['POST'])
+@comment_routes.route('/comments/<int:comment_id>/replies', methods=['POST'])
 @login_required
 def reply_to_a_comment(comment_id):
   curr_user_id = current_user.id
@@ -83,25 +83,37 @@ def reply_to_a_comment(comment_id):
     return jsonify({'message': 'Comment could not be found'}), 404
 
 
+@comment_routes.route('/comments/<int:comment_id>', methods=['PUT'])
+@login_required
+def update_a_comment(comment_id):
+  curr_user_id = current_user.id
+  comment = Comment.query.get(comment_id)
+  form = CommentForm()
+  if comment:
+    if form.validate_on_submit:
+      if comment.user_id == curr_user_id:
+        comment.content = form.data['content']
+        db.session.commit()
+        return comment.to_dict()
+      else:
+        return {'errors': ['Unauthorized']}
+    else:
+      return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+  else:
+    return jsonify({'message': 'Comment could not be found'}), 404
 
 
-
-
-# @comment_routes.route('/comments/test')
-# def test():
-#   # story = Story(user_id=1, title='wow', content='heyyy')
-#   # db.session.add(story)
-#   # print(story)
-#   # db.session.commit()
-#   # return story.title
-#   user = User.query.get(4)
-#   story = Story.query.get(1)
-#   print(user.my_stories[0].title)
-#   com = Comment(user_id=4, content='asdf')
-#   story.comments.append(com)
-#   # user.my_comments.append(com)
-#   # user.my_stories[0].comments.append(com)
-#   db.session.add(com)
-#   db.session.commit()
-#   com2 = Comment.query.get(4)
-#   return com2.replies[0].content
+@comment_routes.route('/comments/<int:comment_id>', methods=['DELETE'])
+@login_required
+def delete_a_comment(comment_id):
+  curr_user_id = current_user.id
+  comment = Comment.query.get(comment_id)
+  if comment:
+    if comment.user_id == curr_user_id:
+      db.session.delete(comment)
+      db.session.commit()
+      return comment.to_dict()
+    else:
+      return {'errors': ['Unauthorized']}
+  else:
+    return jsonify({'message': 'Comment could not be found'}), 404
