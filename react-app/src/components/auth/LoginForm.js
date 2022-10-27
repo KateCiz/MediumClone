@@ -31,8 +31,8 @@ const LoginForm = () => {
   }
 
   //demo user set up
-  const demo_email  = '';
-  const demo_password = '';
+  const demo_email  = 'demo@aa.io';
+  const demo_password = 'password';
 
   function demoLogin(){
       setEmail(demo_email);

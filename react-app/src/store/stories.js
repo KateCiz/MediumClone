@@ -6,6 +6,7 @@ import { csrfFetch } from "./csrf";
 //constants
 const GET_ALL_STORIES = 'GET_ALL_STORIES';
 const GET_USER_STORIES ='GET_USER_STORIES';
+const GET_FEED = 'GET_FEED'
 const GET_STORY_DETAILS = 'GET_STORY_DETAILS';
 const CREATE_STORY = 'CREATE_STORY';
 const UPDATE_STORY = 'UPDATE_STORY';
@@ -24,6 +25,13 @@ const getStories = (stories) => {
 const getUserStories = (stories) => {
     return {
         type: GET_USER_STORIES,
+        stories
+    }
+};
+
+const getMyFeed = (stories) => {
+    return {
+        type: GET_FEED,
         stories
     }
 };
@@ -84,12 +92,22 @@ export const getAllStories = () => async (dispatch) => {
 };
 
     //GET User Stories
-export const userStories = () => async (dispatch) => {
-    const res = await csrfFetch('/api/profiles/:userId');
+export const userStories = (userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/profiles/${userId}`);
 
     if(res.ok){
         const data = await res.json();
         dispatch(getUserStories(data.Stories));
+    }
+};
+
+//GET FEED
+export const getProfileFeed = () => async(dispatch) => {
+    const res = await csrfFetch('/api/feed/myfollows');
+
+    if(res.ok){
+        const data = await res.json();
+        dispatch(getMyFeed(data.Stories));
     }
 };
 
@@ -187,6 +205,10 @@ export default function storyReducer(state = initialState, action){
             let userStories = {};
             action.stories.forEach((story) => userStories[story.id] = story);
             return userStories;
+        case GET_FEED:
+            let feed = {};
+            action.stories.forEach((story) => feed[story.id] = story);
+            return feed;
         case GET_STORY_DETAILS:
             newState[action.story.id] = action.story
             return newState;
