@@ -85,3 +85,4 @@ def update_one_story(story_id):
                 return jsonify({'message': 'Users can only delete their own stories'}), 403
         else:
             return jsonify({'message': 'Story could not be found'}), 404
+

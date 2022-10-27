@@ -17,3 +17,18 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/profile/<int:id>')
+def user_profile(id):
+    user = User.query.get(id)
+    if user:
+        author_profile = user.author_side_bar_to_dict()
+        comments = [comment.user_comments_to_dict() for comment in user.my_comments]
+        stories = [story.to_dict() for story in user.my_stories]
+        author_profile['Comments'] = comments
+        author_profile['Stories'] = stories
+        return jsonify({'Author': author_profile}), 200
+    else:
+        return jsonify({'message': 'User could not be found'}), 404
+
+
