@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import './LoginForm.css'
 
-const LoginForm = () => {
+const LoginForm = ({closeModal}) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,40 +27,60 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
+  const exitFromModal = (e) => {
+      closeModal();
+  };
+
   if (user) {
     return <Redirect to='/' />;
   }
 
   return (
     <div className="login-container">
-      <form onSubmit={onLogin}>
+      <button className="exit-icon" onClick={exitFromModal}>
+        <i className="fa-solid fa-xmark"></i>
+      </button>
+      <span className="login-modal-heading">Welcome back.</span>
+      <form onSubmit={onLogin} className="signin-form">
         <div>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
         </div>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email" className="login-label">
+            Email
+          </label>
           <input
+            className="login-input"
             name="email"
             type="text"
-            placeholder="Email"
             value={email}
             onChange={updateEmail}
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" className="login-label">
+            Password
+          </label>
           <input
+            className="login-input"
             name="password"
             type="password"
-            placeholder="Password"
             value={password}
             onChange={updatePassword}
           />
-          <button type="submit">Login</button>
+          <button type="submit" className="login-btn-modal">
+            Login
+          </button>
         </div>
       </form>
+      <div className="switch-to-signup">
+        <span>
+          No Account?
+          <button className="switch-to-signup-btn">Create one</button>
+        </span>
+      </div>
     </div>
   );
 };

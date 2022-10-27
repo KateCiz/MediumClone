@@ -22,14 +22,7 @@ const HorizontalNavBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink
-            to="/users"
-            exact={true}
-            activeClassName="active"
-            style={{ textDecoration: "none" }}
-          >
-            Sign in
-          </NavLink>
+          <LoginFormModal />
         </li>
         <li>
           <SignupFormModal />
