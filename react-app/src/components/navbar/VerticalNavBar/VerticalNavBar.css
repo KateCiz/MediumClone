@@ -1,0 +1,61 @@
+.user-pic {
+  width: 40px;
+  height: auto;
+  margin-bottom: 30px;
+}
+
+.SideBar {
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 81px;
+  border-right: 1px solid #292929;
+}
+
+.SideBar nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  margin: 0;
+}
+
+.SideBar nav ul {
+  padding: 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  list-style-type: none;
+  list-style: none;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.navbaricon {
+  color: #292929;
+  font-size: 22px;
+  margin-top: 50px;
+  stroke-width: ".5";
+}
+
+.navbaricon:hover {
+  color: #0d0d0d;
+}
+
+.profile-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.medlogo {
+  color: #292929;
+  font-size: 35px;
+  margin-top: 39px;
+}
