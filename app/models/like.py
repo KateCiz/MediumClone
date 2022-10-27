@@ -12,3 +12,18 @@ class Like(db.Model):
     user = db.relationship("User", back_populates = "my_likes")
     story = db.relationship("Story", back_populates = 'story_likes')
     comment = db.relationship("Comment", back_populates = 'comment_likes')
+
+# added to to_dict to use depending on the context
+
+    def to_dict_story(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'story_id': self.story_id
+        }
+    def to_dict_comment(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'comment_id': self.comment_id
+        }
