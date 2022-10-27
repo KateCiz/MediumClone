@@ -53,7 +53,7 @@ export const getUserFollows = (userId) => async(dispatch) => {
 
 //GET FOLLOWERS
 export const getUserFollowers = (userId) => async(dispatch) => {
-    const res = await csrfFetch(`/profiles/${userId}/follows`);
+    const res = await csrfFetch(`/profiles/${userId}/followers`);
 
     if(res.ok){
         const followers = await res.json();
@@ -86,12 +86,14 @@ export const unFollowAUser = (userId) => async(dispatch) => {
     }
 };
 
+
 //Reducer
-export default function followsReducer(state = initialState, action){
+export default function followsReducer(state = {}, action){
     let newState = {...state}
     switch(action.type){
         case GET_FOLLOWS:
-            //TODO
+            action.follows.forEach((follow) => newState[follow.id] = follow);
+            return newState;
         case GET_FOLLOWERS:
             newState[action.comment.id] = action.comment
             return newState;

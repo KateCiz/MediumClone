@@ -129,8 +129,8 @@ export const likeComment = (commentId) => async(dispatch) => {
     if(res.ok){
         const data = await res.json();
         dispatch(LikeComment(data.comment_id))
+        return data
     }
-    return data
 };
 
 //UNLIKE COMMENT
@@ -142,8 +142,9 @@ export const unlikeStory = (commentId) => async(dispatch) => {
     if(res.ok){
         const data = await res.json();
         dispatch(UnLikeComment(data.comment_id))
+        return data
     }
-    return data
+
 };
 
     //DELETE Comment
