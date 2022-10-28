@@ -1,24 +1,29 @@
-// import { useDispatch, useSelector } from "react-redux";
-// import { useEffect, useState } from "react";
-// import {getUserStories} from "../../store/stories";
-import VerticalNavBar from "../navbar/VerticalNavBar/VerticalNavBar"
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getUserProfile } from "../../store/session";
+import { useParams } from "react-router-dom";
+import VerticalNavBar from "../navbar/VerticalNavBar/VerticalNavBar";
 
 function UserProfile(){
-    // const dispatch = useDispatch();
-    // const userStories = useSelector((state) => Object.values(state.storyState.stories));
-    // const user = useSelector(state => state.session.user)
+     const dispatch = useDispatch();
+     const currentUser = useSelector(state => state.session.user);
+     const userProfile = useSelector(state => state.session.profile);
+     const {userId} = useParams();
 
-    // useEffect(() => {
-    //     dispatch(getUserStories())
-    // });
+     useEffect(() => {
+        dispatch(getUserProfile(userId))
+     });
 
     return (
         <div className="user-profile-page">
             <VerticalNavBar/>
             <div className="user-details">
-                <img className="user-image"></img>
-                <h1>Name Placeholder</h1>
+                <img className="user-image" src={userProfile.image_profile_url}></img>
+                <h1>{user.first_name}</h1>
+                <h3>Following: {userProfile.num_follows}</h3>
+                <h3>Followers: {userProfile.num_followers}</h3>
             </div>
+            <div></div>
         </div>
     );
 };
