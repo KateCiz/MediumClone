@@ -11,8 +11,8 @@ class Story(db.Model):
     created_date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
     updated_date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
 
-    story_likes = db.relationship("Like", back_populates = 'story')
-    comments = db.relationship("Comment", back_populates = 'story')
+    story_likes = db.relationship("Like", back_populates = 'story', cascade='all, delete-orphan')
+    comments = db.relationship("Comment", back_populates = 'story', cascade='all, delete-orphan')
     user = db.relationship("User", back_populates = 'my_stories')
 
     def to_dict(self):

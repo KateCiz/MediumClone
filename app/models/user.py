@@ -32,9 +32,9 @@ class User(db.Model, UserMixin):
         lazy="dynamic"
     )
 
-    my_likes = db.relationship("Like", back_populates='user')
-    my_comments = db.relationship("Comment", back_populates='user')
-    my_stories = db.relationship("Story", back_populates= 'user')
+    my_likes = db.relationship("Like", back_populates='user', cascade='all, delete-orphan')
+    my_comments = db.relationship("Comment", back_populates='user', cascade='all, delete-orphan')
+    my_stories = db.relationship("Story", back_populates= 'user', cascade='all, delete-orphan')
 
     @property
     def password(self):
@@ -102,7 +102,6 @@ class User(db.Model, UserMixin):
 
     def num_followers(self):
         return len(self.list_followers())
-    
+
     def num_follows(self):
         return len(self.list_follows())
-    
