@@ -10,7 +10,8 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import HorizontalNavBar from './components/navbar/HorizontalNavBar/HorizontalNavBar';
 import VerticalNavBar from "./components/navbar/VerticalNavBar/VerticalNavBar";
-import MainPage from "./components/homepage/index"
+import MainPage from "./components/homepage/index";
+import UserProfile from './components/Profile/ProfilePage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,6 +43,9 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
+          <Route path="/profiles" exact={true}>
+            <UserProfile/>
+          </Route>
         </Switch>
         )}
       </BrowserRouter>
