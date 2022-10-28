@@ -6,7 +6,7 @@ class Story(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(50), nullable=False)
-    content = db.Column(db.Text(20000), nullable=False)
+    content = db.Column(db.Text(), nullable=False)
     image_url = db.Column(db.String(300))
     created_date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
     updated_date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
