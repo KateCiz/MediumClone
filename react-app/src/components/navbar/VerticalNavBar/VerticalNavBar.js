@@ -5,7 +5,7 @@ import "./VerticalNavBar.css";
 import { FiEdit, FiBookmark, FiHome } from "react-icons/fi";
 import ProfileButton from "../ProfileButton"
 
-const VerticalNavBar = ({user}) => {
+const VerticalNavBar = ({user, isLoaded }) => {
 
   return (
     <div className="SideBar">

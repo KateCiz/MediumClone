@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getUserProfile } from "../../store/session";
 import { useParams } from "react-router-dom";
-import VerticalNavBar from "../navbar/VerticalNavBar/VerticalNavBar";
 
 function UserProfile(){
      const dispatch = useDispatch();
@@ -16,13 +15,12 @@ function UserProfile(){
 
     return (
         <div className="user-profile-page">
-            <VerticalNavBar/>
-            <div className="user-details">
+            {/* <div className="user-details">
                 <img className="user-image" src={userProfile.image_profile_url}></img>
-                <h1>{user.first_name}</h1>
+                <h1>{userProfile.first_name}</h1>
                 <h3>Following: {userProfile.num_follows}</h3>
                 <h3>Followers: {userProfile.num_followers}</h3>
-            </div>
+            </div> */}
             <div></div>
         </div>
     );

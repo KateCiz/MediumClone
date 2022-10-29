@@ -66,11 +66,12 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const getUserProfile = (userId) => async(dispatch) => {
-  const res = await fetch(`/api/profile/${userId}`);
+  const res = await fetch(`/api/users/profile/${userId}`);
 
   if(res.ok){
-    const profile =  res.json();
-    dispatch(userProfile(profile));
+    const profile = await res.json();
+    console.log('this is a test', profile.Author)
+    dispatch(userProfile(profile.Author));
   }
 };
 
@@ -122,8 +123,9 @@ export default function reducer(state = initialState, action) {
     case REMOVE_USER:
       return { user: null }
     case USER_PROFILE:
-      const profile = {}
-      return profile = {...action.user_profile}
+      let profile = {}
+      profile = {...action.payload.user_profile}
+      return profile
     default:
       return state;
   }
