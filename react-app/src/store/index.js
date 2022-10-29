@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import commentsReducer from './comments';
 import followsReducer from './follows';
+import profilesReducer from './profiles';
 import session from './session'
 import storyReducer from './stories';
 
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   storyState: storyReducer,
   commentState: commentsReducer,
   followsState: followsReducer,
+  profileState: profilesReducer,
 });
 
 

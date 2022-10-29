@@ -1,7 +1,6 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
-const USER_PROFILE = 'USER_PROFILE'
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -11,13 +10,6 @@ const setUser = (user) => ({
 const removeUser = () => ({
   type: REMOVE_USER,
 });
-
-const userProfile = (user_profile) => {
-  return {
-    type: USER_PROFILE,
-    payload: user_profile
-  };
-};
 
 const initialState = { user: null };
 
@@ -63,16 +55,6 @@ export const login = (email, password) => async (dispatch) => {
     return ['An error occurred. Please try again.']
   }
 
-};
-
-export const getUserProfile = (userId) => async(dispatch) => {
-  const res = await fetch(`/api/users/profile/${userId}`);
-
-  if(res.ok){
-    const profile = await res.json();
-    console.log('this is a test', profile.Author)
-    dispatch(userProfile(profile.Author));
-  }
 };
 
 export const logout = () => async (dispatch) => {
@@ -122,10 +104,6 @@ export default function reducer(state = initialState, action) {
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
-    case USER_PROFILE:
-      let profile = {}
-      profile = {...action.payload.user_profile}
-      return profile
     default:
       return state;
   }
