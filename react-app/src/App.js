@@ -33,14 +33,11 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      { loaded && currentUser &&(
-        <VerticalNavBar user={currentUser} isLoaded={loaded}/>
-        )
-      }
         { loaded && (
+          <>
+          <NavBar/>
         <Switch>
           <Route path="/" exact={true}>
-            <NavBar />
             <MainPage />
           </Route>
           <ProtectedRoute path="/users" exact={true}>
@@ -53,6 +50,7 @@ function App() {
             <UserProfile/>
           </Route>
         </Switch>
+        </>
         )}
       </BrowserRouter>
     </>

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getUserProfile } from "../../store/profiles";
 import { useParams, Link } from "react-router-dom";
+import EditProfileModal from "./editModal";
 
 function UserProfile(){
      const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function UserProfile(){
                 { currentUser?.id === userProfile.id &&
                 <>
                 <Link to="/stories">WRITE A STORY</Link>
+                <EditProfileModal/>
                 </>
                 }
         </div>
