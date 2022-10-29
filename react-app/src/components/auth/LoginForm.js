@@ -41,6 +41,15 @@ const LoginForm = ({closeModal, switchPage}) => {
     return <Redirect to='/' />;
   }
 
+  //demo user set up
+  const demo_email  = 'demo@aa.io';
+  const demo_password = 'password';
+
+  function demoLogin(){
+      setEmail(demo_email);
+      setPassword(demo_password);
+  };
+
   return (
     <div className="login-container">
       <button className="exit-icon" onClick={exitFromModal}>

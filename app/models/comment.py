@@ -14,11 +14,11 @@ class Comment(db.Model):
     # relation to itself (replies)
     replies = db.relationship(
         'Comment', backref=db.backref('parent', remote_side=[id]),
-        lazy='dynamic')
+        lazy='dynamic', cascade='all, delete-orphan')
 
     user = db.relationship("User", back_populates= 'my_comments')
     story = db.relationship("Story", back_populates = 'comments')
-    comment_likes = db.relationship("Like", back_populates= 'comment')
+    comment_likes = db.relationship("Like", back_populates= 'comment', cascade='all, delete-orphan')
 
     def user_comments_to_dict(self):
         return {
