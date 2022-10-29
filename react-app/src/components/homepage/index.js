@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {useSelector} from 'react-router-dom';
+import React from 'react';
 
 const HomePage = () => {
     return (

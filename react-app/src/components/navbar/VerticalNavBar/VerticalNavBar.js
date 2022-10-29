@@ -1,12 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import "./VerticalNavBar.css";
 import { FiEdit, FiBookmark, FiHome } from "react-icons/fi";
-import ProfileButton from "../ProfileButton"
+import ProfileButton from "../ProfileButton";
 
-const VerticalNavBar = ({user}) => {
-
+const VerticalNavBar = ({ user }) => {
   return (
     <div className="SideBar">
       <nav>
@@ -27,7 +25,7 @@ const VerticalNavBar = ({user}) => {
               activeClassName="active"
               style={{ textDecoration: "none" }}
             >
-              <FiHome className="navbaricon"/>
+              <FiHome className="navbaricon" />
             </NavLink>
           </li>
           <li>
@@ -37,12 +35,12 @@ const VerticalNavBar = ({user}) => {
               activeClassName="active"
               style={{ textDecoration: "none" }}
             >
-              <FiBookmark className="navbaricon"/>
+              <FiBookmark className="navbaricon" />
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/"
+              to="/new-story"
               exact={true}
               activeClassName="active"
               style={{ textDecoration: "none" }}

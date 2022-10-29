@@ -1,0 +1,50 @@
+.test-editor {
+    max-width: 600px;
+    margin: auto;
+
+}
+
+.test-editor:focus {
+  outline: none;
+}
+
+.ProseMirror{
+  outline: none;
+}
+
+.large-editor:focus {
+  outline: none;
+}
+
+.test-editor p {
+    font-size: 40px;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.large-editor p {
+    font-size: 25px;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.test-editor p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.large-editor p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+
+.large-editor {
+    max-width: 600px;
+    margin: auto;
+    max-height: 1000px;
+}
