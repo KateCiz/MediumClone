@@ -5,18 +5,19 @@ import { getProfileFeed } from "../../store/stories"
 import StoryPreview from "./StoryPreview";
 import "./index.css";
 
-function AuthorStoryFeed({ stories }) {
-    // const dispatch = useDispatch();
+function UserStoryFeed({ user }) {
+    const dispatch = useDispatch();
+    const stories = useSelector((state) => state.storyState);
     // const sessionUser = useSelector((state) => state.session.user);
     const [loaded, setLoaded] = useState(false)
     
 
-    // useEffect(() => {
-    //   (async() => {
-    //     await dispatch(getProfileFeed());
-    //     setLoaded(true);
-    //   })();
-    // }, [dispatch]);
+    useEffect(() => {
+      (async() => {
+        await dispatch(getProfileFeed());
+        setLoaded(true);
+      })();
+    }, [dispatch]);
 
 
     if (!loaded) {
@@ -27,6 +28,7 @@ function AuthorStoryFeed({ stories }) {
     return (
       <div className="feed-div">
         <div className="feed-preview-stories">
+          {console.log(stories)}
           {loaded && stories?.map((story, i) => {
               return (
               <NavLink key={i} to={`/stories/${story.id}`} style={{ textDecoration: "none" }}>
@@ -39,4 +41,4 @@ function AuthorStoryFeed({ stories }) {
     );
 }
 
-export default AuthorStoryFeed;
+export default UserStoryFeed;

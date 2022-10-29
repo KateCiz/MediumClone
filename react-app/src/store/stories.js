@@ -103,10 +103,13 @@ export const userStories = (userId) => async (dispatch) => {
 
 //GET FEED
 export const getProfileFeed = () => async(dispatch) => {
-    const res = await csrfFetch('/api/feed/myfollows');
+    console.log("hello")
+    const res = await fetch('/api/feed/myfollows')
+    console.log(res)
 
     if(res.ok){
         const data = await res.json();
+        console.log("data", data)
         dispatch(getMyFeed(data.Stories));
     }
 };
@@ -207,7 +210,8 @@ export default function storyReducer(state = initialState, action){
             return userStories;
         case GET_FEED:
             let feed = {};
-            action.stories.forEach((story) => feed[story.id] = story);
+            // action.stories.forEach((story) => feed[story.id] = story);
+            feed=[...action.stories]
             return feed;
         case GET_STORY_DETAILS:
             newState[action.story.id] = action.story
@@ -219,9 +223,9 @@ export default function storyReducer(state = initialState, action){
             newState[action.story.id] = action.story
             return  newState;
         case LIKE_STORY:
-            //add this
+            return  newState;
         case UNLIKE_STORY:
-            //add this
+            return  newState;
         case DELETE_STORY:
             delete newState[action.storyId];
             return newState;

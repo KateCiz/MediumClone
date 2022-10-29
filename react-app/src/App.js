@@ -10,7 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import HorizontalNavBar from './components/navbar/HorizontalNavBar/HorizontalNavBar';
 import VerticalNavBar from "./components/navbar/VerticalNavBar/VerticalNavBar";
-import MainPage from "./components/homepage/index"
+import HomePage from "./components/homepage/index"
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -34,7 +34,7 @@ function App() {
         <Switch>
           <Route path="/" exact={true}>
             <NavBar />
-            <MainPage />
+            <HomePage />
           </Route>
           <ProtectedRoute path="/users" exact={true}>
             <UsersList />
