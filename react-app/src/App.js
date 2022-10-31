@@ -11,6 +11,7 @@ import { authenticate } from './store/session';
 import HorizontalNavBar from './components/navbar/HorizontalNavBar/HorizontalNavBar';
 import VerticalNavBar from "./components/navbar/VerticalNavBar/VerticalNavBar";
 import HomePage from "./components/homepage/index"
+import FullStoryPage from './components/StoryPage/FullStoryPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,6 +43,9 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
+          <Route path="/stories/:storyId" exact={true}>
+            <FullStoryPage />
+          </Route>
         </Switch>
         )}
       </BrowserRouter>
