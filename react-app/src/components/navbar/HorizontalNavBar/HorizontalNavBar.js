@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import "./HorizontalNavBar.css"
 import SignupFormModal from '../../auth/signupmodal/index'
 import LoginFormModal from '../../auth/signinmodal/index'
+import DemoAccount from '../../auth/DemoAccount/index'
 
 const HorizontalNavBar = () => {
   return (
@@ -11,6 +12,9 @@ const HorizontalNavBar = () => {
         <img className="medium-logo-main" src={"../MediumLogo.ico"} alt="" />
       </NavLink>
       <ul>
+        <li>
+          <DemoAccount />
+        </li>
         <li>
           <NavLink
             to="/login"
