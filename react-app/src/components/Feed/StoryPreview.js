@@ -1,17 +1,10 @@
 import React from "react";
-// import { useSelector } from "react-redux";
-// import EditStoryBtn from "../StoryComponent/EditStory/EditStoryBtn";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-
 
 function StoryPreview({ story }) {
   const history = useHistory();
 
-//   let editStoryBtn;
-
-//   if (user?.id === story.user_id) {
-//     editStoryBtn = <EditStorytBtn story={story} />;
-//   }
 
   return (
     <div className="story-preview-container">
@@ -23,7 +16,6 @@ function StoryPreview({ story }) {
                 <div className="author-name">
                     {`${story?.Author?.first_name} ${story?.Author?.last_name}`}
                 </div>
-                {/* {editStoryBtn} */}
             </div>
             <div className="story-text-preview-container">
                 <div className="story-title-preview">

@@ -1,0 +1,38 @@
+.ellipse-container {
+  position: absolute;
+  cursor: pointer;
+}
+
+.ellipse-dropdown {
+  /* display: none !important; */
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 30px;
+  max-width: 30px;
+  gap: 10px;
+  left: 0px;
+  bottom: 10px;
+  border: 1px lightgray solid;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.ellipse-dropdown li {
+  list-style: none;
+  display: table-cell;
+}
+
+.edit-story-btn {
+  background: none;
+  border: none;
+}
+
+.delete-story-btn {
+  background: none;
+  border: none;
+}
