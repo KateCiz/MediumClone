@@ -1,0 +1,131 @@
+.full-page-story-div {
+    height: 100%;
+    width: 90%;
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.full-story-container {
+    height: 100%;
+}
+
+.full-page-story-details-div {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    border-right: 2px solid rgb(208, 206, 206);
+}
+
+.full-story-author-container {
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    margin-top: 3%;
+}
+
+.author-side-div {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    padding-left: 3%;
+}
+
+.full-story-image-container {
+    height: 450px;
+    width: 80%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.full-story-profile-image-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.full-story-title-text {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.full-story-content {
+    width: 80%;
+}
+
+.full-story-content-text {
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.author-sidebar-profile-image-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.author-sidebar-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: black;
+}
+
+.followers-count-container {
+    color: black;
+}
+
+.full-story-next-to-profile-pic {
+    display: block;
+}
+.full-story-author-name {
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.full-story-created {
+    color: rgba(117, 117, 117, 1);
+    font-size: 12px;
+    margin-left: 5px;
+    align-items: center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.author-bio-container {
+    color: rgba(117, 117, 117, 1);
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.story-reactions-container {
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.likes-count {
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.comment-count {
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+

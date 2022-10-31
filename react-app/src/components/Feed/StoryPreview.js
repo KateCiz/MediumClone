@@ -6,6 +6,17 @@ function StoryPreview({ story }) {
   const history = useHistory();
 
 
+    let CreatedDate;
+
+    if(story?.created_date){
+        const date = new Date(story?.created_date);
+        const createdDay = date.getDay();
+        const createdMonth = date.toLocaleString('default', { month: 'short'});
+        const createdYear = date.getFullYear();
+        const createdStr = `${createdDay} ${createdMonth}, ${createdYear}`;
+        CreatedDate = <p className="full-story-created">{createdStr}</p>;
+      }
+
   return (
     <div className="story-preview-container">
         <div className="text-container">
@@ -26,7 +37,7 @@ function StoryPreview({ story }) {
                 </div>
             </div>
             <div className="created-date">
-                {story?.created_date}
+                {CreatedDate}
             </div>
         </div>
         <div className="image-container"
