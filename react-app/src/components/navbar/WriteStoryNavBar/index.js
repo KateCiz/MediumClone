@@ -3,8 +3,10 @@ import { NavLink } from "react-router-dom";
 import "./index.css";
 import ProfileButton from "./ProfileButton"
 import {SiMedium} from "react-icons/si"
+import ConfirmModal from "../../writepage/ConfirmModal/index";
 
-const WriteStoryNavBar = ({user,handlePublish}) => {
+
+const WriteStoryNavBar = ({user,publish, filledState}) => {
 
 
   return (
@@ -21,7 +23,7 @@ const WriteStoryNavBar = ({user,handlePublish}) => {
 
       <ul>
         <li>
-          <button className="publish-btn" onClick={handlePublish}>Publish</button>
+          <ConfirmModal filledState={filledState} publish={publish}/>
         </li>
         <li>
           <ProfileButton user={user} />
