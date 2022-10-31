@@ -9,16 +9,29 @@ import "./index.css";
 import { useDispatch } from "react-redux";
 import { editStory } from "../../../store/stories";
 import { useHistory, useParams } from "react-router-dom";
+import { getSingleStory } from "../../../store/stories";
 
 const EditPage = () => {
-
   const { storyId } = useParams();
-
-  const story = useSelector((state) => {
-    state?.stories?.find((story) => String(story.id) === storyId)
-  })
-
   const dispatch = useDispatch();
+  const [loaded, setLoaded] = useState(false);
+
+  // const story = useSelector((state) => {
+  //   state?.storyState?.find((story) => String(story?.id) === storyId);
+  // });
+  useEffect(() => {
+      (async() => {
+        await dispatch(getSingleStory(storyId));
+        setLoaded(true);
+      })();
+    }, [dispatch]);
+
+
+
+  const story = useSelector((state) => state.storyState[storyId]);
+
+
+
   const sessionUser = useSelector((state) => state.session.user);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -32,14 +45,6 @@ const EditPage = () => {
       setFilledState(false);
     }
   }, [title, text]);
-
-
-  useEffect(() => {
-    if (story) {
-        setTitle(story.title)
-        setText(story.Text)
-    }
-},[story])
 
   const editor = useEditor({
     extensions: [
@@ -73,6 +78,16 @@ const EditPage = () => {
     },
   });
 
+  useEffect(() => {
+    if(story) {
+      // setTitle(story.title);
+      // setText(story.content);
+      editor.commands.insertContent(story.title);
+      largeeditor.commands.insertContent(story.content);
+    }
+  }, [story]);
+
+
   const history = useHistory();
 
   const handlePublish = () => {
@@ -89,13 +104,17 @@ const EditPage = () => {
 
   return (
     <>
-      <WriteStoryNavBar
-        user={sessionUser}
-        publish={handlePublish}
-        filledState={filledState}
-      />
-      <EditorContent editor={editor} className="test-editor" />
-      <EditorContent editor={largeeditor} className="large-editor" />
+      {loaded && (
+        <>
+          <WriteStoryNavBar
+            user={sessionUser}
+            publish={handlePublish}
+            filledState={filledState}
+          />
+          <EditorContent editor={editor} className="test-editor" />
+          <EditorContent editor={largeeditor} className="large-editor" />
+        </>
+      )}
     </>
   );
 };

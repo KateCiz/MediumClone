@@ -8,28 +8,29 @@ import "./index.css";
 
 function UserStoryFeed({ user }) {
     const dispatch = useDispatch();
-    const stories = useSelector((state) => state.storyState);
+
+    const stories = Object.values(useSelector((state) => state.storyState));
     // const sessionUser = useSelector((state) => state.session.user);
-    // const [loaded, setLoaded] = useState(false)
+    const [loaded, setLoaded] = useState(false)
 
 
     useEffect(() => {
       (async() => {
         await dispatch(getProfileFeed());
+        setLoaded(true)
       })();
     }, [dispatch]);
 
 
-    // if (!loaded) {
-    //   return null;
-    // }
+    if (!loaded) {
+      return null;
+    }
 
 
     return (
       <div className="feed-div">
         <div className="feed-preview-stories">
-
-          {stories.map((story, i) => {
+          {loaded && stories.map((story, i) => {
               return (
               <div>
               <NavLink key={i} to={`/stories/${story.id}`} style={{ textDecoration: "none" }}>

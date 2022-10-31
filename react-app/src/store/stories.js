@@ -192,27 +192,27 @@ export const deleteAStory = (storyId) => async (dispatch) => {
   return response;
 };
 
-const initialState = [];
+const initialState = {};
 
 //Stories REDUCER
 export default function storyReducer(state = initialState, action) {
-  let newState = [ ...state ];
+  let newState = {...state };
   switch (action.type) {
     case GET_ALL_STORIES:
-      // action.stories.forEach((story) => newState[story.id] = story);
-      newState = [...action.stories];
+      action.stories.forEach((story) => newState[story.id] = story);
+      // newState = [...action.stories];
       return newState;
     case GET_USER_STORIES:
-      // let userStories = {};
-      // action.stories.forEach((story) => userStories[story.id] = story);
-      let userStories = [];
-      userStories = [...action.stories];
+      let userStories = {};
+      action.stories.forEach((story) => userStories[story.id] = story);
+      // let userStories = [];
+      // userStories = [...action.stories];
       return userStories;
     case GET_FEED:
-      // let feed = {};
-      // action.stories.forEach((story) => feed[story.id] = story);
-      let feed = [];
-      feed = [...action.stories];
+      let feed = {};
+      action.stories.forEach((story) => feed[story.id] = story);
+      // let feed = [];
+      // feed = [...action.stories];
       return feed;
     case GET_STORY_DETAILS:
       newState[action.story.id] = action.story;
