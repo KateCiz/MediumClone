@@ -12,13 +12,13 @@ story_routes = Blueprint('stories', __name__)
 @story_routes.route('/')
 def get_all_stories():
     stories = Story.query.order_by(Story.created_date.desc()).all()
-    if not bool(stories): 
+    if not bool(stories):
         return jsonify({'message': 'Stories could not be found'}), 404
     return jsonify({'Stories': [story.preview_story_to_dict() for story in stories]}), 200
 
 #DONE
 # create a story
-@story_routes.route('', methods=['POST'])
+@story_routes.route('/', methods=['POST'])
 @login_required
 def create_story():
     form = StoryEditorForm()
@@ -33,9 +33,9 @@ def create_story():
         db.session.add(story)
         db.session.commit()
         return story.to_dict()
-    else: 
+    else:
         return jsonify({'message': 'Story needs the have a title and content'}), 400
-   
+
 
 #DONE
 # get a single story
@@ -49,7 +49,7 @@ def get_one_story(story_id):
         return jsonify({'message': 'Story could not be found'}), 404
 
 #DELETE IS DONE, EDIT IS DONE
-# edit & delete a single story 
+# edit & delete a single story
 @story_routes.route('/<int:story_id>', methods=['PUT', 'DELETE'])
 @login_required
 def update_one_story(story_id):
@@ -67,9 +67,9 @@ def update_one_story(story_id):
                     db.session.add(story)
                     db.session.commit()
                     return jsonify(story.to_dict()), 200
-                else: 
+                else:
                     return jsonify({'message': 'Story needs the have a title and content'}), 400
-            else: 
+            else:
                 return jsonify({'message': 'Users can only edit their own stories'}), 403
         else:
             return jsonify({'message': 'Story could not be found'}), 404
@@ -81,8 +81,7 @@ def update_one_story(story_id):
                 db.session.delete(story)
                 db.session.commit()
                 return jsonify({'message': 'Successfully deleted'}), 200
-            else: 
+            else:
                 return jsonify({'message': 'Users can only delete their own stories'}), 403
         else:
             return jsonify({'message': 'Story could not be found'}), 404
-

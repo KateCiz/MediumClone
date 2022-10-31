@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { useDispatch } from "react-redux";
-// import * as sessionActions from "../../store/session";
 import "./ProfileButton.css";
-import LogoutButton from "../auth/LogoutButton";
-
+import LogoutButton from "../../auth/LogoutButton";
 
 function ProfileButton({ user }) {
   // const dispatch = useDispatch();
@@ -32,17 +30,19 @@ function ProfileButton({ user }) {
   // };
 
   return (
-    <div className="flyout-container">
-      <button className="flyout" onClick={openMenu}>
+    <div className="horizontal-flyout-container">
+      <button className="horizontal-flyout" onClick={openMenu}>
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
-          alt="" className="user-pic"
+          alt="" className="horizontal-user-pic"
         ></img>
       </button>
       {showMenu && (
-        <ul className="profile-dropdown">
+        <ul className="horizontal-profile-dropdown">
           <li>
-            <span>{user.first_name} {user.last_name}</span>
+            <span>
+              {user.first_name} {user.last_name}
+            </span>
           </li>
           <li>
             <span>{user.email}</span>

@@ -9,7 +9,7 @@ function AllStoriesFeed() {
     const dispatch = useDispatch();
     const stories = Object.values(useSelector((state) => state.storyState));
     const [loaded, setLoaded] = useState(false)
-    
+
 
     useEffect(() => {
       (async() => {
@@ -27,7 +27,6 @@ function AllStoriesFeed() {
     return (
       <div className="feed-div">
         <div className="feed-preview-stories">
-          {console.log(stories)}
           {loaded && stories?.map((story, i) => {
               return (
               <NavLink key={i} to={`/stories/${story.id}`} style={{ textDecoration: "none" }}>
