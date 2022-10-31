@@ -73,7 +73,7 @@ const WritePage = () => {
 
   return (
     <>
-      <WriteStoryNavBar user={sessionUser}  publish={handlePublish} filledState={filledState}/>
+      <WriteStoryNavBar user={sessionUser}  publish={handlePublish} filledState={filledState} update={false}/>
       <EditorContent editor={editor} className="test-editor" />
       <EditorContent editor={largeeditor} className="large-editor" />
     </>

@@ -1,35 +1,45 @@
 import "./index.css";
 import React, { useState } from "react";
 import { SmallModal } from "../../../context/smallModal";
-import "./index.css"
-import ConfirmForm from "./confirmpage"
+import "./index.css";
+import ConfirmForm from "./confirmpage";
 
+function ConfirmModal({ filledState, publish, update }) {
+  const [showModal, setShowModal] = useState(false);
 
-
-function ConfirmModal({filledState, publish}){
-    const [showModal, setShowModal] = useState(false);
-
-    const handleModal = () => {
-        if (filledState === true){
-            setShowModal(true);
-        }
+  const handleModal = () => {
+    if (filledState === true) {
+      setShowModal(true);
     }
+  };
 
-
-    return (
-        <>
-            <button className= {filledState ? "publish-btn" : "no-fill-btn" }
-            onClick={() => handleModal()}
-            >publish</button>
-
-        {showModal && (
+  return (
+    <>
+      {update===false ? (
+        <button
+          className={filledState ? "publish-btn" : "no-fill-btn"}
+          onClick={() => handleModal()}
+        >
+          publish
+        </button>
+      ) : (
+        <button
+          className={filledState ? "publish-btn" : "no-fill-btn"}
+          onClick={() => handleModal()}
+        >
+          update
+        </button>
+      )}
+      {showModal && (
         <SmallModal onClose={() => setShowModal(false)}>
-            <ConfirmForm
+          <ConfirmForm
             closeModal={() => setShowModal(false)}
-            publish={publish}/>
+            publish={publish}
+            update={update}
+          />
         </SmallModal>
       )}
     </>
-    );
-        }
-    export default ConfirmModal
+  );
+}
+export default ConfirmModal;

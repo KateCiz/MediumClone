@@ -6,7 +6,7 @@ import {SiMedium} from "react-icons/si"
 import ConfirmModal from "../../writepage/ConfirmModal/index";
 
 
-const WriteStoryNavBar = ({user,publish, filledState}) => {
+const WriteStoryNavBar = ({user, publish, filledState, update}) => {
 
 
   return (
@@ -23,7 +23,7 @@ const WriteStoryNavBar = ({user,publish, filledState}) => {
 
       <ul>
         <li>
-          <ConfirmModal filledState={filledState} publish={publish}/>
+          <ConfirmModal filledState={filledState} publish={publish} update={update}/>
         </li>
         <li>
           <ProfileButton user={user} />

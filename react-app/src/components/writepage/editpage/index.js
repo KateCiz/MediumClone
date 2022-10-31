@@ -30,7 +30,7 @@ const EditPage = () => {
 
   const story = useSelector((state) => state.storyState[storyId]);
 
-
+  const update = true;
 
   const sessionUser = useSelector((state) => state.session.user);
   const [title, setTitle] = useState("");
@@ -110,6 +110,7 @@ const EditPage = () => {
             user={sessionUser}
             publish={handlePublish}
             filledState={filledState}
+            update={update}
           />
           <EditorContent editor={editor} className="test-editor" />
           <EditorContent editor={largeeditor} className="large-editor" />

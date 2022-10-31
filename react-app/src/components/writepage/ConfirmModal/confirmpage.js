@@ -1,7 +1,7 @@
 import React from 'react'
 import "./confirmpage.css"
 
-const ConfirmForm = ({closeModal, publish}) => {
+const ConfirmForm = ({closeModal, publish, update}) => {
 
     const exitFromModal = (e) => {
       closeModal();
@@ -14,8 +14,18 @@ const ConfirmForm = ({closeModal, publish}) => {
         </button>
         <span className="heading-confirm">Confirm publication?</span>
         <div className="btns-container">
-          <button className="cancel-btn-publish" onClick={exitFromModal}>cancel</button>
-          <button className="publish-final-btn" onClick={publish}>publish</button>
+          <button className="cancel-btn-publish" onClick={exitFromModal}>
+            cancel
+          </button>
+          {update === false ? (
+            <button className="publish-final-btn" onClick={publish}>
+              publish
+            </button>
+          ) : (
+            <button className="publish-final-btn" onClick={publish}>
+              update
+            </button>
+          )}
         </div>
       </div>
     );
