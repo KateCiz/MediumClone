@@ -33,7 +33,7 @@ function UserProfile(){
             </div>
                 { currentUser?.id === userProfile.id &&
                 <>
-                <Link to="/stories">WRITE A STORY</Link>
+                <Link to="/stories">WRITE</Link>
                 <EditProfileModal/>
                 </>
                 }
