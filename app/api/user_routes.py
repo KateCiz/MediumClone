@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.forms.profile_form import ProfileEditorForm
+from app.models import User, db
 
 user_routes = Blueprint('users', __name__)
 
@@ -31,4 +32,13 @@ def user_profile(id):
     else:
         return jsonify({'message': 'User could not be found'}), 404
 
-
+# EDIT PROFILE ROUTE
+@user_routes.route('/profile/<int:id>/edit', methods=['PUT'])
+@login_required
+def edit_user_profile(id):
+    user = User.query.get(id)
+    form = ProfileEditorForm()
+    if form.validate_on_submit():
+        user.bio = form.data['bio'],
+        user.image_profile_url = form.data['image_profile_url']
+        db.session.commit()

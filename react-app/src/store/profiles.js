@@ -1,5 +1,6 @@
 //constants
-const GET_USER_PROFILE = 'GET_USER_PROFILE'
+const GET_USER_PROFILE = 'GET_USER_PROFILE';
+const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
 
 //actions
 const userProfile = (user_profile) => {
@@ -9,15 +10,34 @@ const userProfile = (user_profile) => {
     };
   };
 
+const updateProfile = (user_profile) => {
+  return {
+    type: UPDATE_USER_PROFILE,
+    user_profile
+  }
+};
+
 //thunks
 export const getUserProfile = (userId) => async(dispatch) => {
  const res = await fetch(`/api/users/profile/${userId}`);
 
     if(res.ok){
       const profile = await res.json();
-      console.log('this is a test', profile.Author)
       dispatch(userProfile(profile.Author));
     }
+};
+
+export const updateUserProfile = (userId, bio, image_profile_url) => async(dispatch) => {
+  const res = await fetch(`api/users/profile/${userId}/edit`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      bio,
+      image_profile_url
+    })
+  })
 };
 
 const initialState = {};

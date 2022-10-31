@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { updateUserProfile } from '../../store/profiles';
 
 
 function EditProfileForm({closeModal}){
     const [bio, setBio] = useState('');
-    const [userImage, setUserImage] = useState('');
+    const [image_profile_url, setImageProfileURL] = useState('');
     const [errors, setErrors] = useState([]);
 
     const user = useSelector(state => state.session.user);
@@ -13,9 +14,9 @@ function EditProfileForm({closeModal}){
 
     const onEdit = async(e) => {
         e.preventDefault();
-        const data = await dispatch(/*dispatch thunk to edit user details */)
+        const data = await dispatch(updateUserProfile(user.id, bio, image_profile_url))
                     .then(<Redirect to={`/user/profile/${user.id}`}/>);
-        if (data) {
+        if (data.errors) {
           setErrors(data);
         }
       };
@@ -25,7 +26,7 @@ function EditProfileForm({closeModal}){
     };
 
     const updateImage = (e) => {
-        setUserImage(e.target.value);
+        setImageProfileURL(e.target.value);
     };
 
     const exitFromModal = (e) => {
@@ -64,7 +65,7 @@ function EditProfileForm({closeModal}){
                         className='user-image-input'
                         name='image_profile_url'
                         type='string'
-                        value= {userImage}
+                        value= {image_profile_url}
                         onChange={updateImage}
                     />
                 </div>
