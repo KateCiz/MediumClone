@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
+from flask_login import current_user, login_required
 from app.forms.profile_form import ProfileEditorForm
 from app.models import User, db
 
@@ -38,7 +38,13 @@ def user_profile(id):
 def edit_user_profile(id):
     user = User.query.get(id)
     form = ProfileEditorForm()
-    if form.validate_on_submit():
-        user.bio = form.data['bio'],
-        user.image_profile_url = form.data['image_profile_url']
-        db.session.commit()
+    if user.id == current_user.id:
+        if form.validate_on_submit():
+            user.bio = form.data['bio'] or user.bio
+            user.image_profile_url = form.data['image_profile_url'] or user.image_profile_url
+            db.session.commit()
+            return jsonify({'message': 'User Updated'}), 200
+        else:
+            return jsonify({'message':''}), 400
+    else:
+        return jsonify({'message': 'Unauthorized'}), 403

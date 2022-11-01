@@ -10,12 +10,12 @@ const userProfile = (user_profile) => {
     };
   };
 
-const updateProfile = (user_profile) => {
-  return {
-    type: UPDATE_USER_PROFILE,
-    user_profile
-  }
-};
+// const updateProfile = (user_profile) => {
+//   return {
+//     type: GET_USER_PROFILE,
+//     user_profile
+//   }
+// };
 
 //thunks
 export const getUserProfile = (userId) => async(dispatch) => {
@@ -36,8 +36,13 @@ export const updateUserProfile = (userId, bio, image_profile_url) => async(dispa
     body: JSON.stringify({
       bio,
       image_profile_url
-    })
-  })
+    }),
+  });
+  if(res.ok){
+    const data =await res.json();
+    return data
+  }
+
 };
 
 const initialState = {};
