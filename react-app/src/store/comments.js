@@ -180,9 +180,9 @@ export default function commentsReducer(state = initialState, action){
             newState[action.comment.id] = action.comment
             return  newState;
         case LIKE_COMMENT:
-            //add this
+            return  newState;
         case UNLIKE_COMMENT:
-            //add this
+            return  newState;
         case DELETE_COMMENT:
             delete newState[action.commentId];
             return newState;

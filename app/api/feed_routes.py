@@ -14,8 +14,8 @@ def get_feed():
     followed_stories = user.followed_stories().all()
 
     for story in followed_stories:
-        data = story.to_dict()
-
+        data = story.preview_story_to_dict()
+        
         feed.append(data)
 
     return jsonify({'Stories': [story for story in feed]}), 200
