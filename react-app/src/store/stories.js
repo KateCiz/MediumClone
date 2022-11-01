@@ -82,7 +82,7 @@ const UnLikeStory = (storyId) => {
 
 //GET ALL STORIES
 export const getAllStories = () => async (dispatch) => {
-  const res = await csrfFetch("/api/stories");
+  const res = await csrfFetch("/api/stories/");
 
   if (res.ok) {
     const data = await res.json();
@@ -93,7 +93,7 @@ export const getAllStories = () => async (dispatch) => {
 
 //GET User Stories
 export const userStories = (userId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/profiles/${userId}`);
+  const res = await csrfFetch(`/api/profiles/${userId}/`);
 
   if (res.ok) {
     const data = await res.json();
@@ -103,7 +103,7 @@ export const userStories = (userId) => async (dispatch) => {
 
 //GET FEED
 export const getProfileFeed = () => async (dispatch) => {
-  const res = await csrfFetch("/api/feed/myfollows");
+  const res = await csrfFetch("/api/feed/myfollows/");
 
   if (res.ok) {
     const data = await res.json();
@@ -113,7 +113,7 @@ export const getProfileFeed = () => async (dispatch) => {
 
 //Get SINGLE STORY
 export const getSingleStory = (storyId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/stories/${storyId}`);
+  const res = await csrfFetch(`/api/stories/${storyId}/`);
 
   if (res.ok) {
     const story = await res.json();
@@ -144,7 +144,7 @@ export const createNewStory = (story) => async (dispatch) => {
 
 //UPDATE STORY
 export const editStory = (story, id) => async (dispatch) => {
-  const res = await csrfFetch(`/api/stories/${id}`, {
+  const res = await csrfFetch(`/api/stories/${id}/`, {
     method: "PUT",
     body: JSON.stringify(story),
   });
@@ -159,7 +159,7 @@ export const editStory = (story, id) => async (dispatch) => {
 
 //DELETE STORY
 export const deleteAStory = (storyId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/stories/${storyId}`, {
+  const res = await csrfFetch(`/api/stories/${storyId}/`, {
     method: "DELETE",
   });
   const response = await res.json();
