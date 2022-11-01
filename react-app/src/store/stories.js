@@ -156,29 +156,6 @@ export const editStory = (story, id) => async (dispatch) => {
   }
 };
 
-//Like A STORY
-export const likeStory = (storyId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/stories/${storyId}/likes`, {
-    method: "POST",
-  });
-
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(LikeStory(data.story_id));
-  }
-};
-
-//Unlike A STORY
-export const unlikeStory = (storyId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/stories/${storyId}/likes`, {
-    method: "DELETE",
-  });
-
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(UnLikeStory(data.story_id));
-  }
-};
 
 //DELETE STORY
 export const deleteAStory = (storyId) => async (dispatch) => {
@@ -223,10 +200,6 @@ export default function storyReducer(state = initialState, action) {
     case UPDATE_STORY:
       newState[action.story.id] = action.story;
       return newState;
-    case LIKE_STORY:
-    //add this
-    case UNLIKE_STORY:
-    //add this
     case DELETE_STORY:
       delete newState[action.storyId];
       return newState;
