@@ -26,7 +26,7 @@ function FullStoryPage() {
   return (
     <div className="full-page-story-div">
       <div className="full-page-story-details-div">
-        <OneStory story={story} />
+        <OneStory story={story} storyId={storyId} />
       </div>
       <div className="author-side-div">
         <NavLink key={story?.user_id} to={`/profiles/${story?.user_id}`} style={{ textDecoration: "none" }}>

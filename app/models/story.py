@@ -49,7 +49,8 @@ class Story(db.Model):
             'updated_date': self.updated_date,
             'Author': self.user.author_side_bar_to_dict(),
             'num_likes': self.num_likes(),
-            'num_comments': self.num_comments()
+            'num_comments': self.num_comments(),
+            'like_accounts': [like.to_dict_story() for like in self.story_likes]
         }
 
     def num_likes(self):
