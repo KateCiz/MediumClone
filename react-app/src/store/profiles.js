@@ -28,7 +28,7 @@ export const getUserProfile = (userId) => async(dispatch) => {
 };
 
 export const updateUserProfile = (userId, bio, image_profile_url) => async(dispatch) => {
-  const res = await fetch(`api/users/profile/${userId}/edit`, {
+  const res = await fetch(`api/users/profile/${userId}/edit/`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

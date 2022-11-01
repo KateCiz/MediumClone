@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { updateUserProfile } from '../../store/profiles';
-
+import "./editForm.css"
 
 function EditProfileForm({closeModal}){
     const [bio, setBio] = useState('');
@@ -16,7 +16,7 @@ function EditProfileForm({closeModal}){
         e.preventDefault();
         const data = await dispatch(updateUserProfile(user.id, bio, image_profile_url))
                     .then(<Redirect to={`/user/profile/${user.id}`}/>);
-        if (data.errors) {
+        if (data) {
           setErrors(data);
         }
       };
@@ -34,7 +34,7 @@ function EditProfileForm({closeModal}){
     };
 
  return(
-    <div>
+    <div className='edit-profile-container'>
             <button className="exit-icon" onClick={exitFromModal}>
                 <i className="fa-solid fa-xmark"></i>
             </button>
@@ -64,7 +64,7 @@ function EditProfileForm({closeModal}){
                     <input
                         className='user-image-input'
                         name='image_profile_url'
-                        type='string'
+                        type='text'
                         value= {image_profile_url}
                         onChange={updateImage}
                     />

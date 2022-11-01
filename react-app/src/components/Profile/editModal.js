@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import EditProfileForm from "./editForm";
+import "./editButton.css"
 
 function EditProfileModal(){
     const [showModal, setShowModal] = useState(false);

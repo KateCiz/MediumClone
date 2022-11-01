@@ -19,21 +19,9 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
-@user_routes.route('/profile/<int:id>')
-def user_profile(id):
-    user = User.query.get(id)
-    if user:
-        author_profile = user.author_side_bar_to_dict()
-        comments = [comment.user_comments_to_dict() for comment in user.my_comments]
-        stories = [story.to_dict() for story in user.my_stories]
-        author_profile['Comments'] = comments
-        author_profile['Stories'] = stories
-        return jsonify({'Author': author_profile}), 200
-    else:
-        return jsonify({'message': 'User could not be found'}), 404
 
 # EDIT PROFILE ROUTE
-@user_routes.route('/profile/<int:id>/edit', methods=['PUT'])
+@user_routes.route('/profile/<int:id>/edit/', methods=['PUT'])
 @login_required
 def edit_user_profile(id):
     user = User.query.get(id)
@@ -48,3 +36,33 @@ def edit_user_profile(id):
             return jsonify({'message':''}), 400
     else:
         return jsonify({'message': 'Unauthorized'}), 403
+
+@user_routes.route('/profile/<int:id>')
+def user_profile(id):
+    user = User.query.get(id)
+    if user:
+        author_profile = user.author_side_bar_to_dict()
+        comments = [comment.user_comments_to_dict() for comment in user.my_comments]
+        stories = [story.to_dict() for story in user.my_stories]
+        author_profile['Comments'] = comments
+        author_profile['Stories'] = stories
+        return jsonify({'Author': author_profile}), 200
+    else:
+        return jsonify({'message': 'User could not be found'}), 404
+
+# EDIT PROFILE ROUTE
+# @user_routes.route('/profile/<int:id>/edit', methods=['PUT'])
+# @login_required
+# def edit_user_profile(id):
+#     user = User.query.get(id)
+#     form = ProfileEditorForm()
+#     if user.id == current_user.id:
+#         if form.validate_on_submit():
+#             user.bio = form.data['bio'] or user.bio
+#             user.image_profile_url = form.data['image_profile_url'] or user.image_profile_url
+#             db.session.commit()
+#             return jsonify({'message': 'User Updated'}), 200
+#         else:
+#             return jsonify({'message':''}), 400
+#     else:
+#         return jsonify({'message': 'Unauthorized'}), 403
