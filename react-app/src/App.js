@@ -10,6 +10,7 @@ import HomePage from "./components/homepage/index";
 import WritePage from "./components/writepage/index";
 import EditPage from "./components/writepage/editpage/index";
 import FullStoryPage from "./components/StoryPage/FullStoryPage";
+import VerticalNavBar from "./components/navbar/VerticalNavBar/VerticalNavBar";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -48,6 +49,7 @@ function App() {
               <User />
             </ProtectedRoute>
             <Route path="/stories/:storyId" exact={true}>
+              <NavBar />
               <FullStoryPage />
             </Route>
           </Switch>

@@ -29,9 +29,9 @@ function FullStoryPage() {
         <OneStory story={story} storyId={storyId} />
       </div>
       <div className="author-side-div">
-        <NavLink key={story?.user_id} to={`/profiles/${story?.user_id}`} style={{ textDecoration: "none" }}>
+        {/* <NavLink key={story?.user_id} to={`/profiles/${story?.user_id}`} style={{ textDecoration: "none" }}> */}
           <AuthorSideBar Author={story?.Author}/>
-        </NavLink>
+        {/* </NavLink> */}
       </div>
     </div>
   );

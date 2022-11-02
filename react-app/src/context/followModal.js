@@ -23,7 +23,7 @@ export function FollowModalProvider({ children }) {
 }
 
 export function FollowModal({ onClose, children }) {
-  const modalNode = useContext(SmallModalContext);
+  const modalNode = useContext(FollowModalContext);
   if (!modalNode) return null;
 
   return ReactDOM.createPortal(

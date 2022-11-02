@@ -1,0 +1,14 @@
+.follow-btn-modal-list {
+  color: #292929;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10pt;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #292929;
+  border-radius: 3px;
+  width: 85px;
+  height: 30px;
+  top: 50px;
+  left: 50px;
+  cursor: hand;
+}

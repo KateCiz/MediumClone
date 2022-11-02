@@ -80,11 +80,11 @@ function OneStory({ story, storyId }) {
       <div className="story-reactions-container">
         <div classname="likes-count">
           <LikeStory story={story} storyId={storyId} />
-          <p class="reactions">{story?.num_likes}</p>
+          <p className="reactions">{story?.num_likes}</p>
         </div>
         <div className="comment-count">
-          <i class="fa-solid fa-comment fa-lg"></i>
-          <p class="reactions">{story?.num_comments}</p>
+          <i className="fa-solid fa-comment fa-lg"></i>
+          <p className="reactions">{story?.num_comments}</p>
         </div>
       </div>
     </div>
