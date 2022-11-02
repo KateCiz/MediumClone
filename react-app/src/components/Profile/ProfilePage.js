@@ -4,6 +4,7 @@ import { getUserProfile } from "../../store/profiles";
 import { useParams, Link } from "react-router-dom";
 import EditProfileModal from "./editModal";
 import "./profile.css"
+
 function UserProfile(){
      const dispatch = useDispatch();
      const currentUser = useSelector(state => state.session.user);
@@ -18,12 +19,13 @@ function UserProfile(){
         <div className="user-profile-page">
             <div className="user-details">
                 <div className="image-container">
-                    <img
+                    {currentUser.image_profile_url ?
+                    (<img className="user-image" src={userProfile.image_profile_url}></img>):
+                    (<img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
                         className="user-pic-placeholder"
                     >
-                    </img>
-                    {/* <img className="user-image" src={userProfile.image_profile_url}></img> */}
+                    </img>)}
                 </div>
                 <h1>{userProfile.first_name}</h1>
                 <h3>Following: {userProfile.num_follows}</h3>
@@ -40,7 +42,7 @@ function UserProfile(){
             </nav>
                 { currentUser?.id === userProfile.id &&
                 <div className="options-container">
-                <Link to="/stories" className="write-link">WRITE</Link>
+                <Link to="/stories" className="write-link">Write</Link>
                 <EditProfileModal/>
                 </div>
                 }

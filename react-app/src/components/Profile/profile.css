@@ -34,8 +34,8 @@
 
 .write-link {
   align-self: center;
-  background-color: #292929;
-  border: 0;
+  /* background-color: #292929; */
+  border: 0px;
   color: white;
   cursor: pointer;
   justify-content: center;

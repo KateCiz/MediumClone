@@ -46,7 +46,7 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
-          <Route path="/profiles/:userId" exact={true}>
+          <Route path="/profile/:userId" exact={true}>
             <UserProfile/>
           </Route>
         </Switch>

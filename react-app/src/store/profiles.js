@@ -10,10 +10,10 @@ const userProfile = (user_profile) => {
     };
   };
 
-// const updateProfile = (user_profile) => {
+// const updateProfile = (message) => {
 //   return {
 //     type: GET_USER_PROFILE,
-//     user_profile
+//     message
 //   }
 // };
 
@@ -28,7 +28,7 @@ export const getUserProfile = (userId) => async(dispatch) => {
 };
 
 export const updateUserProfile = (userId, bio, image_profile_url) => async(dispatch) => {
-  const res = await fetch(`api/users/profile/${userId}/edit/`, {
+  const res = await fetch(`/api/users/profile/${userId}/edit`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -39,9 +39,15 @@ export const updateUserProfile = (userId, bio, image_profile_url) => async(dispa
     }),
   });
   if(res.ok){
-    const data =await res.json();
+    const data = await res.json();
+    // dispatch(updateProfile(data))
     return data
-  }
+  }else if(res.status < 500){
+    const data = await res.json();
+    if(data.errors){
+      return data.errors;
+    };
+  };
 
 };
 

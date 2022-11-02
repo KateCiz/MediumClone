@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { updateUserProfile } from '../../store/profiles';
+
+import { getUserProfile, updateUserProfile } from '../../store/profiles';
 import "./editForm.css"
 
 function EditProfileForm({closeModal}){
@@ -12,14 +12,15 @@ function EditProfileForm({closeModal}){
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
+
     const onEdit = async(e) => {
         e.preventDefault();
         const data = await dispatch(updateUserProfile(user.id, bio, image_profile_url))
-                    .then(<Redirect to={`/user/profile/${user.id}`}/>);
-        if (data) {
-          setErrors(data);
-        }
-      };
+        .then(exitFromModal)
+            if (data) {
+                setErrors(data);
+            }
+    };
 
     const updateBio = (e) => {
         setBio(e.target.value);
@@ -40,11 +41,11 @@ function EditProfileForm({closeModal}){
             </button>
             <span className="modal-heading">Profile Information</span>
             <form onSubmit={onEdit} className='edit-profile-form'>
-                <div>
-                    {errors.map((error, ind) => (
+                {/* <div>
+                    {errors?.map((error, ind) => (
                     <div key={ind}>{error}</div>
                     ))}
-                </div>
+                </div> */}
                 <div>
                     <label htmlFor='bio' className='user-bio'>
                         About
