@@ -37,6 +37,7 @@ const FollowsForm = ({ Author, user }) => {
                 </div>
                 <div className="name-info-card">
                   <span>{follow?.user.first_name}</span>
+                  <span> </span>
                   <span>{follow?.user.last_name}</span>
                 </div>
                 <div className="follow-btn-card">

@@ -38,6 +38,7 @@ const FollowForm = ({Author, user}) => {
                         </div>
                         <div className="name-info-card">
                           <span>{follower?.user.first_name}</span>
+                          <span> </span>
                           <span>{follower?.user.last_name}</span>
                         </div>
                         <div className="follow-btn-card">

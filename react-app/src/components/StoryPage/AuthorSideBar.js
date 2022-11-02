@@ -41,8 +41,8 @@ function AuthorSideBar({ Author }) {
         <FollowingModal user={sessionUser} Author={Author} />
         <FollowsModal user={sessionUser} Author={Author} />
         {/* {FollowBtn} */}
-        <FollowButton followerId={Author?.id}/>
       </div>
+      <FollowButton followerId={Author?.id} />
       <div className="author-bio-container">About Me: {Author?.bio}</div>
     </div>
   );
