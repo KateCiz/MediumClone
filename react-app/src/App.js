@@ -12,6 +12,7 @@ import HorizontalNavBar from './components/navbar/HorizontalNavBar/HorizontalNav
 import VerticalNavBar from "./components/navbar/VerticalNavBar/VerticalNavBar";
 import MainPage from "./components/homepage/index";
 import UserProfile from './components/Profile/ProfilePage';
+import Footer from './components/Footer/footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -52,6 +53,7 @@ function App() {
         </Switch>
         </>
         )}
+        <Footer/>
       </BrowserRouter>
     </>
   );
