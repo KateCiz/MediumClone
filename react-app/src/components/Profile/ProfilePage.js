@@ -4,6 +4,7 @@ import { getUserProfile } from "../../store/profiles";
 import { useParams, Link } from "react-router-dom";
 import EditProfileModal from "./editModal";
 import "./profile.css"
+import AuthorStoryFeed from "./Feed";
 
 function UserProfile(){
      const dispatch = useDispatch();
@@ -34,15 +35,21 @@ function UserProfile(){
             <nav className="toggle-container">
                 <div className="row">
                     <div className="toggles">
-                        <a role="tab">Stories</a>
-                        <a role="tab">Comments</a>
-                        <a role="tab" rel="alternate" href="/">About</a>
+                        <a role="tab">
+                            <p>Stories</p>
+                        </a>
+                        {currentUser?.id === userProfile.id &&
+                        <a role="tab" href="">Comments</a>
+                        }
+                        <a role="tab" rel="alternate" href="">
+                            <p>About</p>
+                        </a>
                     </div>
                 </div>
             </nav>
                 { currentUser?.id === userProfile.id &&
                 <div className="options-container">
-                <Link to="/stories" className="write-link">Write</Link>
+                <Link to="/new-story" className="write-link">Write</Link>
                 <EditProfileModal/>
                 </div>
                 }

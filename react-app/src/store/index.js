@@ -12,11 +12,8 @@ const rootReducer = combineReducers({
   storyState: storyReducer,
   commentState: commentsReducer,
   followsState: followsReducer,
-<<<<<<< HEAD
   profileState: profilesReducer,
-=======
   likeState: likesReducer,
->>>>>>> dev
 });
 
 

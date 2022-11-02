@@ -19,7 +19,7 @@ const userProfile = (user_profile) => {
 
 //thunks
 export const getUserProfile = (userId) => async(dispatch) => {
- const res = await fetch(`/api/users/profile/${userId}`);
+ const res = await fetch(`/api/profiles/${userId}`);
 
     if(res.ok){
       const profile = await res.json();

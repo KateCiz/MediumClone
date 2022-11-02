@@ -19,6 +19,16 @@
     height: fit-content;
 }
 
+.image-container{
+  width: 100px;
+  height: fit-content;
+}
+
+.user-name{
+  font-size: xx-large;
+  font-weight: 400;
+}
+
 .toggle-container{
     display: flex;
     flex-direction: column;
