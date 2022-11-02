@@ -54,7 +54,7 @@ function App() {
             </Route>
             <Route path="/test" exact={true}>
               <NavBar />
-              <MainPage />
+              <HomePage />
               {showComments && <CommentsBar id={3} type={'story'} setDisplay={setShowComments} />}
             </Route>
           </Switch>
