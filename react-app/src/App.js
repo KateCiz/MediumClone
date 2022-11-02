@@ -11,10 +11,12 @@ import { authenticate } from './store/session';
 import HorizontalNavBar from './components/navbar/HorizontalNavBar/HorizontalNavBar';
 import VerticalNavBar from "./components/navbar/VerticalNavBar/VerticalNavBar";
 import MainPage from "./components/homepage/index"
+import CommentsBar from './components/comments/CommentsBar';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const [showComments, setShowComments] = useState(true);
 
   useEffect(() => {
     (async() => {
@@ -42,6 +44,11 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
+          <Route path="/test" exact={true}>
+            <NavBar />
+            <MainPage />
+            {showComments && <CommentsBar id={3} type={'story'} setDisplay={setShowComments} />}
+          </Route>
         </Switch>
         )}
       </BrowserRouter>

@@ -5,6 +5,7 @@ import { csrfFetch } from "./csrf";
 
 //constants
 const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
+const GET_ALL_REPLIES = 'GET_ALL_REPLIES'
 const SINGLE_COMMENT = 'GET_SINGLE_COMMENT'
 const CREATE_COMMENT = 'CREATE_COMMENT';
 const UPDATE_COMMENT = 'UPDATE_COMMENT';
@@ -19,6 +20,14 @@ const getComments = (comments) => {
         type: GET_ALL_COMMENTS,
         comments
     }
+};
+
+const getReplies = (replies, parentId) => {
+  return {
+      type: GET_ALL_REPLIES,
+      replies,
+      parentId
+  }
 };
 
 const getSingleComment = (comment) => {
@@ -68,13 +77,25 @@ const UnLikeComment = (commentId) => {
     //GET ALL Comments
 export const getAllComments = (storyId) => async (dispatch) => {
     const res = await csrfFetch(`/api/stories/${storyId}/comments`);
-
+    console.log('runnung1')
     if(res.ok){
         const comments = await res.json();
+        console.log('runnung2', comments)
         dispatch(getComments(comments));
     }
     return res;
 };
+
+    //GET ALL Replies
+    export const getAllReplies = (commentId) => async (dispatch) => {
+      const res = await csrfFetch(`/api/comments/${commentId}/replies`);
+
+      if(res.ok){
+          const replies = await res.json();
+          dispatch(getReplies(replies, commentId));
+      }
+      return res;
+  };
 
 //SINGLE COMMENT
 export const getComment = (commentId) => async(dispatch) => {
@@ -159,15 +180,20 @@ export const deleteAComment = (commentId) => async (dispatch) => {
     return response;
 };
 
-const initialState = {};
+const initialState = {comments: {}, replies: {}};
 
 //Comments REDUCER
 export default function commentsReducer(state = initialState, action){
-    let newState = {...state}
+    let newState = {comments: {...state.comments}, replies: {...state.replies}}
     switch(action.type){
         case  GET_ALL_COMMENTS:
-            action.comments.forEach((comment) => newState[comment.id] = comment);
-            return newState;
+            newState.comments = {}
+            action.comments.forEach((comment) => newState.comments[comment.id] = comment);
+            return newState
+        case  GET_ALL_REPLIES:
+          // action.replies.forEach((reply) => newState.replies[action.parentId][reply.id] = reply);
+          newState.replies[action.parentId] = action.replies
+          return newState
         case SINGLE_COMMENT:
             return {
                 ...state,

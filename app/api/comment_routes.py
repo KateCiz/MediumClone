@@ -32,8 +32,9 @@ def get_story_comments(story_Id):
 def get_comment_replies(comment_Id):
   comment = Comment.query.get(comment_Id)
   if comment:
-    replies = [comment.to_dict() for comment in comment.replies]
-    return jsonify(replies)
+    res = comment.to_dict()
+    res['replies'] = {reply.id: reply.to_dict() for reply in comment.replies}
+    return jsonify(res)
   else:
     return jsonify({'message': 'Comment could not be found'}), 404
 

@@ -1,0 +1,29 @@
+.comment-box {
+  border-left: 1px solid black;
+  width: 400px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+  position: fixed;
+  right: 0;
+  margin: 0;
+  top: 0;
+  background-color: white;
+}
+
+.create-comment {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.create-comment-2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-textarea {
+  height: 17px;
+}
