@@ -6,6 +6,7 @@ import OneStory from "./OneStory";
 import AuthorSideBar from "./AuthorSideBar";
 import "./index.css";
 
+
 function FullStoryPage() {
   const { storyId } = useParams();
   const story = useSelector((state) => state.storyState[storyId]);

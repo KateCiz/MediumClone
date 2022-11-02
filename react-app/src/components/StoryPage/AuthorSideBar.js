@@ -5,6 +5,7 @@ import { followAUser } from "../../store/follows";
 import  FollowingModal from "../util/FollowModal/index.js";
 import  FollowButton from "../util/FollowButton/index"
 import { getCurUserFollowers } from "../../store/follows";
+import FollowsModal from "../util/FollowsModal/index"
 
 function AuthorSideBar({ Author }) {
   const history = useHistory();
@@ -38,6 +39,7 @@ function AuthorSideBar({ Author }) {
       <div className="followers-count-container">
         {/* <p>{Author?.num_followers} Followers</p> */}
         <FollowingModal user={sessionUser} Author={Author} />
+        <FollowsModal user={sessionUser} Author={Author} />
         {/* {FollowBtn} */}
         <FollowButton followerId={Author?.id}/>
       </div>

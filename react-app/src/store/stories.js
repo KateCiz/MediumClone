@@ -144,7 +144,7 @@ export const createNewStory = (story) => async (dispatch) => {
 
 //UPDATE STORY
 export const editStory = (story, id) => async (dispatch) => {
-  const res = await csrfFetch(`/api/stories/${id}/`, {
+  const res = await csrfFetch(`/api/stories/${id}`, {
     method: "PUT",
     body: JSON.stringify(story),
   });
@@ -159,7 +159,7 @@ export const editStory = (story, id) => async (dispatch) => {
 
 //DELETE STORY
 export const deleteAStory = (storyId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/stories/${storyId}/`, {
+  const res = await csrfFetch(`/api/stories/${storyId}`, {
     method: "DELETE",
   });
   const response = await res.json();
