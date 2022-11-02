@@ -10,8 +10,6 @@ const SINGLE_COMMENT = 'GET_SINGLE_COMMENT'
 const CREATE_COMMENT = 'CREATE_COMMENT';
 const UPDATE_COMMENT = 'UPDATE_COMMENT';
 const DELETE_COMMENT = 'DELETE_COMMENT';
-const LIKE_COMMENT = 'LIKE_COMMENT';
-const UNLIKE_COMMENT = 'UNLIKE_COMMENT';
 
 
 //ACTION CREATORS
@@ -54,20 +52,6 @@ const updateComment =  (comment) => {
 const deleteComment = (commentId) => {
     return {
         type: DELETE_COMMENT,
-        commentId
-    }
-};
-
-const LikeComment = (commentId) => {
-    return {
-        type: LIKE_COMMENT,
-        commentId
-    }
-};
-
-const UnLikeComment = (commentId) => {
-    return {
-        type: UNLIKE_COMMENT,
         commentId
     }
 };
@@ -126,7 +110,7 @@ export const createComment = (comment, storyId) => async(dispatch) =>  {
 };
 
     //UPDATE Comment
-export const editStory = (comment, commentId) => async(dispatch) =>  {
+export const editComment = (comment, commentId) => async(dispatch) =>  {
     const {content} = comment;
 
     const res = await csrfFetch(`/api/comments/${commentId}`, {
@@ -141,32 +125,6 @@ export const editStory = (comment, commentId) => async(dispatch) =>  {
     }
 };
 
-//LIKE Comment
-export const likeComment = (commentId) => async(dispatch) => {
-    const res = await csrfFetch(`/api/comments/${commentId}/likes`, {
-        method: 'POST',
-    });
-
-    if(res.ok){
-        const data = await res.json();
-        dispatch(LikeComment(data.comment_id))
-        return data
-    }
-};
-
-//UNLIKE COMMENT
-export const unlikeStory = (commentId) => async(dispatch) => {
-    const res = await csrfFetch(`/api/comments/${commentId}/likes`, {
-        method: 'DELETE',
-    });
-
-    if(res.ok){
-        const data = await res.json();
-        dispatch(UnLikeComment(data.comment_id))
-        return data
-    }
-
-};
 
     //DELETE Comment
 export const deleteAComment = (commentId) => async (dispatch) => {
@@ -205,10 +163,6 @@ export default function commentsReducer(state = initialState, action){
         case UPDATE_COMMENT:
             newState[action.comment.id] = action.comment
             return  newState;
-        case LIKE_COMMENT:
-            //add this
-        case UNLIKE_COMMENT:
-            //add this
         case DELETE_COMMENT:
             delete newState[action.commentId];
             return newState;

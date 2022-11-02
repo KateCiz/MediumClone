@@ -74,3 +74,28 @@ def like_a_comment(comment_Id):
                 return jsonify({'message': 'Like could not be found'}), 404
         else:
             return jsonify({'message': 'Comment could not be found'}), 404
+
+
+@like_routes.route('/stories/<int:storyId>/currentuser')
+@login_required
+def is_liked_story(storyId):
+    cur_user =  current_user.id
+    like = Like.query.filter(Like.user_id == cur_user,
+                               Like.story_id == int(storyId))
+    exists = [likes.to_dict_comment() for likes in like]
+    if(exists):
+        return jsonify({'story_liked': 'true'})
+    else:
+        return jsonify({'story_liked': 'false'})
+
+@like_routes.route('/comments/<int:commentId>/currentuser')
+@login_required
+def is_liked_comment(commentId):
+    cur_user =  current_user.id
+    like = Like.query.filter(Like.user_id == cur_user,
+                               Like.comment_id == int(commentId))
+    exists = [likes.to_dict_comment() for likes in like]
+    if(exists):
+        return jsonify({'comment_liked': 'true'})
+    else:
+        return jsonify({'comment_liked': 'false'})
