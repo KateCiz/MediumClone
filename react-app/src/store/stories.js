@@ -103,7 +103,7 @@ export const userStories = (userId) => async (dispatch) => {
 
 //GET FEED
 export const getProfileFeed = () => async (dispatch) => {
-  const res = await csrfFetch("/api/feed/myfollows/");
+  const res = await csrfFetch("/api/feed/myfollows");
 
   if (res.ok) {
     const data = await res.json();

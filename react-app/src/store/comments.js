@@ -8,6 +8,7 @@ const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
 const GET_ALL_REPLIES = 'GET_ALL_REPLIES'
 const SINGLE_COMMENT = 'GET_SINGLE_COMMENT'
 const CREATE_COMMENT = 'CREATE_COMMENT';
+const CREATE_REPLY = 'CREATE_REPLY';
 const UPDATE_COMMENT = 'UPDATE_COMMENT';
 const DELETE_COMMENT = 'DELETE_COMMENT';
 
@@ -40,6 +41,14 @@ const addComment = (comment) => {
         type: CREATE_COMMENT,
         comment,
     }
+};
+
+const addReply = (reply, parentId) => {
+  return {
+      type: CREATE_REPLY,
+      reply,
+      parentId
+  }
 };
 
 const updateComment =  (comment) => {
@@ -109,6 +118,24 @@ export const createComment = (comment, storyId) => async(dispatch) =>  {
     }
 };
 
+    //CREATE Reply
+export const createReply = (comment, commentId) => async(dispatch) =>  {
+  const {content} =  comment;
+
+  const res = await csrfFetch(`/api/comments/${commentId}/replies`, {
+      method: 'POST',
+      body: JSON.stringify({
+          content
+      })
+  });
+
+  if(res.ok){
+      const newComment = await res.json();
+      dispatch(addReply(newComment, commentId));
+      return res
+  }
+};
+
     //UPDATE Comment
 export const editComment = (comment, commentId) => async(dispatch) =>  {
     const {content} = comment;
@@ -149,16 +176,20 @@ export default function commentsReducer(state = initialState, action){
             action.comments.forEach((comment) => newState.comments[comment.id] = comment);
             return newState
         case  GET_ALL_REPLIES:
-          // action.replies.forEach((reply) => newState.replies[action.parentId][reply.id] = reply);
-          newState.replies[action.parentId] = action.replies
-          return newState
+            // action.replies.forEach((reply) => newState.replies[action.parentId][reply.id] = reply);
+            newState.replies[action.parentId] = action.replies
+            return newState
         case SINGLE_COMMENT:
             return {
                 ...state,
                 [action.comment.id]: action.comment
             }
         case CREATE_COMMENT:
-            newState[action.comment.id] = action.comment
+            newState.comments[action.comment.id] = action.comment
+            return newState;
+        case CREATE_REPLY:
+          // console.log(action)
+            newState.replies[action.parentId].replies[action.reply.id] = action.reply
             return newState;
         case UPDATE_COMMENT:
             newState[action.comment.id] = action.comment

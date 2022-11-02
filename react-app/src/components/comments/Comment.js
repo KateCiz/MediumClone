@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { updateComment, deleteComment } from "../../store/comments";
+import { editComment } from "../../store/comments";
 import CommentsBar from "./CommentsBar";
 import { Link } from "react-router-dom";
 
@@ -28,20 +28,19 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
   //   setShowEditButton(true);
   // }
 
-  // const saveComment = async (e) => {
-  //   e.preventDefault();
+  const saveComment = async (e) => {
+    e.preventDefault();
 
-  //   const outerPayload = {
-  //     commentId: comment.id,
-  //     payload: {
-  //       body: newComment
-  //     }
-  //   }
+    const payload = {
+      payload: {
+        content: newComment
+      }
+    }
 
-  //   await dispatch(updateComment(outerPayload));
-  //   setShowEdit(false);
-  //   setShowEditButton(true);
-  // }
+    await dispatch(editComment(payload, comment.id));
+    setShowEdit(false);
+    setShowEditButton(true);
+  }
 
   if(showEdit) {
     return(
@@ -55,8 +54,8 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
 
       <div className="comment-body edit-area">
       <textarea value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>
-      {/* <button onClick={saveComment}>Save</button>
-      <button onClick={destroyComment}>Delete</button> */}
+      <button onClick={saveComment}>Save</button>
+      {/* <button onClick={destroyComment}>Delete</button> */}
       </div>
 
     </div>
@@ -77,9 +76,9 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
         setShowEditButton(false);
         }}>Edit</button>}
       </div>
-      <button onClick={() => setShowReplies(true)}>Show replies</button>
       <div className="comment-body">{comment.content}</div>
       {comment.createdAt !== comment.updatedAt && <div className="edited-comment">Edited</div>}
+      <button onClick={() => setShowReplies(true)}>Show replies</button>
       {showReplies && <div><div><CommentsBar id={comment.id} type={'comment'} setDisplay={setShowReplies} /></div></div>}
     </div>
   );

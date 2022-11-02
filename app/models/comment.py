@@ -31,6 +31,9 @@ class Comment(db.Model):
         }
 
     def to_dict(self):
+
+        num_replies = db.session.query(Comment).filter(Comment.parent_id == self.id).count()
+
         return {
             'id': self.id,
             'author': {
@@ -41,7 +44,7 @@ class Comment(db.Model):
             },
             'content': self.content,
             'num_likes': len(self.comment_likes),
-            # 'num_replies': len(self.replies),
+            'num_replies': num_replies,
             'created_date': self.created_date,
             'updated_date': self.updated_date
         }

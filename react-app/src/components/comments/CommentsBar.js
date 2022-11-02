@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import Comment from "./Comment";
+import { Link } from "react-router-dom";
 
-import { getAllComments, getAllReplies, createComment} from "../../store/comments";
+
+import { getAllComments, getAllReplies, createComment, createReply} from "../../store/comments";
 
 import './CommentsBar.css'
 
@@ -46,13 +48,16 @@ function CommentsBar ({id, type, setDisplay}) {
     const payload = {
       content: newComment
     }
-    dispatch(createComment(payload, id));
+    if(type === 'story') {
+      dispatch(createComment(payload, id));
+    } else if(type === 'comment') {
+      dispatch(createReply(payload, id))
+    }
     setNewComment('');
   }
 
   const createCommentBox = (
     <>
-      <button onClick={() => setDisplay(false)}>Exit</button>
       <div className="create-comment">
         Leave a comment:
           <div className="create-comment-2">
@@ -62,8 +67,26 @@ function CommentsBar ({id, type, setDisplay}) {
       </div>
     </>
   );
+
+  const mainComment = (
+    <div className="main-comment">
+      <div className="comment-top">
+      <Link to={`/profiles/${commentState.replies[id]?.author.id}`} className='comment-user-button'>
+      <img
+          src={commentState.replies[id]?.author.image_profile_url || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU'}
+          className="user-icon-img"
+        ></img>
+      <h5>{commentState.replies[id]?.author.first_name} {commentState.replies[id]?.author.last_name}</h5>
+      </Link>
+      </div>
+      <div className="comment-body">{commentState.replies[id]?.content}</div>
+      {commentState.replies[id]?.createdAt !== commentState.replies[id]?.updatedAt && <div className="edited-comment">Edited</div>}
+    </div>
+  );
   return (
     <div className="comment-box">
+      <button onClick={() => setDisplay(false)}>Exit</button>
+      {type === 'comment' && mainComment}
       {sessionUser && createCommentBox}
       {console.log(comments)}
       {comments !== undefined && Object.values(comments).map(comment => <Comment key={comment.id} showEditButton={showEditButton} setShowEditButton={setShowEditButton} comment={comment} sessionUserId={sessionUser ? sessionUser.id : null} />)}

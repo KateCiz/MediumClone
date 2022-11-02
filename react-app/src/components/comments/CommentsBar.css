@@ -5,12 +5,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 10px;
+  /* row-gap: 10px; */
   position: fixed;
   right: 0;
   margin: 0;
   top: 0;
   background-color: white;
+  overflow-y: scroll;
 }
 
 .create-comment {
@@ -26,4 +27,16 @@
 
 .comment-textarea {
   height: 17px;
+}
+
+.main-comment {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  align-items: center;
+  border-bottom: 1px solid black;
+  width: 100%;
+  /* border-radius: 5px; */
+  margin-top: 10px;
+  padding-left: 20px;
 }
