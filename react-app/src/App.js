@@ -67,6 +67,9 @@ function App() {
             <Route path="/stories/:storyId" exact={true}>
               <FullStoryPage />
             </Route>
+            <Route path="/profile/:userId" exact={true}>
+              <UserProfile/>
+            </Route>
           </Switch>
         )}
         <Footer/>
