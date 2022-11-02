@@ -11,7 +11,7 @@ function FollowingModal({Author, user}) {
 
   return (
     <>
-      <button className="followers-total-btn" onClick={() => setShowModal(true)} >
+      <button className="followers-total-btn" onClick={() => {if(user) {setShowModal(true)}}} >
         followers {Author?.num_follows}
       </button>
       {showModal && (

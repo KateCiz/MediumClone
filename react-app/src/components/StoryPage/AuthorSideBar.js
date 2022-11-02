@@ -13,7 +13,7 @@ function AuthorSideBar({ Author }) {
   const sessionUser = useSelector((state) => state.session.user);
 
   useEffect(()=>{
-    dispatch(getCurUserFollowers(sessionUser.id))
+    if(sessionUser) dispatch(getCurUserFollowers(sessionUser.id))
   })
 
   let FollowBtn;
@@ -42,7 +42,7 @@ function AuthorSideBar({ Author }) {
         <FollowsModal user={sessionUser} Author={Author} />
         {/* {FollowBtn} */}
       </div>
-      <FollowButton followerId={Author?.id} />
+      {sessionUser ? (<FollowButton followerId={Author?.id} />) : null }
       <div className="author-bio-container">About Me: {Author?.bio}</div>
     </div>
   );

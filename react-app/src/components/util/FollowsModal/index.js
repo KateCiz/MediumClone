@@ -11,7 +11,11 @@ function FollowsModal({ Author, user }) {
     <>
       <button
         className="follows-total-btn"
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          if (user) {
+            setShowModal(true);
+          }
+        }}
       >
         follows {Author?.num_followers}
       </button>

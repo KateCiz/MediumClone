@@ -14,9 +14,11 @@ function OneStory({ story, storyId }) {
   let StoryImg;
   let editStoryBtn;
 
+  if(sessionUser){
     if (sessionUser.id === story?.user_id) {
       editStoryBtn = <Ellipse story={story} />;
     }
+  }
 
   if (story?.updated_date !== story?.created_date) {
     const editedDate = new Date(story?.updated_date);
@@ -66,7 +68,7 @@ function OneStory({ story, storyId }) {
               {EditedDate}
             </div>
           </div>
-          {story && sessionUser.id === story?.user_id ? (
+          {story && sessionUser && sessionUser.id === story?.user_id ? (
             <Ellipse story={story} />
           ) : null}
         </div>
