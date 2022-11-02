@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 // import EditStoryBtn from "../StoryComponent/EditStory/EditStoryBtn";
 import { useHistory } from "react-router-dom";
 import LikeStory from "../util/LikeButton/LikeStory/index"
+import Ellipse from "../util/EditEllipses/index";
 
 function OneStory({ story, storyId }) {
   const history = useHistory();
@@ -11,11 +12,13 @@ function OneStory({ story, storyId }) {
   let EditedDate;
   let CreatedDate;
   let StoryImg;
-  //   let editStoryBtn;
+  let editStoryBtn;
 
-  //   if (sessionUser.id === story.user_id) {
-  //     editStoryBtn = <EditStorytBtn story={story} />;
-  //   }
+  if(sessionUser){
+    if (sessionUser.id === story?.user_id) {
+      editStoryBtn = <Ellipse story={story} />;
+    }
+  }
 
   if (story?.updated_date !== story?.created_date) {
     const editedDate = new Date(story?.updated_date);
@@ -65,7 +68,9 @@ function OneStory({ story, storyId }) {
               {EditedDate}
             </div>
           </div>
-          {/* {editStoryBtn} */}
+          {story && sessionUser && sessionUser.id === story?.user_id ? (
+            <Ellipse story={story} />
+          ) : null}
         </div>
       </div>
       <div className="full-story-title">
@@ -80,12 +85,12 @@ function OneStory({ story, storyId }) {
       <div className="story-reactions-container">
         <div classname="likes-count">
           <LikeStory story={story} storyId={storyId} />
-          <p class="reactions">{story?.num_likes}</p>
         </div>
+        <span className="reactions">{story?.num_likes}</span>
         <div className="comment-count">
-          <i class="fa-solid fa-comment fa-lg"></i>
-          <p class="reactions">{story?.num_comments}</p>
+          <i className="fa-solid fa-comment fa-lg"></i>
         </div>
+        <span className="reactions">{story?.num_comments}</span>
       </div>
     </div>
   );

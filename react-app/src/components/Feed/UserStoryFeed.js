@@ -29,7 +29,7 @@ function UserStoryFeed({ user }) {
         {loaded &&
           stories?.map((story, i) => {
             return (
-              <div>
+              <div key={i}>
                 <NavLink
                   key={i}
                   to={`/stories/${story.id}`}

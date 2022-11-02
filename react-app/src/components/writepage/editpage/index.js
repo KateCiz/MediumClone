@@ -79,13 +79,13 @@ const EditPage = () => {
   });
 
   useEffect(() => {
-    if(story) {
+    if(loaded) {
       // setTitle(story.title);
       // setText(story.content);
       editor.commands.insertContent(story.title);
       largeeditor.commands.insertContent(story.content);
     }
-  }, [story]);
+  }, [loaded]);
 
 
   const history = useHistory();
@@ -99,7 +99,7 @@ const EditPage = () => {
       };
       dispatch(editStory(story, storyId));
     }
-    history.push("/");
+    history.push(`/stories/${storyId}`);
   };
 
   return (

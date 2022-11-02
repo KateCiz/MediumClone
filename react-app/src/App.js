@@ -50,6 +50,7 @@ function App() {
               <User />
             </ProtectedRoute>
             <Route path="/stories/:storyId" exact={true}>
+              <NavBar />
               <FullStoryPage />
             </Route>
             <Route path="/test" exact={true}>

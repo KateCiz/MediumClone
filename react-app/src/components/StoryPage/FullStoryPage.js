@@ -6,6 +6,7 @@ import OneStory from "./OneStory";
 import AuthorSideBar from "./AuthorSideBar";
 import "./index.css";
 
+
 function FullStoryPage() {
   const { storyId } = useParams();
   const story = useSelector((state) => state.storyState[storyId]);
@@ -29,9 +30,9 @@ function FullStoryPage() {
         <OneStory story={story} storyId={storyId} />
       </div>
       <div className="author-side-div">
-        <NavLink key={story?.user_id} to={`/profiles/${story?.user_id}`} style={{ textDecoration: "none" }}>
+        {/* <NavLink key={story?.user_id} to={`/profiles/${story?.user_id}`} style={{ textDecoration: "none" }}> */}
           <AuthorSideBar Author={story?.Author}/>
-        </NavLink>
+        {/* </NavLink> */}
       </div>
     </div>
   );
