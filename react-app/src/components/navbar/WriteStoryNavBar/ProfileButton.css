@@ -1,0 +1,30 @@
+
+.horizontal-flyout-container {
+  display: flex;
+  background: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.horizontal-user-pic {
+  width: 40px;
+  height: auto;
+}
+
+.horizontal-flyout {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.horizontal-profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  top: 70px;
+  right: 18px;
+  gap: 10px;
+  border: 1px lightgray solid;
+}

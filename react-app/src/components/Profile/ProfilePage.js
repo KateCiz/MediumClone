@@ -27,7 +27,7 @@ function UserProfile(){
                     >
                     </img>)}
                 </div>
-                <h1>{userProfile.first_name}</h1>
+                <h1 className="user-name">{userProfile.first_name}</h1>
                 <h3>Following: {userProfile.num_follows}</h3>
                 <h3>Followers: {userProfile.num_followers}</h3>
             </div>

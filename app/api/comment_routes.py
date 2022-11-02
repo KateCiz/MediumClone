@@ -112,7 +112,7 @@ def delete_a_comment(comment_id):
     if comment.user_id == curr_user_id:
       db.session.delete(comment)
       db.session.commit()
-      return comment.to_dict()
+      return jsonify({"message": "Successfully deleted comment"}), 200
     else:
       return {'errors': ['Unauthorized']}
   else:

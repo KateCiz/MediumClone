@@ -98,7 +98,7 @@ export default function followsReducer(state = {}, action){
             newState[action.comment.id] = action.comment
             return newState;
         case FOLLOW:
-            //add this
+            return  newState;
         case UNFOLLOW:
             //add this
             return state;
