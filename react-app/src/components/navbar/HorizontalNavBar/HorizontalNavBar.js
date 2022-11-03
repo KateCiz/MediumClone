@@ -18,14 +18,6 @@ const HorizontalNavBar = () => {
         </li>
         <li>
           <WriteLoginFormModal />
-          {/* <NavLink
-            to="/login"
-            exact={true}
-            activeClassName="active"
-            style={{ textDecoration: "none" }}
-          >
-            Write
-          </NavLink> */}
         </li>
         <li>
           <LoginFormModal />

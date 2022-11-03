@@ -14,9 +14,9 @@ function FullStoryPage() {
   const history = useHistory();
   // const [loaded, setLoaded] = useState(false)
 
-  if(!story){
-    history.push('/404');
-  }
+  // if(!story){
+  //   history.push('/404');
+  // }
 
   useEffect(() => {
     (async() => {
