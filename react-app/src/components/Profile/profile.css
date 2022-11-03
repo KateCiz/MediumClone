@@ -20,8 +20,12 @@
 }
 
 .image-container{
-  width: 100px;
-  height: fit-content;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .user-name{

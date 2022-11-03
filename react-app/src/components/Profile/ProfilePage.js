@@ -62,6 +62,13 @@ function UserProfile(){
                     })}
                 </div>
             </div>
+            <div className="comments-div">
+                {userProfile.Comments?.map((comment,i) => {
+                    return (
+                        <></>
+                    );
+                })}
+            </div>
         </div>
     );
 };
