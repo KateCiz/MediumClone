@@ -23,9 +23,17 @@ const NavBar = () => {
         <HorizontalNavBar />
       )}
       {sessionUser && location.pathname.slice(0, 8) === "/stories" && (
-        <VerticalNavBar user={sessionUser}/>
+        <VerticalNavBar user={sessionUser} />
       )}
-      {sessionUser && location.pathname.slice(0,10) === "/edit-story" && <WriteStoryNavBar />}
+      {sessionUser && location.pathname.slice(0, 10) === "/edit-story" && (
+        <WriteStoryNavBar />
+      )}
+      {sessionUser && location.pathname.slice(0, 9) === "/profiles" && (
+        <VerticalNavBar user={sessionUser} />
+      )}
+      {!sessionUser && location.pathname.slice(0, 9) === "/profiles" && (
+        <HorizontalNavBar />
+      )}
     </>
   );
 }

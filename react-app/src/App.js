@@ -41,39 +41,35 @@ function App() {
     <>
       <BrowserRouter>
         {loaded && (
-          <Switch>
-            <Route path="/" exact={true}>
-              <NavBar />
-              <HomePage />
-            </Route>
-            <ProtectedRoute path="/users" exact={true}>
-              <UsersList />
-            </ProtectedRoute>
-            <ProtectedRoute path="/new-story" exact={true}>
-              <WritePage />
-            </ProtectedRoute>
-            <ProtectedRoute path="/edit-story/:storyId" exact={true}>
-              <EditPage />
-            </ProtectedRoute>
-            <ProtectedRoute path="/users/:userId" exact={true}>
-              <User />
-            </ProtectedRoute>
-            <Route path="/stories/:storyId" exact={true}>
-              <NavBar />
-              <FullStoryPage />
-            </Route>
-            <Route path='/about' exact={true}>
-              <AboutUs />
-            </Route>
-            <Route path="/profile/:userId" exact={true}>
-              <UserProfile/>
-            </Route>
-            <Route>
-              <NotFound />
-            </Route>
-          </Switch>
+          <>
+            <NavBar />
+            <Switch>
+              <Route path="/" exact={true}>
+                <HomePage />
+              </Route>
+              <ProtectedRoute path="/new-story" exact={true}>
+                <WritePage />
+              </ProtectedRoute>
+              <ProtectedRoute path="/edit-story/:storyId" exact={true}>
+                <EditPage />
+              </ProtectedRoute>
+              <Route path="/stories/:storyId" exact={true}>
+                <NavBar />
+                <FullStoryPage />
+              </Route>
+              <Route path="/about" exact={true}>
+                <AboutUs />
+              </Route>
+              <Route path="/profiles/:userId" exact={true}>
+                <UserProfile />
+              </Route>
+              <Route>
+                <NotFound />
+              </Route>
+            </Switch>
+          </>
         )}
-        <Footer/>
+        <Footer />
       </BrowserRouter>
     </>
   );

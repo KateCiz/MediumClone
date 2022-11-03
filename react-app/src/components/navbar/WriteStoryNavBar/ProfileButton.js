@@ -31,10 +31,10 @@ function ProfileButton({ user }) {
 
   let profilePic;
 
-  if(!user.image_profile_url){
+  if(!user?.image_profile_url){
     profilePic = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU";
   } else {
-    profilePic = user.image_profile_url;
+    profilePic = user?.image_profile_url;
   }
 
   return (

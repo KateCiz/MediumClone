@@ -7,7 +7,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import CharacterCount from "@tiptap/extension-character-count";
 import "./index.css";
 import { useDispatch } from "react-redux";
-import { editStory } from "../../../store/stories";
+import storyReducer, { editStory } from "../../../store/stories";
 import { useHistory, useParams } from "react-router-dom";
 import { getSingleStory } from "../../../store/stories";
 
@@ -15,6 +15,7 @@ const EditPage = () => {
   const { storyId } = useParams();
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
+  const history = useHistory();
 
   // const story = useSelector((state) => {
   //   state?.storyState?.find((story) => String(story?.id) === storyId);
@@ -23,6 +24,7 @@ const EditPage = () => {
       (async() => {
         await dispatch(getSingleStory(storyId));
         setLoaded(true);
+
       })();
     }, [dispatch]);
 
@@ -84,11 +86,19 @@ const EditPage = () => {
       // setText(story.content);
       editor.commands.insertContent(story.title);
       largeeditor.commands.insertContent(story.content);
+
+      if(story){
+        if(sessionUser){
+          if (story.Author.id !== sessionUser.id){
+            history.push('/404')
+          }
+        }
+      }
     }
   }, [loaded]);
 
 
-  const history = useHistory();
+
 
   const handlePublish = () => {
     if (title.length > 1 && text.length > 1) {
