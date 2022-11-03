@@ -54,7 +54,6 @@ function App() {
                 <EditPage />
               </ProtectedRoute>
               <Route path="/stories/:storyId" exact={true}>
-                <NavBar />
                 <FullStoryPage />
               </Route>
               <Route path="/about" exact={true}>
