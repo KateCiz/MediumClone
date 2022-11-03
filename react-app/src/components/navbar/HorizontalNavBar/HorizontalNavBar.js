@@ -9,7 +9,7 @@ const HorizontalNavBar = () => {
   return (
     <nav className="navbar-container">
       <NavLink to="/" className="site-logo">
-        <img className="medium-logo-main" src={"../MediumLogo.ico"} alt="" />
+        <img className="medium-logo-main" src={"../Medium.svg"} alt="" />
       </NavLink>
       <ul>
         <li>

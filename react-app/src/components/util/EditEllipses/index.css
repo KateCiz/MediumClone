@@ -1,5 +1,6 @@
 .ellipse-container {
-  position: absolute;
+  margin-left: 10px;
+  position: relative;
   cursor: pointer;
 }
 
@@ -15,16 +16,23 @@
   max-width: 30px;
   gap: 10px;
   left: 0px;
-  bottom: 10px;
+  top: 10px;
   border: 1px lightgray solid;
   align-items: center;
   display: flex;
   justify-content: center;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .ellipse-dropdown li {
   list-style: none;
   display: table-cell;
+  padding-right: 30px;
+  padding-left: 30px;
+
 }
 
 .edit-story-btn {
