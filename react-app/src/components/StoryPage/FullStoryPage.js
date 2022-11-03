@@ -6,6 +6,7 @@ import OneStory from "./OneStory";
 import AuthorSideBar from "./AuthorSideBar";
 import "./index.css";
 
+
 function FullStoryPage() {
   const { storyId } = useParams();
   const story = useSelector((state) => state.storyState[storyId]);
@@ -31,7 +32,7 @@ function FullStoryPage() {
   return (
     <div className="full-page-story-div">
       <div className="full-page-story-details-div">
-        <OneStory story={story} />
+        <OneStory story={story} storyId={storyId} />
       </div>
       <div className="author-side-div">
           <AuthorSideBar Author={story?.Author}/>
