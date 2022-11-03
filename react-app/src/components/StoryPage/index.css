@@ -125,6 +125,7 @@
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     color: black;
+    cursor: pointer;
 }
 
 .reactions {
@@ -138,4 +139,5 @@
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     color: black;
+    cursor: pointer;
 }

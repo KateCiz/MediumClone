@@ -45,6 +45,7 @@ def create_story_comment(story_id):
   curr_user_id = current_user.id
   story = Story.query.get(story_id)
   form = CommentForm()
+  print(form.data)
   if story:
     if form.validate_on_submit:
       comment = Comment(
@@ -93,7 +94,9 @@ def update_a_comment(comment_id):
   if comment:
     if form.validate_on_submit:
       if comment.user_id == curr_user_id:
-        comment.content = form.data['content']
+        print(form.data)
+        comment.content = form.data['content'] or comment.content
+        db.session.add(comment)
         db.session.commit()
         return comment.to_dict()
       else:

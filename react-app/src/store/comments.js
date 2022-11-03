@@ -51,17 +51,19 @@ const addReply = (reply, parentId) => {
   }
 };
 
-const updateComment =  (comment) => {
+const updateComment = (comment, parentId) => {
     return {
         type: UPDATE_COMMENT,
-        comment
+        comment,
+        parentId
     }
 };
 
-const deleteComment = (commentId) => {
+const deleteComment = (commentId, parentId) => {
     return {
         type: DELETE_COMMENT,
-        commentId
+        commentId,
+        parentId
     }
 };
 
@@ -120,7 +122,7 @@ export const createComment = (comment, storyId) => async(dispatch) =>  {
 
     //CREATE Reply
 export const createReply = (comment, commentId) => async(dispatch) =>  {
-  const {content} =  comment;
+  const {content} = comment;
 
   const res = await csrfFetch(`/api/comments/${commentId}/replies`, {
       method: 'POST',
@@ -137,30 +139,32 @@ export const createReply = (comment, commentId) => async(dispatch) =>  {
 };
 
     //UPDATE Comment
-export const editComment = (comment, commentId) => async(dispatch) =>  {
+export const editComment = (comment, commentId, parentId) => async(dispatch) =>  {
     const {content} = comment;
-
+  console.log(content);
     const res = await csrfFetch(`/api/comments/${commentId}`, {
         method: 'PUT',
-        body: JSON.stringify(content),
+        body: JSON.stringify({
+          content
+        }),
     });
 
     if(res.ok){
         const updatedComment = await res.json();
-        dispatch(updateComment(updatedComment));
+        dispatch(updateComment(updatedComment, parentId));
         return res
     }
 };
 
 
     //DELETE Comment
-export const deleteAComment = (commentId) => async (dispatch) => {
+export const deleteAComment = (commentId, parentId) => async (dispatch) => {
     const res = await csrfFetch(`/api/comments/${commentId}`, {
         method: 'DELETE'
     });
     const response = await res.json();
     if(res.status === 200){
-        dispatch(deleteComment(commentId));
+        dispatch(deleteComment(commentId, parentId));
     }
     return response;
 };
@@ -192,10 +196,18 @@ export default function commentsReducer(state = initialState, action){
             newState.replies[action.parentId].replies[action.reply.id] = action.reply
             return newState;
         case UPDATE_COMMENT:
-            newState[action.comment.id] = action.comment
+            if(action.parentId) {
+              newState.replies[action.parentId].replies[action.comment.id] = action.comment;
+            } else {
+              newState.comments[action.comment.id] = action.comment;
+            }
             return  newState;
         case DELETE_COMMENT:
-            delete newState[action.commentId];
+          if(action.parentId) {
+            delete newState.replies[action.parentId].replies[action.commentId]
+          } else {
+            delete newState.comments[action.commentId]
+          }
             return newState;
         default:
             return state;

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { editComment } from "../../store/comments";
+import { editComment, deleteAComment } from "../../store/comments";
 import CommentsBar from "./CommentsBar";
+import CommentsButton from "./CommentsButton";
 import { Link } from "react-router-dom";
 
 
@@ -12,32 +13,24 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
   const dispatch = useDispatch();
   const {author} = comment;
   const [showEdit, setShowEdit] = useState(false);
-  const [newComment, setNewComment] = useState(comment.body)
-  const [showReplies, setShowReplies] = useState(false);
+  const [newComment, setNewComment] = useState(comment.content)
 
-  // const destroyComment = async (e) => {
-  //   e.preventDefault();
 
-  //   const outerPayload = {
-  //     commentId: comment.id,
-  //     songId: comment.songId
-  //   }
+  const destroyComment = async (e) => {
+    e.preventDefault();
 
-  //   await dispatch(deleteComment(outerPayload));
-  //   setShowEdit(false);
-  //   setShowEditButton(true);
-  // }
+    await dispatch(deleteAComment(comment.id, comment.parent_id));
+    setShowEdit(false);
+    setShowEditButton(true);
+  }
 
   const saveComment = async (e) => {
     e.preventDefault();
-
     const payload = {
-      payload: {
-        content: newComment
-      }
+      content: newComment
     }
 
-    await dispatch(editComment(payload, comment.id));
+    await dispatch(editComment(payload, comment.id, comment.parent_id));
     setShowEdit(false);
     setShowEditButton(true);
   }
@@ -46,8 +39,11 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
     return(
       <div className="comment">
       <div className="comment-top">
-      <Link to={`/users/${author.id}`} className='comment-user-button'>
-      {( author.previewImage && author.previewImage.length > 1 && <img src={author.previewImage} className='user-icon-img' />) || <i className="fas fa-user-circle fa-2xl user-icon" />}
+      <Link to={`/profiles/${author.id}`} className='comment-user-button'>
+      <img
+          src={author.image_profile_url || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU'}
+          className="user-icon-img"
+        ></img>
       <h5>{author.first_name} {author.last_name}</h5>
       </Link>
       </div>
@@ -55,7 +51,7 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
       <div className="comment-body edit-area">
       <textarea value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>
       <button onClick={saveComment}>Save</button>
-      {/* <button onClick={destroyComment}>Delete</button> */}
+      <button onClick={destroyComment}>Delete</button>
       </div>
 
     </div>
@@ -64,7 +60,7 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
   return (
     <div className="comment">
       <div className="comment-top">
-      <Link to={`/users/${author.id}`} className='comment-user-button'>
+      <Link to={`/profiles/${author.id}`} className='comment-user-button'>
       <img
           src={author.image_profile_url || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU'}
           className="user-icon-img"
@@ -78,8 +74,12 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
       </div>
       <div className="comment-body">{comment.content}</div>
       {comment.createdAt !== comment.updatedAt && <div className="edited-comment">Edited</div>}
-      <button onClick={() => setShowReplies(true)}>Show replies</button>
-      {showReplies && <div><div><CommentsBar id={comment.id} type={'comment'} setDisplay={setShowReplies} /></div></div>}
+      <div className="comment-replies-btn">
+        <div className="comment-count">
+          <CommentsButton id={comment.id} type={'comment'} />
+        </div>
+        <span className="reactions">{comment?.num_replies}</span>
+      </div>
     </div>
   );
 }

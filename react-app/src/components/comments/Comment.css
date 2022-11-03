@@ -48,3 +48,8 @@
 .comments-user-pic {
   margin-top: 0px;
 }
+
+.comment-replies-btn {
+  display: flex;
+  align-items: center;
+}
