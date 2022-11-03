@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./VerticalNavBar.css";
-import { FiEdit, FiBookmark, FiHome } from "react-icons/fi";
+import { FiEdit, FiHome } from "react-icons/fi";
+import { BsJournalBookmarkFill } from "react-icons/bs";
 import ProfileButton from "../ProfileButton";
 
 const VerticalNavBar = ({ user }) => {
@@ -30,12 +31,12 @@ const VerticalNavBar = ({ user }) => {
           </li>
           <li>
             <NavLink
-              to="/"
+              to={`/profiles/${user.id}`}
               exact={true}
               activeClassName="active"
               style={{ textDecoration: "none" }}
             >
-              <FiBookmark className="navbaricon" />
+              <BsJournalBookmarkFill className="navbaricon" />
             </NavLink>
           </li>
           <li>

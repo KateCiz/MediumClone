@@ -4,6 +4,7 @@ import "./HorizontalNavBar.css"
 import SignupFormModal from '../../auth/signupmodal/index'
 import LoginFormModal from '../../auth/signinmodal/index'
 import DemoAccount from '../../auth/DemoAccount/index'
+import WriteLoginFormModal from "../../auth/WriteLogin";
 
 const HorizontalNavBar = () => {
   return (
@@ -16,13 +17,24 @@ const HorizontalNavBar = () => {
           <DemoAccount />
         </li>
         <li>
-          <NavLink
+          <WriteLoginFormModal />
+          {/* <NavLink
             to="/login"
             exact={true}
             activeClassName="active"
             style={{ textDecoration: "none" }}
           >
             Write
+          </NavLink> */}
+        </li>
+        <li>
+          <NavLink
+            to="/about"
+            exact={true}
+            activeClassName="active"
+            style={{ textDecoration: "none" }}
+          >
+            About Us
           </NavLink>
         </li>
         <li>
