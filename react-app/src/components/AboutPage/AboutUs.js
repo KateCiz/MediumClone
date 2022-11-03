@@ -8,13 +8,13 @@ function AboutUs() {
          'pic': 'https://res.cloudinary.com/dymmlu1dw/image/upload/v1667347304/MediumClone/austin-screenshot_v62rmu.png',
          'blurb': 'I love coding and will dive down the rabbit hole whenever I find code that interests me.',
          'github': 'https://github.com/FenneAustin',
-         'linkedIn': ''
+         'linkedIn': 'https://www.linkedin.com/in/austin-fenne'
         },
         {'name': 'Kaitlin Cizewski',
          'pic': 'https://res.cloudinary.com/dymmlu1dw/image/upload/v1667338766/MediumClone/kate-square-pic2_yybmtf.jpg',
-         'blurb': "Single mom by day and software engineer by night. I'm a small town girl from Pennsylvania who loves organizing code and writing.",
+         'blurb': "Software engineer by night and single mom by day. I'm a small town girl from Pennsylvania who loves organizing code and writing.",
          'github': 'https://github.com/KateCiz',
-         'linkedIn': ''
+         'linkedIn': 'https://www.linkedin.com/in/kaitlin-cizewski/'
         },
         {'name': 'Mariel Vaca',
          'pic': 'https://res.cloudinary.com/dymmlu1dw/image/upload/v1667263842/MediumClone/mariel-pic_ddb9yk.jpg',

@@ -63,14 +63,12 @@ function App() {
               <FullStoryPage />
             </Route>
             <Route path='/about' exact={true}>
-              <NavBar />
               <AboutUs />
             </Route>
             <Route path="/profile/:userId" exact={true}>
               <UserProfile/>
             </Route>
             <Route>
-              <NavBar />
               <NotFound />
             </Route>
           </Switch>
