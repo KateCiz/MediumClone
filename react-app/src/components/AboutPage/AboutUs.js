@@ -1,5 +1,5 @@
 import './index.css';
-import { FaReact, FaFlask, FaPython, FaMortarPestle } from 'react-icons/fa';
+import { FaReact, FaJsSquare, FaFlask, FaPython, FaMortarPestle, FaGithub } from 'react-icons/fa';
 
 function AboutUs() {
 
@@ -32,10 +32,11 @@ function AboutUs() {
 
     const icons = [
         {'tech-icon': <FaReact className='fa-5x'/>, 'name': 'React'},
+        {'tech-icon': <FaJsSquare className='fa-5x'/>, 'name': 'Javascript'},
         {'tech-icon': <FaFlask className='fa-5x'/>, 'name': 'Flask'},
         {'tech-icon': <FaPython className='fa-5x'/>, 'name': 'Python'},
         {'tech-icon': <FaMortarPestle className='fa-5x'/>, 'name': 'SQLAlchemy'},
-
+        {'tech-icon': <FaGithub className='fa-5x'/>, 'name': 'GIT'},
     ]
 
     return (
