@@ -9,7 +9,7 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
   type: REMOVE_USER,
-})
+});
 
 const initialState = { user: null };
 
@@ -55,7 +55,7 @@ export const login = (email, password) => async (dispatch) => {
     return ['An error occurred. Please try again.']
   }
 
-}
+};
 
 export const logout = () => async (dispatch) => {
   const response = await fetch('/api/auth/logout', {
