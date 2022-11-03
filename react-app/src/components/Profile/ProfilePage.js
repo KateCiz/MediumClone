@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getUserProfile } from "../../store/profiles";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, NavLink} from "react-router-dom";
 import EditProfileModal from "./editModal";
 import "./profile.css"
 import AuthorStoryFeed from "./Feed";
+import AuthorStoryPreview from "./AuthorStoryPreview";
 
 function UserProfile(){
      const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function UserProfile(){
         <div className="user-profile-page">
             <div className="user-details">
                 <div className="image-container">
-                    {currentUser.image_profile_url ?
+                    {userProfile?.image_profile_url ?
                     (<img className="user-image" src={userProfile.image_profile_url}></img>):
                     (<img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
@@ -35,9 +36,7 @@ function UserProfile(){
             <nav className="toggle-container">
                 <div className="row">
                     <div className="toggles">
-                        <a role="tab">
-                            <p>Stories</p>
-                        </a>
+                        <a role="tab" href="">Stories</a>
                         {currentUser?.id === userProfile.id &&
                         <a role="tab" href="">Comments</a>
                         }
@@ -53,6 +52,18 @@ function UserProfile(){
                 <EditProfileModal/>
                 </div>
                 }
+            {/* <AuthorStoryFeed stories={userProfile.Stories}/> */}
+            <div className="feed-div">
+        <div className="feed-preview-stories">
+          {userProfile.Stories?.map((story, i) => {
+              return (
+              <NavLink key={i} to={`/stories/${story.id}`} style={{ textDecoration: "none" }}>
+                 <AuthorStoryPreview story={story}/>
+              </NavLink>
+            );
+          })}
+        </div>
+      </div>
         </div>
     );
 };
