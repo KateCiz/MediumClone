@@ -1,0 +1,13 @@
+.edit-profile-button {
+  color: #292929;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: 'Roboto Condensed', sans-serif;
+  border: none;
+  background: none;
+  cursor: pointer;
+  }
+
+  .edit-profile-button:hover {
+    opacity: 0.8;
+  }
