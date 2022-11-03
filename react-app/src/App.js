@@ -65,7 +65,7 @@ function App() {
             <Route path='/about' exact={true}>
               <AboutUs />
             </Route>
-            <Route path="/profile/:userId" exact={true}>
+            <Route path="/profiles/:userId" exact={true}>
               <UserProfile/>
             </Route>
             <Route>
