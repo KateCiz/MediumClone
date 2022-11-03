@@ -1,22 +1,31 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {useHistory} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 import HorizontalNavBar from "./HorizontalNavBar/HorizontalNavBar"
 import VerticalNavBar from './VerticalNavBar/VerticalNavBar';
 import MainNavBar from './MainPageNavBar/index'
 import WriteStoryNavBar from './WriteStoryNavBar/index';
 
 const NavBar = () => {
-  const history = useHistory()
+  const location = useLocation()
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
     <>
-    {console.log(history.location.pathname)}
-    {console.log(!sessionUser)}
-    {console.log(history.location.path ==='/')}
-    { !sessionUser && history.location.path == "/" && <MainNavBar /> }
-    { sessionUser && history.location.path === '/' ? (<VerticalNavBar user={sessionUser}/>) : null}
+      {!sessionUser && location.pathname === "/" && <MainNavBar />}
+      {sessionUser && location.pathname === "/" && (
+        <VerticalNavBar user={sessionUser} />
+      )}
+      {sessionUser && location.pathname === "/new-story" && (
+        <WriteStoryNavBar />
+      )}
+      {!sessionUser && location.pathname.slice(0, 8) === "/stories" && (
+        <HorizontalNavBar />
+      )}
+      {sessionUser && location.pathname.slice(0, 8) === "/stories" && (
+        <VerticalNavBar user={sessionUser}/>
+      )}
+      {sessionUser && location.pathname.slice(0,10) === "/edit-story" && <WriteStoryNavBar />}
     </>
   );
 }
