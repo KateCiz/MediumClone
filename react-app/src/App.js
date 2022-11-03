@@ -1,6 +1,13 @@
+import { useDispatch, useSelector } from 'react-redux';
+import LoginForm from './components/auth/LoginForm';
+import SignUpForm from './components/auth/SignUpForm';
+import HorizontalNavBar from './components/navbar/HorizontalNavBar/HorizontalNavBar';
+import VerticalNavBar from "./components/navbar/VerticalNavBar/VerticalNavBar";
+import MainPage from "./components/homepage/index";
+import UserProfile from './components/Profile/ProfilePage';
+import Footer from './components/Footer/footer';
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import NavBar from "./components/navbar/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
@@ -10,10 +17,14 @@ import HomePage from "./components/homepage/index";
 import WritePage from "./components/writepage/index";
 import EditPage from "./components/writepage/editpage/index";
 import FullStoryPage from "./components/StoryPage/FullStoryPage";
+import AboutUs from "./components/AboutPage/AboutUs";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+
+  const currentUser = useSelector(state => state.session.user);
 
   useEffect(() => {
     (async () => {
@@ -51,8 +62,18 @@ function App() {
               <NavBar />
               <FullStoryPage />
             </Route>
+            <Route path='/about' exact={true}>
+              <AboutUs />
+            </Route>
+            <Route path='/404'>
+              <NotFound />
+            </Route>
+            <Route path="/profile/:userId" exact={true}>
+              <UserProfile/>
+            </Route>
           </Switch>
         )}
+        <Footer/>
       </BrowserRouter>
     </>
   );

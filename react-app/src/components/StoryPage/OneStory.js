@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import LikeStory from "../util/LikeButton/LikeStory/index"
 import Ellipse from "../util/EditEllipses/index";
+import CommentsButton from "../comments/CommentsButton";
 
 function OneStory({ story, storyId }) {
   const history = useHistory();
@@ -88,9 +89,10 @@ function OneStory({ story, storyId }) {
         </div>
         <span className="reactions">{story?.num_likes}</span>
         <div className="comment-count">
-          <i className="fa-solid fa-comment fa-lg"></i>
+          <CommentsButton id={storyId} />
         </div>
         <span className="reactions">{story?.num_comments}</span>
+
       </div>
     </div>
   );

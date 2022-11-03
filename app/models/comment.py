@@ -31,16 +31,36 @@ class Comment(db.Model):
         }
 
     def to_dict(self):
+
+        num_replies = db.session.query(Comment).filter(Comment.parent_id == self.id).count()
+
         return {
             'id': self.id,
             'author': {
-                    'id': self.id,
+                    'id': self.user.id,
                     'first_name': self.user.first_name,
                     'last_name': self.user.last_name,
                     'image_profile_url': self.user.image_profile_url,
             },
             'content': self.content,
-            'likes': len(self.comment_likes),
+            'num_likes': len(self.comment_likes),
+            'num_replies': num_replies,
+            'parent_id': self.parent_id,
             'created_date': self.created_date,
             'updated_date': self.updated_date
         }
+    # def to_dict_with_replies(self):
+    #     return {
+    #         'id': self.id,
+    #         'author': {
+    #                 'id': self.user.id,
+    #                 'first_name': self.user.first_name,
+    #                 'last_name': self.user.last_name,
+    #                 'image_profile_url': self.user.image_profile_url,
+    #         },
+    #         'content': self.content,
+    #         'likes': len(self.comment_likes),
+    #         'replies': {comment.id: comment.to_dict() for comment in self.replies},
+    #         'created_date': self.created_date,
+    #         'updated_date': self.updated_date
+    #     }
