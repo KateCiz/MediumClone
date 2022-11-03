@@ -12,16 +12,16 @@ import './CommentsBar.css'
 function CommentsBar ({id, type, setDisplay}) {
   const dispatch = useDispatch();
   const commentState = useSelector(state => state.commentState);
-  const display = commentState.display
+  // const display = commentState.display
   let comments = {};
 
-  // useEffect(() => {
+
     if(type === 'story') {
       comments = commentState.comments;
     } else if(type === 'comment') {
       comments = commentState.replies[id]?.replies;
     }
-  // }, [commentState])
+
 
   const sessionUser = useSelector(state => state.session.user)
   const [showEditButton, setShowEditButton] = useState(true);
@@ -38,7 +38,6 @@ function CommentsBar ({id, type, setDisplay}) {
       } else if(type === 'comment') {
         dispatch(getAllReplies(id))
       }
-      console.log('getting comments');
     }
   }, [id]);
 
@@ -88,7 +87,6 @@ function CommentsBar ({id, type, setDisplay}) {
       <button onClick={() => setDisplay(false)}>Exit</button>
       {type === 'comment' && mainComment}
       {sessionUser && createCommentBox}
-      {console.log(comments)}
       {comments !== undefined && Object.values(comments).map(comment => <Comment key={comment.id} showEditButton={showEditButton} setShowEditButton={setShowEditButton} comment={comment} sessionUserId={sessionUser ? sessionUser.id : null} />)}
     </div>
   );

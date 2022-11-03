@@ -10,12 +10,10 @@ import HomePage from "./components/homepage/index";
 import WritePage from "./components/writepage/index";
 import EditPage from "./components/writepage/editpage/index";
 import FullStoryPage from "./components/StoryPage/FullStoryPage";
-import CommentsBar from './components/comments/CommentsBar';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const [showComments, setShowComments] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -52,11 +50,6 @@ function App() {
             <Route path="/stories/:storyId" exact={true}>
               <NavBar />
               <FullStoryPage />
-            </Route>
-            <Route path="/test" exact={true}>
-              <NavBar />
-              <HomePage />
-              {showComments && <CommentsBar id={3} type={'story'} setDisplay={setShowComments} />}
             </Route>
           </Switch>
         )}

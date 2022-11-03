@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useDispatch } from "react-redux";
 import { editComment, deleteAComment } from "../../store/comments";
-import CommentsBar from "./CommentsBar";
 import CommentsButton from "./CommentsButton";
 import { Link } from "react-router-dom";
 
 
 import './Comment.css';
 
-function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
+function Comment ({comment, sessionUserId}) {
 
   const dispatch = useDispatch();
   const {author} = comment;
@@ -21,7 +20,6 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
 
     await dispatch(deleteAComment(comment.id, comment.parent_id));
     setShowEdit(false);
-    setShowEditButton(true);
   }
 
   const saveComment = async (e) => {
@@ -32,7 +30,6 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
 
     await dispatch(editComment(payload, comment.id, comment.parent_id));
     setShowEdit(false);
-    setShowEditButton(true);
   }
 
   if(showEdit) {
@@ -67,9 +64,8 @@ function Comment ({comment, sessionUserId, showEditButton, setShowEditButton}) {
         ></img>
       <h5>{author.first_name} {author.last_name}</h5>
       </Link>
-      {showEditButton && author.id === sessionUserId && <button onClick={e => {
+      {author.id === sessionUserId && <button onClick={e => {
         setShowEdit(true)
-        setShowEditButton(false);
         }}>Edit</button>}
       </div>
       <div className="comment-body">{comment.content}</div>
