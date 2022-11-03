@@ -32,8 +32,9 @@ def get_story_comments(story_Id):
 def get_comment_replies(comment_Id):
   comment = Comment.query.get(comment_Id)
   if comment:
-    replies = [comment.to_dict() for comment in comment.replies]
-    return jsonify(replies)
+    res = comment.to_dict()
+    res['replies'] = {reply.id: reply.to_dict() for reply in comment.replies}
+    return jsonify(res)
   else:
     return jsonify({'message': 'Comment could not be found'}), 404
 
@@ -44,6 +45,7 @@ def create_story_comment(story_id):
   curr_user_id = current_user.id
   story = Story.query.get(story_id)
   form = CommentForm()
+  print(form.data)
   if story:
     if form.validate_on_submit:
       comment = Comment(
@@ -92,7 +94,9 @@ def update_a_comment(comment_id):
   if comment:
     if form.validate_on_submit:
       if comment.user_id == curr_user_id:
-        comment.content = form.data['content']
+        print(form.data)
+        comment.content = form.data['content'] or comment.content
+        db.session.add(comment)
         db.session.commit()
         return comment.to_dict()
       else:

@@ -5,8 +5,10 @@ import { csrfFetch } from "./csrf";
 
 //constants
 const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
+const GET_ALL_REPLIES = 'GET_ALL_REPLIES'
 const SINGLE_COMMENT = 'GET_SINGLE_COMMENT'
 const CREATE_COMMENT = 'CREATE_COMMENT';
+const CREATE_REPLY = 'CREATE_REPLY';
 const UPDATE_COMMENT = 'UPDATE_COMMENT';
 const DELETE_COMMENT = 'DELETE_COMMENT';
 
@@ -17,6 +19,14 @@ const getComments = (comments) => {
         type: GET_ALL_COMMENTS,
         comments
     }
+};
+
+const getReplies = (replies, parentId) => {
+  return {
+      type: GET_ALL_REPLIES,
+      replies,
+      parentId
+  }
 };
 
 const getSingleComment = (comment) => {
@@ -33,17 +43,27 @@ const addComment = (comment) => {
     }
 };
 
-const updateComment =  (comment) => {
+const addReply = (reply, parentId) => {
+  return {
+      type: CREATE_REPLY,
+      reply,
+      parentId
+  }
+};
+
+const updateComment = (comment, parentId) => {
     return {
         type: UPDATE_COMMENT,
-        comment
+        comment,
+        parentId
     }
 };
 
-const deleteComment = (commentId) => {
+const deleteComment = (commentId, parentId) => {
     return {
         type: DELETE_COMMENT,
-        commentId
+        commentId,
+        parentId
     }
 };
 
@@ -52,13 +72,25 @@ const deleteComment = (commentId) => {
     //GET ALL Comments
 export const getAllComments = (storyId) => async (dispatch) => {
     const res = await csrfFetch(`/api/stories/${storyId}/comments`);
-
+    console.log('runnung1')
     if(res.ok){
         const comments = await res.json();
+        console.log('runnung2', comments)
         dispatch(getComments(comments));
     }
     return res;
 };
+
+    //GET ALL Replies
+    export const getAllReplies = (commentId) => async (dispatch) => {
+      const res = await csrfFetch(`/api/comments/${commentId}/replies`);
+
+      if(res.ok){
+          const replies = await res.json();
+          dispatch(getReplies(replies, commentId));
+      }
+      return res;
+  };
 
 //SINGLE COMMENT
 export const getComment = (commentId) => async(dispatch) => {
@@ -88,57 +120,94 @@ export const createComment = (comment, storyId) => async(dispatch) =>  {
     }
 };
 
-    //UPDATE Comment
-export const editComment = (comment, commentId) => async(dispatch) =>  {
-    const {content} = comment;
+    //CREATE Reply
+export const createReply = (comment, commentId) => async(dispatch) =>  {
+  const {content} = comment;
 
+  const res = await csrfFetch(`/api/comments/${commentId}/replies`, {
+      method: 'POST',
+      body: JSON.stringify({
+          content
+      })
+  });
+
+  if(res.ok){
+      const newComment = await res.json();
+      dispatch(addReply(newComment, commentId));
+      return res
+  }
+};
+
+    //UPDATE Comment
+export const editComment = (comment, commentId, parentId) => async(dispatch) =>  {
+    const {content} = comment;
+  console.log(content);
     const res = await csrfFetch(`/api/comments/${commentId}`, {
         method: 'PUT',
-        body: JSON.stringify(content),
+        body: JSON.stringify({
+          content
+        }),
     });
 
     if(res.ok){
         const updatedComment = await res.json();
-        dispatch(updateComment(updatedComment));
+        dispatch(updateComment(updatedComment, parentId));
         return res
     }
 };
 
 
     //DELETE Comment
-export const deleteAComment = (commentId) => async (dispatch) => {
+export const deleteAComment = (commentId, parentId) => async (dispatch) => {
     const res = await csrfFetch(`/api/comments/${commentId}`, {
         method: 'DELETE'
     });
     const response = await res.json();
     if(res.status === 200){
-        dispatch(deleteComment(commentId));
+        dispatch(deleteComment(commentId, parentId));
     }
     return response;
 };
 
-const initialState = {};
+const initialState = {comments: {}, replies: {}};
 
 //Comments REDUCER
 export default function commentsReducer(state = initialState, action){
-    let newState = {...state}
+    let newState = {comments: {...state.comments}, replies: {...state.replies}}
     switch(action.type){
         case  GET_ALL_COMMENTS:
-            action.comments.forEach((comment) => newState[comment.id] = comment);
-            return newState;
+            newState.comments = {}
+            action.comments.forEach((comment) => newState.comments[comment.id] = comment);
+            return newState
+        case  GET_ALL_REPLIES:
+            // action.replies.forEach((reply) => newState.replies[action.parentId][reply.id] = reply);
+            newState.replies[action.parentId] = action.replies
+            return newState
         case SINGLE_COMMENT:
             return {
                 ...state,
                 [action.comment.id]: action.comment
             }
         case CREATE_COMMENT:
-            newState[action.comment.id] = action.comment
+            newState.comments[action.comment.id] = action.comment
+            return newState;
+        case CREATE_REPLY:
+          // console.log(action)
+            newState.replies[action.parentId].replies[action.reply.id] = action.reply
             return newState;
         case UPDATE_COMMENT:
-            newState[action.comment.id] = action.comment
+            if(action.parentId) {
+              newState.replies[action.parentId].replies[action.comment.id] = action.comment;
+            } else {
+              newState.comments[action.comment.id] = action.comment;
+            }
             return  newState;
         case DELETE_COMMENT:
-            delete newState[action.commentId];
+          if(action.parentId) {
+            delete newState.replies[action.parentId].replies[action.commentId]
+          } else {
+            delete newState.comments[action.commentId]
+          }
             return newState;
         default:
             return state;
