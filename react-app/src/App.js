@@ -68,7 +68,7 @@ function App() {
             <Route path='/404'>
               <NotFound />
             </Route>
-            <Route path="/profile/:userId" exact={true}>
+            <Route path="/profiles/:userId" exact={true}>
               <UserProfile/>
             </Route>
           </Switch>

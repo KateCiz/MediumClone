@@ -4,7 +4,6 @@ import { getUserProfile } from "../../store/profiles";
 import { useParams, Link, NavLink} from "react-router-dom";
 import EditProfileModal from "./editModal";
 import "./profile.css"
-import AuthorStoryFeed from "./Feed";
 import AuthorStoryPreview from "./AuthorStoryPreview";
 
 function UserProfile(){
@@ -52,18 +51,17 @@ function UserProfile(){
                 <EditProfileModal/>
                 </div>
                 }
-            {/* <AuthorStoryFeed stories={userProfile.Stories}/> */}
             <div className="feed-div">
-        <div className="feed-preview-stories">
-          {userProfile.Stories?.map((story, i) => {
-              return (
-              <NavLink key={i} to={`/stories/${story.id}`} style={{ textDecoration: "none" }}>
-                 <AuthorStoryPreview story={story}/>
-              </NavLink>
-            );
-          })}
-        </div>
-      </div>
+                <div className="feed-preview-stories">
+                    {userProfile.Stories?.map((story, i) => {
+                        return (
+                            <NavLink key={i} to={`/stories/${story.id}`} style={{ textDecoration: "none" }}>
+                                <AuthorStoryPreview story={story}/>
+                            </NavLink>
+                        );
+                    })}
+                </div>
+            </div>
         </div>
     );
 };
