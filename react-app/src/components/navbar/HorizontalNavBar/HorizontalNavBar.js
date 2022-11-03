@@ -28,16 +28,6 @@ const HorizontalNavBar = () => {
           </NavLink> */}
         </li>
         <li>
-          <NavLink
-            to="/about"
-            exact={true}
-            activeClassName="active"
-            style={{ textDecoration: "none" }}
-          >
-            About Us
-          </NavLink>
-        </li>
-        <li>
           <LoginFormModal />
         </li>
         <li>

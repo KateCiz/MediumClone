@@ -65,11 +65,11 @@ function App() {
             <Route path='/about' exact={true}>
               <AboutUs />
             </Route>
-            <Route path='/404'>
-              <NotFound />
-            </Route>
             <Route path="/profile/:userId" exact={true}>
               <UserProfile/>
+            </Route>
+            <Route>
+              <NotFound />
             </Route>
           </Switch>
         )}
