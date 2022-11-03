@@ -10,6 +10,8 @@ import HomePage from "./components/homepage/index";
 import WritePage from "./components/writepage/index";
 import EditPage from "./components/writepage/editpage/index";
 import FullStoryPage from "./components/StoryPage/FullStoryPage";
+import AboutUs from "./components/AboutPage/AboutUs";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -49,6 +51,12 @@ function App() {
             </ProtectedRoute>
             <Route path="/stories/:storyId" exact={true}>
               <FullStoryPage />
+            </Route>
+            <Route path='/about' exact={true}>
+              <AboutUs />
+            </Route>
+            <Route path='/404'>
+              <NotFound />
             </Route>
           </Switch>
         )}

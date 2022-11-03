@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { getSingleStory } from "../../store/stories";
 import OneStory from "./OneStory";
 import AuthorSideBar from "./AuthorSideBar";
@@ -10,7 +10,12 @@ function FullStoryPage() {
   const { storyId } = useParams();
   const story = useSelector((state) => state.storyState[storyId]);
   const dispatch = useDispatch();
+  const history = useHistory();
   // const [loaded, setLoaded] = useState(false)
+
+  if(!story){
+    history.push('/404');
+  }
 
   useEffect(() => {
     (async() => {
@@ -29,9 +34,7 @@ function FullStoryPage() {
         <OneStory story={story} />
       </div>
       <div className="author-side-div">
-        <NavLink key={story?.user_id} to={`/profiles/${story?.user_id}`} style={{ textDecoration: "none" }}>
           <AuthorSideBar Author={story?.Author}/>
-        </NavLink>
       </div>
     </div>
   );

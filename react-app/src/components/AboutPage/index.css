@@ -1,0 +1,80 @@
+.about-us-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.all-people-div {
+    width: 85%;
+    margin-left: 10%;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid rgb(208, 206, 206);
+}
+.about-person-div {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.callback-warriors {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 33px;
+    display: flex;
+    justify-content: center;
+}
+
+.person-name {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.person-blurb {
+    font-size: 17px;
+}
+
+.about-person-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.about-person-text {
+    width: 70%;
+    margin-left: 10px;
+}
+
+.person-github {
+    margin: 5px;
+}
+
+.technologies-side-bar {
+    height: 100%;
+    width: 15%;
+    display: block;
+    align-items: center;
+    padding-left: 3%;
+}
+
+.icon-div {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.icon-name-div {
+    font-size: 18px;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
