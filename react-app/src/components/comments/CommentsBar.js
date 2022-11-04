@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import Comment from "./Comment";
 import { Link } from "react-router-dom";
+import LoginPopUpModal from "../auth/LoginPopUp";
 
 
 import { getAllComments, getAllReplies, createComment, createReply} from "../../store/comments";
@@ -60,7 +61,10 @@ function CommentsBar ({id, type, setDisplay}) {
       <div className="create-comment">
         Leave a comment:
           <div className="create-comment-2">
-            <textarea className="comment-textarea" value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>
+            {
+              sessionUser ?<textarea className="comment-textarea" value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>:
+              <LoginPopUpModal location={'comment'} />
+            }
             {newComment.length > 0 && <button onClick={createNewComment}>Create Comment</button>}
           </div>
       </div>
@@ -86,7 +90,7 @@ function CommentsBar ({id, type, setDisplay}) {
     <div className="comment-box">
       <button onClick={() => setDisplay(false)}>Exit</button>
       {type === 'comment' && mainComment}
-      {sessionUser && createCommentBox}
+      {true && createCommentBox}
       {comments !== undefined && Object.values(comments).map(comment => <Comment key={comment.id} showEditButton={showEditButton} setShowEditButton={setShowEditButton} comment={comment} sessionUserId={sessionUser ? sessionUser.id : null} />)}
     </div>
   );
