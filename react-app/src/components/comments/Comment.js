@@ -71,17 +71,19 @@ function Comment ({comment, sessionUserId}) {
       </div>
       <div className="comment-body">{comment.content}</div>
       {comment.createdAt !== comment.updatedAt && <div className="edited-comment">Edited</div>}
-      <div className="comment-like-btn">
-        <div className="comment-count">
-          <LikeComment comment={comment} commentId={comment.id} sessionUser={sessionUserId} />
+      <div className="comment-bottom">
+        <div className="comment-like-btn">
+          <div className="comment-count">
+            <LikeComment comment={comment} commentId={comment.id} sessionUserId={sessionUserId} />
+          </div>
+          <span className="reactions">{comment?.num_likes}</span>
         </div>
-        <span className="reactions">{comment?.num_likes}</span>
-      </div>
-      <div className="comment-replies-btn">
-        <div className="comment-count">
-          <CommentsButton id={comment.id} type={'comment'} />
+        <div className="comment-replies-btn">
+          <div className="comment-count">
+            <CommentsButton id={comment.id} type={'comment'} />
+          </div>
+          <span className="reactions">{comment?.num_replies}</span>
         </div>
-        <span className="reactions">{comment?.num_replies}</span>
       </div>
     </div>
   );

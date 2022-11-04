@@ -5,19 +5,21 @@ import { unlikeComment, likeComment } from "../../../../store/likes";
 import { getComment } from "../../../../store/comments";
 // import "./index.css";
 
-const LikeComment = ({ comment, commentId }) => {
+const LikeComment = ({ comment, commentId, sessionUserId}) => {
   // const [isLiked, setIsLiked] = useState(comment.liked)
    let isLiked = comment.liked
 
   const dispatch = useDispatch();
 
   const handleLike = async () => {
-    if (isLiked) {
-      dispatch(unlikeComment(commentId));
-      dispatch(getComment(commentId));
-    } else {
-      dispatch(likeComment(commentId));
-      dispatch(getComment(commentId));
+    if(sessionUserId !== comment.author.id) {
+      if (isLiked) {
+        dispatch(unlikeComment(commentId));
+        dispatch(getComment(commentId));
+      } else {
+        dispatch(likeComment(commentId));
+        dispatch(getComment(commentId));
+      }
     }
     // setIsLiked(!isLiked)
   };

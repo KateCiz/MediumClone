@@ -53,6 +53,7 @@ def seed_users():
         password='password'
     )
 
+    demo.follows.extend([marnie, bobbie, user4, user5, user6, user7])
     user7.follows.append(user6)
     user6.follows.append(user7)
     user7.follows.append(marnie)
@@ -78,7 +79,7 @@ def seed_users():
 
     db.session.add(user6)
     db.session.commit()
-    
+
     db.session.add(user7)
     db.session.commit()
 
@@ -131,7 +132,7 @@ def seed_stories():
         content="We're nearing the holidays and that means that new years is right around the corner. This time of year can be an extremely stressful. However, with the right notebook or planner you can master this season and set up your new year's goals like a champion. Here are a few questions to ask yourself... 1. Do you like deadlines or hate them like covid-19? 2. Where are you most likely to see your notes + keep them organized (on your phone, on your fridge, in a notebook, etc.)? 3. Are you more motivated to do things that are on a to-do list or when tasks are broken up day by day? That last one is important. If you can't seem to stick to a monthly or weekly calendar, then to-do lists are probably your best friend as they help you focus in on what's important. Vice versa, if to-lists just overwhelm you to no end, then spacing things out over a week or month could help you keep yourself reminded of the big picture. There is no one size fits all for organization, but every single person has the ability to learn to be organized in one way or another. Happy holidays!",
         image_url="https://res.cloudinary.com/dymmlu1dw/image/upload/v1667236944/MediumClone/pexels-pineapple-supply-co-174673_rpjhig.jpg")
     story8 = Story(
-        user_id=7, 
+        user_id=7,
         title="To Dog Parent Or Not To Dog Parent?",
         content="First let me begin by saying I am a dog person. I love dogs and always will. With that being said, not everyone is, but sometimes people think they don't like dogs because of one or two bad experiences. If you love dogs and are responsible enough to keep it alive...then I'm not sure why you clicked on this article. Go get a puppy dog! For those who are on the fence, think about your experience and why it was negative. Was it the breed, the size, the environment, how clean or dirty the dog was, or how much it shed? Some dogs shed like no tomorrow, but there are hypo-allergenic breeds too. If the dog was mean, consider how it was cared for or who was its owner. Dogs who are mistreated or taught to act badly by a cruel owner behave VERY differently than well cared for dogs, just like humans! I'll throw you one last bone, maybe you secretly really want a dog if you're still on the fence at the end of this story. Or maybe I'm just really biased. Whether you want to get a dog or not, if this story gave you a good scratch behind the ears be sure to give this story a like or a comment!",
         image_url="https://res.cloudinary.com/dymmlu1dw/image/upload/v1667237247/MediumClone/pexels-chris-f-1144410_ot7vzl.jpg")
