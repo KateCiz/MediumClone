@@ -17,6 +17,7 @@ const WritePage = () => {
   const [text, setText] = useState("");
   const [image, setImage] = useState("")
   const [filledState, setFilledState] = useState(false);
+  const [showImageInput, setShowImageInput] = useState(false);
 
    useEffect(()=>{
       if (title.length > 0 && text.length > 0) {
@@ -71,11 +72,42 @@ const WritePage = () => {
       history.push("/");
   }
 
+  const handleAddImage = () => {
+    setShowImageInput(!showImageInput)
+  }
+
+  const handleImageUpdate = (e) => {
+    setImage(e.target.value)
+  }
+
   return (
     <>
-      <WriteStoryNavBar user={sessionUser}  publish={handlePublish} filledState={filledState} update={false}/>
+      <WriteStoryNavBar
+        user={sessionUser}
+        publish={handlePublish}
+        filledState={filledState}
+        update={false}
+      />
       <EditorContent editor={editor} className="test-editor" />
       <EditorContent editor={largeeditor} className="large-editor" />
+      <div className="image-info">
+        {showImageInput ? (
+          <img
+            className="open-close-btns"
+            src={"../x-btn.svg"}
+            alt=""
+            onClick={handleAddImage}
+          />
+        ) : (
+          <img
+            className="open-close-btns"
+            src={"../+-btn.svg"}
+            alt=""
+            onClick={handleAddImage}
+          />
+        )}
+        {showImageInput ? <input className="image-input-field" placeholder="add link to image" maxLength={300} value={image} onChange={handleImageUpdate}></input> : null}
+      </div>
     </>
   );
 };
