@@ -53,7 +53,7 @@ def seed_users():
         password='password'
     )
 
-    demo.follows.extend([marnie, bobbie, user4, user5, user6, user7])
+    demo.followed.extend([marnie, bobbie, user4, user5, user6, user7])
     user7.follows.append(user6)
     user6.follows.append(user7)
     user7.follows.append(marnie)
