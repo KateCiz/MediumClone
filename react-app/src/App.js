@@ -42,7 +42,6 @@ function App() {
       <BrowserRouter>
         {loaded && (
           <>
-            <NavBar />
             <Switch>
               <Route path="/" exact={true}>
                 <HomePage />
@@ -66,9 +65,10 @@ function App() {
                 <NotFound />
               </Route>
             </Switch>
+            <Footer />
+            <NavBar />
           </>
         )}
-        <Footer />
       </BrowserRouter>
     </>
   );
