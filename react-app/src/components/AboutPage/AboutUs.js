@@ -5,7 +5,7 @@ function AboutUs() {
 
     const aboutUs = [
         {'name': 'Austin Fenne',
-         'pic': 'https://res.cloudinary.com/dymmlu1dw/image/upload/v1667347304/MediumClone/austin-screenshot_v62rmu.png',
+         'pic': 'https://res.cloudinary.com/dymmlu1dw/image/upload/v1667513682/MediumClone/Headshot_3_hm00nd.png',
          'blurb': 'I love coding and will dive down the rabbit hole whenever I find code that interests me.',
          'github': 'https://github.com/FenneAustin',
          'linkedIn': 'https://www.linkedin.com/in/austin-fenne'
