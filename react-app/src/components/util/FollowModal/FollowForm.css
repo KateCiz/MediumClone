@@ -1,0 +1,43 @@
+.profile-img {
+  width: 40px;
+  height: auto;
+  border-radius: 50px;
+}
+
+.followers-header {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 22px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.individual-follower-container {
+  display: inline-flex;
+  width: 100% !important;
+  align-items: center;
+  vertical-align: center;
+  margin-top: 10px;
+
+}
+
+.profile-img {
+  margin-left: 10px;
+}
+
+.name-info-card {
+  margin-left: 30px;
+}
+.follow-btn-card {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+
+
+.followers-modal-container {
+    overflow-y: auto;
+    max-height: 100%;
+}

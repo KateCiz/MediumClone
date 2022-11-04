@@ -6,6 +6,7 @@ import {deleteAStory} from "../../../store/stories"
 import { useDispatch } from "react-redux";
 
 
+
 const Ellipse = ({ story }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -17,12 +18,13 @@ const Ellipse = ({ story }) => {
     setShowMenu(true);
   };
 
-  const handleEdit = () => {
+  const handleEdit = async () => {
     history.push("/edit-story/" + story.id)
   };
 
   const handleDelete = () => {
     dispatch(deleteAStory(story.id))
+    history.push("/")
   };
 
   useEffect(() => {

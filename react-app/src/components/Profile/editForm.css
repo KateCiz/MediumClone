@@ -1,0 +1,21 @@
+.edit-profile-container{
+    height: 100% !important;
+    width: 100% !important;
+    background-color: white;
+    margin: auto;
+    box-shadow: 0px 3px 3px darkgray;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.modal-heading {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 28px;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}

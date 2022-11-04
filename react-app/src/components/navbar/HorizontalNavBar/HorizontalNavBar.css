@@ -3,7 +3,12 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #292929;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  background-color: white;
 }
+
 .navbar-container ul {
   display: flex;
   list-style-type: none;
@@ -19,12 +24,14 @@
   font-family: 'Roboto Condensed', sans-serif;
 }
 
+
 a:visited {
   text-decoration: none;
   color: #292929;
 }
 
 .medium-logo-main {
+  margin-left: 20px;
   width: 175px;
 }
 

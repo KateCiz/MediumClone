@@ -1,0 +1,77 @@
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #292929;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  background-color: white;
+}
+
+.navbar-container-change {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #292929;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  background-color: rgba(255, 190, 26, 255);
+}
+
+
+.navbar-container ul {
+  display: flex;
+  list-style-type: none;
+  list-style: none;
+  align-items: center;
+}
+
+.navbar-container-change ul {
+  display: flex;
+  list-style-type: none;
+  list-style: none;
+  align-items: center;
+}
+
+.navbar-container li {
+  color: #292929;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 16px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.navbar-container-change li {
+  color: #292929;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 16px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #292929;
+}
+
+.medium-logo-main {
+  margin-left: 20px;
+  width: 175px;
+}
+
+.signup-btn {
+  align-items: center;
+  background-color: #292929;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  justify-content: center;
+  border-radius: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: 'Roboto Condensed', sans-serif;
+}

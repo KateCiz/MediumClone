@@ -4,20 +4,12 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 
-function AuthorStoryPreview({ story }) {
+function AuthorStoryPreview({story}) {
   const history = useHistory();
-
-//   let editStoryBtn;
-
-//   if (user?.id === story.user_id) {
-//     editStoryBtn = <EditStorytBtn story={story} />;
-//   }
-
   return (
     <div className="story-preview-container">
         <div className="text-container">
             <div className="author-container">
-                {/* {editStoryBtn} */}
             </div>
             <div className="story-text-preview-container">
                 <div className="story-title-preview">

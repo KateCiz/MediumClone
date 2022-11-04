@@ -53,6 +53,7 @@ def seed_users():
         password='password'
     )
 
+    demo.followed.extend([marnie, bobbie, user4, user5, user6, user7])
     user7.follows.append(user6)
     user6.follows.append(user7)
     user7.follows.append(marnie)
@@ -62,11 +63,23 @@ def seed_users():
     bobbie.follows.append(user4)
     user4.follows.append(bobbie)
     db.session.add(demo)
+    db.session.commit()
+
     db.session.add(marnie)
+    db.session.commit()
+
     db.session.add(bobbie)
+    db.session.commit()
+
     db.session.add(user4)
+    db.session.commit()
+
     db.session.add(user5)
+    db.session.commit()
+
     db.session.add(user6)
+    db.session.commit()
+
     db.session.add(user7)
     db.session.commit()
 

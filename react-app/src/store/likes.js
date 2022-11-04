@@ -62,7 +62,7 @@ export const likeComment = (commentId) => async(dispatch) => {
 
     if(res.ok){
         const data = await res.json();
-        dispatch(createLikeComment(data))
+        dispatch(createLikeComment(commentId))
         return data
     }
 };
@@ -88,14 +88,14 @@ export const unlikeComment = (commentId) => async(dispatch) => {
 
 
 
-const initialState = {};
+const initialState = {commentLikes: {}};
 
 
 export default function likesReducer(state = initialState, action) {
   let newState = { ...state };
   switch (action.type) {
     case CREATE_LIKE_COMMENT:
-      newState["commentLikes"][action.payload.comment_id] = action.payload;
+      newState.commentLikes[action.payload] = action.payload;
       return newState;
     case CREATE_LIKE_STORY:
       newState[action.payload.story_id] = action.payload;
@@ -104,7 +104,7 @@ export default function likesReducer(state = initialState, action) {
       delete newState[action.payload];
       return newState
     case DELETE_LIKE_COMMENT:
-      delete newState["commentLikes"].action.payload;
+      delete newState.commentLikes[action.payload];
       return newState
     default:
       return state;
