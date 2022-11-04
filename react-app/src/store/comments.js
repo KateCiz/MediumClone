@@ -169,6 +169,7 @@ export const deleteAComment = (commentId, parentId) => async (dispatch) => {
     return response;
 };
 
+
 const initialState = {comments: {}, replies: {}};
 
 //Comments REDUCER
@@ -180,19 +181,20 @@ export default function commentsReducer(state = initialState, action){
             action.comments.forEach((comment) => newState.comments[comment.id] = comment);
             return newState
         case  GET_ALL_REPLIES:
-            // action.replies.forEach((reply) => newState.replies[action.parentId][reply.id] = reply);
             newState.replies[action.parentId] = action.replies
             return newState
         case SINGLE_COMMENT:
-            return {
-                ...state,
-                [action.comment.id]: action.comment
+            const {comment} = action;
+            if(comment.parent_id) {
+              newState.replies[comment.parent_id].replies[comment.id] = comment;
+            } else {
+              newState.comments[comment.id] = comment;
             }
+            return newState;
         case CREATE_COMMENT:
             newState.comments[action.comment.id] = action.comment
             return newState;
         case CREATE_REPLY:
-          // console.log(action)
             newState.replies[action.parentId].replies[action.reply.id] = action.reply
             return newState;
         case UPDATE_COMMENT:

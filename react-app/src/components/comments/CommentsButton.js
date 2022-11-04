@@ -9,7 +9,9 @@ function CommentsButton({id, type}) {
 
   return (
     <>
-      <i className="fa-solid fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>
+      {display1 ? <i className="fa-solid fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>:
+      <i className="fa-regular fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>}
+
       {display1 && <CommentsBar id={id} type={type || 'story'} setDisplay={setDisplay1} />}
     </>
   );

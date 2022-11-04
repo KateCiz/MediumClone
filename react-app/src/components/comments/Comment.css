@@ -53,3 +53,14 @@
   display: flex;
   align-items: center;
 }
+
+.comment-like-btn {
+  display: flex;
+  align-items: center;
+}
+
+.comment-bottom {
+  display: flex;
+  align-items: center;
+  row-gap: 15px;
+}
