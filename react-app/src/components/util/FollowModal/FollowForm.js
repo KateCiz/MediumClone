@@ -15,6 +15,9 @@ const FollowForm = ({Author, user}) => {
         dispatch(getCurUserFollowers(user.id))
     },[dispatch, Author])
 
+
+
+
     return (
     <div className="followers-modal-container">
         <span className="followers-header">Following</span>
@@ -30,8 +33,7 @@ const FollowForm = ({Author, user}) => {
                             style={{ textDecoration: "none" }}
                           >
                             <img
-                              //   src={follower?.user.image_profile_url}
-                              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
+                              src={ follower.user.image_profile_url ? follower.user.image_profile_url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU" }
                               className="profile-img"
                             />
                           </NavLink>

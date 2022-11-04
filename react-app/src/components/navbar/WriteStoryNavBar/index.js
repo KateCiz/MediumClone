@@ -17,7 +17,7 @@ const WriteStoryNavBar = ({user, publish, filledState, update}) => {
           <SiMedium className="medium-logo-write" />
         </NavLink>
         <span className="name-header">
-          Draft in {user.first_name} {user.last_name}
+          Draft in {user?.first_name} {user?.last_name}
         </span>
       </div>
 
