@@ -22,7 +22,7 @@ def validation_errors_to_error_messages(validation_errors):
 def get_story_comments(story_Id):
   story = Story.query.get(story_Id)
   if story:
-    base = [comment.to_dict(current_user.id) for comment in story.comments if comment.parent_id is None] # Can be improved
+    base = [comment.to_dict(current_user.is_authenticated and current_user.id) for comment in story.comments if comment.parent_id is None] # Can be improved
     return jsonify(base)
   else:
     return jsonify({'message': 'Story could not be found'}), 404
@@ -32,8 +32,8 @@ def get_story_comments(story_Id):
 def get_comment_replies(comment_Id):
   comment = Comment.query.get(comment_Id)
   if comment:
-    res = comment.to_dict(current_user.id)
-    res['replies'] = {reply.id: reply.to_dict(current_user.id) for reply in comment.replies}
+    res = comment.to_dict()
+    res['replies'] = {reply.id: reply.to_dict(current_user.is_authenticated and current_user.id) for reply in comment.replies}
     return jsonify(res)
   else:
     return jsonify({'message': 'Comment could not be found'}), 404
@@ -42,7 +42,7 @@ def get_comment_replies(comment_Id):
 @comment_routes.route('/stories/<int:story_id>/comments', methods=['POST'])
 @login_required
 def create_story_comment(story_id):
-  curr_user_id = current_user.id
+  curr_user_id = current_user.is_authenticated and current_user.id
   story = Story.query.get(story_id)
   form = CommentForm()
   print(form.data)
@@ -55,7 +55,7 @@ def create_story_comment(story_id):
         )
       db.session.add(comment)
       db.session.commit()
-      return comment.to_dict(current_user.id)
+      return comment.to_dict(current_user.is_authenticated and current_user.id)
     else:
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
   else:
@@ -65,7 +65,7 @@ def create_story_comment(story_id):
 @comment_routes.route('/comments/<int:comment_id>/replies', methods=['POST'])
 @login_required
 def reply_to_a_comment(comment_id):
-  curr_user_id = current_user.id
+  curr_user_id = current_user.is_authenticated and current_user.id
   comment = Comment.query.get(comment_id)
   form = CommentForm()
   if comment:
@@ -78,7 +78,7 @@ def reply_to_a_comment(comment_id):
         )
       db.session.add(reply)
       db.session.commit()
-      return reply.to_dict(current_user.id)
+      return reply.to_dict(current_user.is_authenticated and current_user.id)
     else:
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
   else:
@@ -88,7 +88,7 @@ def reply_to_a_comment(comment_id):
 @comment_routes.route('/comments/<int:comment_id>', methods=['PUT'])
 @login_required
 def update_a_comment(comment_id):
-  curr_user_id = current_user.id
+  curr_user_id = current_user.is_authenticated and current_user.id
   comment = Comment.query.get(comment_id)
   form = CommentForm()
   if comment:
@@ -98,7 +98,7 @@ def update_a_comment(comment_id):
         comment.content = form.data['content'] or comment.content
         db.session.add(comment)
         db.session.commit()
-        return comment.to_dict(current_user.id)
+        return comment.to_dict(current_user.is_authenticated and current_user.id)
       else:
         return {'errors': ['Unauthorized']}
     else:
@@ -110,7 +110,7 @@ def update_a_comment(comment_id):
 @comment_routes.route('/comments/<int:comment_id>', methods=['DELETE'])
 @login_required
 def delete_a_comment(comment_id):
-  curr_user_id = current_user.id
+  curr_user_id = current_user.is_authenticated and current_user.id
   comment = Comment.query.get(comment_id)
   if comment:
     if comment.user_id == curr_user_id:
