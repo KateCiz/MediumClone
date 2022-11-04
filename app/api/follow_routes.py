@@ -70,7 +70,7 @@ def user_profile(id):
     user = User.query.get(id)
     if user:
         author_profile = user.author_side_bar_to_dict()
-        comments = [comment.user_comments_to_dict() for comment in user.my_comments]
+        comments = [comment.to_dict(id) for comment in user.my_comments]
         stories = [story.to_dict() for story in user.my_stories]
         author_profile['Comments'] = comments
         author_profile['Stories'] = stories
