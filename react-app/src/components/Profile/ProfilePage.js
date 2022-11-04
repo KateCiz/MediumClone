@@ -3,15 +3,19 @@ import { useEffect, useState } from "react";
 import { getUserProfile } from "../../store/profiles";
 import { useParams, Link, NavLink} from "react-router-dom";
 import EditProfileModal from "./editModal";
-import "./profile.css"
-import AuthorStoryFeed from "./Feed";
 import AuthorStoryPreview from "./AuthorStoryPreview";
+import Comment from "../comments/Comment";
+
+//styles
+import "./profile.css"
+import '../comments/Comment.css';
 
 function UserProfile(){
      const dispatch = useDispatch();
      const currentUser = useSelector(state => state.session.user);
      const userProfile = useSelector(state => state.profileState);
      const {userId} = useParams();
+
 
      useEffect(() => {
         dispatch(getUserProfile(userId))
@@ -52,18 +56,32 @@ function UserProfile(){
                 <EditProfileModal/>
                 </div>
                 }
-            {/* <AuthorStoryFeed stories={userProfile.Stories}/> */}
             <div className="feed-div">
-        <div className="feed-preview-stories">
-          {userProfile.Stories?.map((story, i) => {
-              return (
-              <NavLink key={i} to={`/stories/${story.id}`} style={{ textDecoration: "none" }}>
-                 <AuthorStoryPreview story={story}/>
-              </NavLink>
-            );
-          })}
-        </div>
-      </div>
+                <div className="feed-preview-stories">
+                    {userProfile.Stories?.map((story, i) => {
+                        return (
+                            <NavLink key={i} to={`/stories/${story.id}`} style={{ textDecoration: "none" }}>
+                                <AuthorStoryPreview story={story}/>
+                            </NavLink>
+                        );
+                    })}
+                </div>
+            </div>
+            <div className="comments-div">
+                {userProfile.Comments?.map((comment,i) => {
+                    return (
+                        <div className="comment" key={i}>
+                            {/* {comment.content}
+                            <p>{comment.created_date}</p> */}
+                            {/* <div className="comment-body edit area">
+                                <button onClick={editComment}>Edit</button>
+                                <button onClick={() => destroyComment(comment.id, comment.parent_id)}>Delete</button>
+                            </div> */}
+                            <Comment comment={comment} sessionUserId={currentUser.id}/>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };
