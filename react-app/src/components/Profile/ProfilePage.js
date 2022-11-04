@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import { getUserProfile } from "../../store/profiles";
 import { useParams, Link, NavLink} from "react-router-dom";
 import EditProfileModal from "./editModal";
-import "./profile.css"
 import AuthorStoryPreview from "./AuthorStoryPreview";
+import {editComment, deleteAComment} from "../../store/comments"
+
+//styles
+import "./profile.css"
+import '../comments/Comment.css';
 
 function UserProfile(){
      const dispatch = useDispatch();
@@ -12,9 +16,20 @@ function UserProfile(){
      const userProfile = useSelector(state => state.profileState);
      const {userId} = useParams();
 
+
      useEffect(() => {
         dispatch(getUserProfile(userId))
      },[dispatch]);
+
+    //  const destroyComment = async (e) => {
+    //     e.preventDefault();
+
+    //     await dispatch(deleteAComment(comment.id, comment.parent_id));
+    //   }
+
+    // const editComment = async (e) => {
+
+    // };
 
     return (
         <div className="user-profile-page">
@@ -65,7 +80,14 @@ function UserProfile(){
             <div className="comments-div">
                 {userProfile.Comments?.map((comment,i) => {
                     return (
-                        <></>
+                        <div className="comment" key={i}>
+                            {comment.content}
+                            <p>{comment.created_date}</p>
+                            {/* <div className="comment-body edit area">
+                                <button onClick={editComment}>Edit</button>
+                                <button onClick={() => destroyComment(comment.id, comment.parent_id)}>Delete</button>
+                            </div> */}
+                        </div>
                     );
                 })}
             </div>

@@ -20,12 +20,19 @@
 }
 
 .image-container{
-  width: 90px;
-  height: 90px;
+  display: flex;
+  align-self: flex-start;
+
+}
+
+.user-image{
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+
 }
 
 .user-name{
@@ -43,11 +50,12 @@
 .options-container{
     display: flex;
     flex-direction: column;
+    align-self: flex-end;
 
 }
 
 .write-link {
-  align-self: center;
+  align-self: flex-end;
   /* background-color: #292929; */
   border: 0px;
   color: white;
