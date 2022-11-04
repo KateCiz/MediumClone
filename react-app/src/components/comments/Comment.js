@@ -2,6 +2,7 @@ import { useState} from "react";
 import { useDispatch } from "react-redux";
 import { editComment, deleteAComment } from "../../store/comments";
 import CommentsButton from "./CommentsButton";
+import LikeComment from "../util/LikeButton/LikeComment";
 import { Link } from "react-router-dom";
 
 
@@ -70,11 +71,19 @@ function Comment ({comment, sessionUserId}) {
       </div>
       <div className="comment-body">{comment.content}</div>
       {comment.createdAt !== comment.updatedAt && <div className="edited-comment">Edited</div>}
-      <div className="comment-replies-btn">
-        <div className="comment-count">
-          <CommentsButton id={comment.id} type={'comment'} />
+      <div className="comment-bottom">
+        <div className="comment-like-btn">
+          <div className="comment-count">
+            <LikeComment comment={comment} commentId={comment.id} sessionUserId={sessionUserId} />
+          </div>
+          <span className="reactions">{comment?.num_likes}</span>
         </div>
-        <span className="reactions">{comment?.num_replies}</span>
+        <div className="comment-replies-btn">
+          <div className="comment-count">
+            <CommentsButton id={comment.id} type={'comment'} />
+          </div>
+          <span className="reactions">{comment?.num_replies}</span>
+        </div>
       </div>
     </div>
   );
