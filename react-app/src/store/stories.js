@@ -120,6 +120,7 @@ export const getSingleStory = (storyId) => async (dispatch) => {
     dispatch(getStoryDetails(story));
     return res;
   }
+  return res;
 };
 
 //CREATE STORY
