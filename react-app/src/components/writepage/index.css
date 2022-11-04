@@ -48,3 +48,17 @@
     margin: auto;
     max-height: 1000px;
 }
+
+
+.open-close-btns {
+  color: #292929;
+  border: 1px solid #292929;
+  border-radius: 50%;
+
+}
+
+.image-info {
+  width: 10px;
+  display: block;
+  margin: auto;
+}

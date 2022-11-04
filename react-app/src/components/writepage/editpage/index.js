@@ -16,6 +16,7 @@ const EditPage = () => {
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
   const history = useHistory();
+   const [showImageInput, setShowImageInput] = useState(false);
 
   // const story = useSelector((state) => {
   //   state?.storyState?.find((story) => String(story?.id) === storyId);
@@ -86,7 +87,7 @@ const EditPage = () => {
       // setText(story.content);
       editor.commands.insertContent(story.title);
       largeeditor.commands.insertContent(story.content);
-
+      setImage(story.image_url)
       if(story){
         if(sessionUser){
           if (story.Author.id !== sessionUser.id){
@@ -112,6 +113,14 @@ const EditPage = () => {
     history.push(`/stories/${storyId}`);
   };
 
+    const handleAddImage = () => {
+      setShowImageInput(!showImageInput);
+    };
+
+    const handleImageUpdate = (e) => {
+      setImage(e.target.value);
+    };
+
   return (
     <>
       {loaded && (
@@ -124,6 +133,32 @@ const EditPage = () => {
           />
           <EditorContent editor={editor} className="test-editor" />
           <EditorContent editor={largeeditor} className="large-editor" />
+          <div className="image-info">
+            {showImageInput ? (
+              <img
+                className="open-close-btns"
+                src={"../x-btn.svg"}
+                alt=""
+                onClick={handleAddImage}
+              />
+            ) : (
+              <img
+                className="open-close-btns"
+                src={"../+-btn.svg"}
+                alt=""
+                onClick={handleAddImage}
+              />
+            )}
+            {showImageInput ? (
+              <input
+                className="image-input-field"
+                placeholder="add link to image"
+                maxLength={300}
+                value={image}
+                onChange={handleImageUpdate}
+              ></input>
+            ) : null}
+          </div>
         </>
       )}
     </>
