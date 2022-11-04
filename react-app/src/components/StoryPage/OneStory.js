@@ -57,7 +57,11 @@ function OneStory({ story, storyId }) {
           <div
             className="full-story-profile-image-container"
             style={{
-              backgroundImage: `url('${story?.Author?.image_profile_url}')`,
+              backgroundImage: `url('${
+                story?.Author.image_profile_url
+                  ? story.Author.image_profile_url
+                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
+              }')`,
             }}
           ></div>
           <div className="full-story-next-to-profile-pic">
@@ -92,7 +96,6 @@ function OneStory({ story, storyId }) {
           <CommentsButton id={storyId} />
         </div>
         <span className="reactions">{story?.num_comments}</span>
-
       </div>
     </div>
   );
