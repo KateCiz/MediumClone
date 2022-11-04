@@ -20,8 +20,11 @@ function FullStoryPage() {
 
   useEffect(() => {
     (async() => {
-      await dispatch(getSingleStory(storyId));
+      const res = await dispatch(getSingleStory(storyId));
       // setLoaded(true);
+      if (res.status === 404){
+        history.push('/404')
+      }
     })();
   }, [dispatch]);
 
