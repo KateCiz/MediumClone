@@ -4,7 +4,7 @@ import "./HorizontalNavBar.css"
 import SignupFormModal from '../../auth/signupmodal/index'
 import LoginFormModal from '../../auth/signinmodal/index'
 import DemoAccount from '../../auth/DemoAccount/index'
-import WriteLoginFormModal from "../../auth/WriteLogin";
+import LoginPopUpModal from "../../auth/LoginPopUp";
 
 const HorizontalNavBar = () => {
   return (
@@ -17,7 +17,7 @@ const HorizontalNavBar = () => {
           <DemoAccount />
         </li>
         <li>
-          <WriteLoginFormModal />
+          <LoginPopUpModal location='write' />
         </li>
         <li>
           <LoginFormModal />

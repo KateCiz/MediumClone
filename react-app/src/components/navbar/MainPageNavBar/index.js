@@ -4,6 +4,7 @@ import "./index.css";
 import SignupFormModal from "../../auth/signupmodal/index";
 import LoginFormModal from "../../auth/signinmodal/index";
 import DemoAccount from "../../auth/DemoAccount/index";
+import LoginPopUpModal from "../../auth/LoginPopUp";
 
 const MainNavBar = () => {
   const [navBar, setNavBar] = useState(false);
@@ -32,14 +33,15 @@ const MainNavBar = () => {
           <DemoAccount />
         </li>
         <li>
-          <NavLink
+          {/* <NavLink
             to="/login"
             exact={true}
             activeClassName="active"
             style={{ textDecoration: "none" }}
           >
             Write
-          </NavLink>
+          </NavLink> */}
+          <LoginPopUpModal location='write' />
         </li>
         <li>
           <LoginFormModal />
