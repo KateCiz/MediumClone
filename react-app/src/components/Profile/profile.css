@@ -2,19 +2,20 @@
   display: flex;
   /* flex-direction: column; */
   flex-flow: column wrap;
-  width:fit-content;
+  width:90%;
   background-color: white;
   margin: auto;
   justify-content: center;
   align-items: center;
   text-align: center;
   border-radius: 5px;
+  flex-grow: 1;
 }
 
 .user-details{
     display:flex;
     flex-direction: row;
-    width: 100%;
+    width: 50%;
 }
 
 .user-pic-placeholder{
@@ -43,10 +44,14 @@
   font-weight: 400;
 }
 
+.details-container{
+  display: block;
+}
+
 .toggle-container{
     display: flex;
     flex-direction: column;
-    align-self:flex-end;
+    align-self:center;
     border-bottom: 0.25px solid #4e4e4e;
     max-width: 100%;
 }
@@ -54,7 +59,7 @@
 .options-container{
     display: flex;
     flex-direction: column;
-    align-self: flex-end;
+    margin-left: auto;
 
 }
 
@@ -95,5 +100,6 @@
 
 .pages-container{
   align-self: baseline;
+  align-self: center;
 
 }
