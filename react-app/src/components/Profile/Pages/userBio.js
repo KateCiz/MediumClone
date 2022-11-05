@@ -1,6 +1,7 @@
+import "./bio.css"
 function UserBio({bio}){
     return(
-        <div>
+        <div className="bio-container">
             {bio}
         </div>
     );

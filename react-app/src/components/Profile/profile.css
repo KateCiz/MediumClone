@@ -1,17 +1,21 @@
 .user-profile-page {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: column; */
+  flex-flow: column wrap;
+  width:90%;
   background-color: white;
   margin: auto;
   justify-content: center;
   align-items: center;
   text-align: center;
   border-radius: 5px;
+  flex-grow: 1;
 }
 
 .user-details{
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 50%;
 }
 
 .user-pic-placeholder{
@@ -40,10 +44,14 @@
   font-weight: 400;
 }
 
+.details-container{
+  display: block;
+}
+
 .toggle-container{
     display: flex;
     flex-direction: column;
-    align-self:flex-end;
+    align-self:center;
     border-bottom: 0.25px solid #4e4e4e;
     max-width: 100%;
 }
@@ -51,7 +59,7 @@
 .options-container{
     display: flex;
     flex-direction: column;
-    align-self: flex-end;
+    margin-left: auto;
 
 }
 
@@ -87,5 +95,11 @@
   cursor: pointer;
   padding-bottom: 10px;
   border-bottom: 1px solid #292929;
+
+}
+
+.pages-container{
+  align-self: baseline;
+  align-self: center;
 
 }

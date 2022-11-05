@@ -7,7 +7,7 @@ import "./editForm.css"
 function EditProfileForm({closeModal}){
     const [bio, setBio] = useState('');
     const [image_profile_url, setImageProfileURL] = useState('');
-    const [errors, setErrors] = useState([]);
+    const [message, setMessage] = useState("");
 
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
@@ -15,11 +15,13 @@ function EditProfileForm({closeModal}){
 
     const onEdit = async(e) => {
         e.preventDefault();
-        const data = await dispatch(updateUserProfile(user.id, bio, image_profile_url))
-        .then(exitFromModal)
-            if (data) {
-                setErrors(data);
-            }
+        if(bio.length < 1 || bio.replaceAll(" ","").length < 1){
+            setMessage("Fill out 'About' section or exit modal")
+        }
+        else{
+            const data = await dispatch(updateUserProfile(user.id, bio, image_profile_url))
+            .then(exitFromModal)
+        }
     };
 
     const updateBio = (e) => {
@@ -41,12 +43,10 @@ function EditProfileForm({closeModal}){
             </button>
             <span className="modal-heading">Profile Information</span>
             <form onSubmit={onEdit} className='edit-profile-form'>
-                {/* <div>
-                    {errors?.map((error, ind) => (
-                    <div key={ind}>{error}</div>
-                    ))}
-                </div> */}
                 <div>
+                   {message &&(<div>{message}</div>)}
+                </div>
+                <div  className='form-inputs-container'>
                     <label htmlFor='bio' className='user-bio'>
                         About
                     </label>
