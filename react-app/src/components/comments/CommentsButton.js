@@ -11,18 +11,18 @@ function CommentsButton({id, type}) {
 
   let Comment;
 
-  if(display1 && sessionUser){
-    Comment = <i className="fa-solid fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>;
-  } if(!display1 && sessionUser){
-    Comment = <i className="fa-regular fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>;
-  } if(!sessionUser){
-    Comment = <LoginPopUpModal location='comment' />;
-  }
+  // if(display1 && sessionUser){
+  //   Comment = <i className="fa-solid fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>;
+  // } if(!display1 && sessionUser){
+  //   Comment = <i className="fa-regular fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>;
+  // } if(!sessionUser){
+  //   Comment = <LoginPopUpModal location='comment' />;
+  // }
 
   return (
     <>
-      {/* {display1 ? <i className="fa-solid fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>:
-      <i className="fa-regular fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>} */}
+      {display1 ? <i className="fa-solid fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>:
+      <i className="fa-regular fa-comment fa-lg" onClick={() => setDisplay1(!display1)}></i>}
       { Comment }
 
       {display1 && <CommentsBar id={id} type={type || 'story'} setDisplay={setDisplay1} />}
