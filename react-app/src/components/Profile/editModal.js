@@ -8,7 +8,7 @@ function EditProfileModal(){
     return (
         <>
             <button className="edit-profile-button" onClick={() => setShowModal(true)}>
-                edit profile
+                Edit Profile
             </button>
           {showModal && (
             <Modal onClose={() => setShowModal(false)}>
