@@ -6,20 +6,30 @@ import "./FeedSwitch.css"
 const FeedSwitch = ({user}) => {
 
     const [allFeed, setAllFeed] = useState(false)
-    const handleFeedSwitch = () => {
-        setAllFeed(!allFeed)
+    const handleAllSwitch = () => {
+        setAllFeed(true)
+  }
+    const handleFypSwitch = () => {
+      setAllFeed(false)
     }
 
     return (
       <div className="feed-switch-container">
-        <div>
-          <button onClick={handleFeedSwitch}>For you</button>
-          <button onClick={handleFeedSwitch}>All</button>
+        <div className="feed-btns">
+          <button
+            className={allFeed ? "feed-btn-select" : "feed-btn"}
+            onClick={handleAllSwitch}
+          >
+            All
+          </button>
+          <button
+            className={allFeed ? "feed-btn" : "feed-btn-select"}
+            onClick={handleFypSwitch}
+          >
+            For you
+          </button>
         </div>
-        {allFeed === true ?
-            <AllStoriesFeed /> :
-            <UserStoryFeed user={user}/>
-        }
+        {allFeed === true ? <AllStoriesFeed /> : <UserStoryFeed user={user} />}
       </div>
     );
 
