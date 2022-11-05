@@ -22,6 +22,9 @@ const SignUpForm = ({closeModal, switchPage}) => {
         setErrors(data)
       }
     }
+    if (password !== repeatPassword) {
+      setErrors(["password and confirm password must match"])
+    }
   };
 
   const updateFirstName = (e) => {
