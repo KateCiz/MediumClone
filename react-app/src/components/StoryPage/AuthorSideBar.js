@@ -31,7 +31,13 @@ function AuthorSideBar({ Author }) {
     <div className="author-side-bar-container">
       <div
         className="author-sidebar-profile-image-container"
-        style={{ backgroundImage: `url('${Author?.image_profile_url}')` }}
+        style={{
+          backgroundImage: `url('${
+            Author?.image_profile_url
+              ? Author?.image_profile_url
+              : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
+          }')`,
+        }}
       ></div>
       <div className="author-sidebar-name">
         {`${Author?.first_name} ${Author?.last_name}`}
