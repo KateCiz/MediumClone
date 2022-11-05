@@ -21,7 +21,7 @@ function UserProfile(){
 
      useEffect(() => {
         dispatch(getUserProfile(userId))
-     },[dispatch]);
+     },[dispatch, userId]);
 
     const [userStories, setUserStories] = useState(true);
     const [userComments, setUserComments] = useState(false);
@@ -58,9 +58,17 @@ function UserProfile(){
                     >
                     </img>)}
                 </div>
-                <h1 className="user-name">{userProfile.first_name}</h1>
-                <h3>Following: {userProfile.num_follows}</h3>
-                <h3>Followers: {userProfile.num_followers}</h3>
+                <div className="details-container">
+                    <h1 className="user-name">{userProfile.first_name}</h1>
+                    <h3>Following: {userProfile.num_follows}</h3>
+                    <h3>Followers: {userProfile.num_followers}</h3>
+                </div>
+                { currentUser?.id === userProfile.id &&
+                <div className="options-container">
+                <Link to="/new-story" className="write-link">Write</Link>
+                <EditProfileModal/>
+                </div>
+                }
             </div>
             <nav className="toggle-container">
                 <div className="row">
@@ -73,12 +81,6 @@ function UserProfile(){
                     </div>
                 </div>
             </nav>
-                { currentUser?.id === userProfile.id &&
-                <div className="options-container">
-                <Link to="/new-story" className="write-link">Write</Link>
-                <EditProfileModal/>
-                </div>
-                }
             <div className="pages-container">
                 {userStories? <UserStoriesFeed stories={userProfile.Stories}/> : null}
                 {userComments ===  true ? <UserComments comments={userProfile.Comments} sessionUserId={currentUser.id}/>: null}
