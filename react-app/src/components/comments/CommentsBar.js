@@ -29,9 +29,7 @@ function CommentsBar ({id, type, setDisplay}) {
   const [newComment, setNewComment] = useState('');
 
 
-  // useEffect(() => {
-  //   // dispatch(resetComments());
-  // }, []);
+
   useEffect(() => {
     if(id) {
       if(type === 'story') {
@@ -59,14 +57,13 @@ function CommentsBar ({id, type, setDisplay}) {
   const createCommentBox = (
     <>
       <div className="create-comment">
-        Leave a comment:
-          <div className="create-comment-2">
+
             {
-              sessionUser ?<textarea className="comment-textarea" value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>:
+              sessionUser ?<textarea maxLength='200' rows='5' cols='50' wrap="hard" placeholder={type === 'story'? 'What are your thoughts?': `Reply to ${commentState.replies[id]?.author.first_name} ${commentState.replies[id]?.author.last_name}`} className="comment-textarea" value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>:
               <LoginPopUpModal location={'comment'} />
             }
-            {newComment.length > 0 && <button onClick={createNewComment}>Create Comment</button>}
-          </div>
+            {newComment.length > 0 && <button onClick={createNewComment} className='publish-btn'>Create Comment</button>}
+
       </div>
     </>
   );
@@ -88,7 +85,15 @@ function CommentsBar ({id, type, setDisplay}) {
   );
   return (
     <div className="comment-box">
+      <img
+            className="exit-bar"
+            src={"/svgs/x-btn.svg"}
+            alt=""
+            onClick={() => setDisplay(false)}
+          />
+          {/* <AiOutlineArrowRight size={28} className="exit-bar" onClick={() => setDisplay(false)} />
       <button onClick={() => setDisplay(false)}>Exit</button>
+      <i className="fa-solid fa-xmark exit-bar" onClick={() => setDisplay(false)} ></i> */}
       {type === 'comment' && mainComment}
       {true && createCommentBox}
       {comments !== undefined && Object.values(comments).map(comment => <Comment key={comment.id} showEditButton={showEditButton} setShowEditButton={setShowEditButton} comment={comment} sessionUserId={sessionUser ? sessionUser.id : null} />)}

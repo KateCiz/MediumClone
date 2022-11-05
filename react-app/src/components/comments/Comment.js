@@ -47,9 +47,9 @@ function Comment ({comment, sessionUserId}) {
       </div>
 
       <div className="comment-body edit-area">
-      <textarea value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>
-      <button onClick={saveComment}>Save</button>
-      <button onClick={destroyComment}>Delete</button>
+      <textarea maxLength='200' rows='5' cols='40' wrap="hard" value={newComment} onChange={e => setNewComment(e.target.value)} className='edit-comment-textarea'></textarea>
+      <button onClick={saveComment} className='publish-btn'>Save</button>
+      <button onClick={destroyComment} className='cancel-btn-updatepage'>Delete</button>
       </div>
 
     </div>
@@ -65,9 +65,9 @@ function Comment ({comment, sessionUserId}) {
         ></img>
       <h5>{author.first_name} {author.last_name}</h5>
       </Link>
-      {author.id === sessionUserId && <button onClick={e => {
+      {author.id === sessionUserId && <div className="edit-comment-button" onClick={e => {
         setShowEdit(true)
-        }}>Edit</button>}
+        }}>Edit</div>}
       </div>
       <div className="comment-body">{comment.content}</div>
       {comment.createdAt !== comment.updatedAt && <div className="edited-comment">Edited</div>}
