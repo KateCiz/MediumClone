@@ -29,6 +29,7 @@ function AuthorSideBar({ Author }) {
 
   return (
     <div className="author-side-bar-container">
+      <div className="black-bar"> </div>
       <div
         className="author-sidebar-profile-image-container"
         style={{
