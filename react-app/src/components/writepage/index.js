@@ -121,14 +121,14 @@ const WritePage = () => {
         {showImageInput ? (
           <img
             className="open-close-btns"
-            src={"../x-btn.svg"}
+            src={"/svgs/x-btn.svg"}
             alt=""
             onClick={handleAddImage}
           />
         ) : (
           <img
             className="open-close-btns"
-            src={"../+-btn.svg"}
+            src={"/svgs/+-btn.svg"}
             alt=""
             onClick={handleAddImage}
           />

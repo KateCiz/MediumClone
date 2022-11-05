@@ -26,7 +26,7 @@ const MainNavBar = () => {
   return (
     <nav className={navBar ? "navbar-container" : "navbar-container-change"}>
       <NavLink to="/" className="site-logo">
-        <img className="medium-logo-main" src={"../Medium.svg"} alt="" />
+        <img className="medium-logo-main" src={"/svgs/Medium.svg"} alt="" />
       </NavLink>
       <ul>
         <li>
