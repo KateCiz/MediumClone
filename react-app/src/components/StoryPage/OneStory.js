@@ -29,7 +29,7 @@ function OneStory({ story, storyId }) {
     });
     const editedYear = editedDate.getFullYear();
     const editedStr = `${editedDay} ${editedMonth}, ${editedYear}`;
-    EditedDate = <p className="full-story-edited">{editedStr}</p>;
+    EditedDate = <p className="full-story-edited">- Edited: {editedStr}</p>;
   }
 
   if (story?.created_date) {
