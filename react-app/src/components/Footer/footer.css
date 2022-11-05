@@ -1,12 +1,12 @@
 .footer-container {
     display: flex;
-    position: fixed;
+    /* position: fixed; */
     flex-direction: row;
     justify-content:  center;
     align-self: center;
     width: 100%;
-    bottom: 0;
-    left: 0;
+    /* bottom: 0; */
+    /* left: 0; */
 
 }
 
@@ -21,4 +21,3 @@
 .footer-links:hover{
     opacity: .8;
 }
-
