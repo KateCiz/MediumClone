@@ -35,11 +35,13 @@
   background-color: white;
   border-radius: 10px;
   min-width: 200px;
-  min-height: 250px;
+  min-height: 150px;
   gap: 10px;
   left: 0px;
   bottom: 60px;
   border: 1px lightgray solid;
 }
 
-
+.logout-btn {
+  margin-bottom: 20px;
+}
