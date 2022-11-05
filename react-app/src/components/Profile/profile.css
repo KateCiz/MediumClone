@@ -1,6 +1,8 @@
 .user-profile-page {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: column; */
+  flex-flow: column wrap;
+  width:fit-content;
   background-color: white;
   margin: auto;
   justify-content: center;
@@ -11,7 +13,8 @@
 
 .user-details{
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
 }
 
 .user-pic-placeholder{
@@ -87,5 +90,10 @@
   cursor: pointer;
   padding-bottom: 10px;
   border-bottom: 1px solid #292929;
+
+}
+
+.pages-container{
+  align-self: baseline;
 
 }
