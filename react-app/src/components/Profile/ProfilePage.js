@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getUserProfile } from "../../store/profiles";
 import { useParams, Link, NavLink} from "react-router-dom";
 import EditProfileModal from "./editModal";
-import Comment from "../comments/Comment";
 import UserStoriesFeed from "./Pages/userStoriesFeed";
 
 //styles
