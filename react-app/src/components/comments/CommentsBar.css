@@ -19,16 +19,23 @@
 .create-comment {
   display: flex;
   align-items: center;
-  height: 50px;
+  /* height: 200px; */
+  flex-direction: column;
+
+  padding-bottom: 20px;
+  margin-top: 10px;
+  border-bottom: 1px solid black;
+  width: 300px;
 }
 
 .create-comment-2 {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .comment-textarea {
-  height: 17px;
+  resize: none;
 }
 
 .main-comment {
@@ -41,4 +48,19 @@
   /* border-radius: 5px; */
   margin-top: 10px;
   padding-left: 20px;
+}
+
+.exit-bar {
+  cursor: pointer;
+  margin-left: 348px;
+  margin-top: 2px;
+}
+
+
+.comment-editor p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
 }
