@@ -1,4 +1,4 @@
-import Comment from "../../comments/Comment";
+import CommentsPreview from "./commentsPreview";
 
 
 function UserComments({comments, sessionUserId}){
@@ -7,13 +7,7 @@ function UserComments({comments, sessionUserId}){
                 {comments?.map((comment,i) => {
                     return (
                         <div className="comment" key={i}>
-                            {/* {comment.content}
-                            <p>{comment.created_date}</p> */}
-                            {/* <div className="comment-body edit area">
-                                <button onClick={editComment}>Edit</button>
-                                <button onClick={() => destroyComment(comment.id, comment.parent_id)}>Delete</button>
-                            </div> */}
-                            <Comment comment={comment} sessionUserId={sessionUserId}/>
+                            <CommentsPreview comment={comment} sessionUserId={sessionUserId}/>
                         </div>
                     );
                 })}

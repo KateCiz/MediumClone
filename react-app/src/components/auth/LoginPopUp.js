@@ -15,7 +15,7 @@ function LoginPopUpModal({ location }) {
         Click = <AiOutlineLike className="like-story-btn" onClick={() => setShowModal(true)} />;
     }
     if(location === 'comment'){
-        Click = <textarea className="comment-textarea" onClick={() => setShowModal(true)} ></textarea>
+        Click = <textarea onClick={() => setShowModal(true)} maxLength='200' rows='5' cols='50' wrap="hard" placeholder='What are your thoughts?' className="comment-textarea"></textarea>
     }
     if(location === 'write'){
        Click = <button

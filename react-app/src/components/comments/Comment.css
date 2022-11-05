@@ -64,3 +64,11 @@
   align-items: center;
   row-gap: 15px;
 }
+
+.edit-comment-textarea {
+  resize: none;
+}
+
+.edit-comment-button {
+  cursor: pointer;
+}

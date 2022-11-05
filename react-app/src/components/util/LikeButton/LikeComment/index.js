@@ -12,14 +12,12 @@ const LikeComment = ({ comment, commentId, sessionUserId}) => {
   const dispatch = useDispatch();
 
   const handleLike = async () => {
-    if(sessionUserId !== comment.author.id) {
-      if (isLiked) {
-        dispatch(unlikeComment(commentId));
-        dispatch(getComment(commentId));
-      } else {
-        dispatch(likeComment(commentId));
-        dispatch(getComment(commentId));
-      }
+    if (isLiked) {
+      dispatch(unlikeComment(commentId));
+      dispatch(getComment(commentId));
+    } else {
+      dispatch(likeComment(commentId));
+      dispatch(getComment(commentId));
     }
     // setIsLiked(!isLiked)
   };
