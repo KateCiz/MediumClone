@@ -13,6 +13,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  padding: none;
 }
 
 .horizontal-flyout {
@@ -27,8 +28,20 @@
   position: absolute;
   background-color: white;
   border-radius: 10px;
-  top: 70px;
-  right: 18px;
+  min-width: 100px;
+  padding-right: 32px;
+  top: 65px;
+  right: 35px;
   gap: 10px;
   border: 1px lightgray solid;
+}
+
+.horizontal-profile-dropdown ul  {
+  width: 100%;
+  min-width: 100%;
+
+}
+
+.logout-btn-horizontal {
+ margin-bottom: 20px;
 }

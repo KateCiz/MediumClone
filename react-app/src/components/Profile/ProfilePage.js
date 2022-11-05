@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getUserProfile } from "../../store/profiles";
-import { useParams, Link, NavLink} from "react-router-dom";
+import { useParams, Link} from "react-router-dom";
 import EditProfileModal from "./editModal";
 import UserStoriesFeed from "./Pages/userStoriesFeed";
 
@@ -21,7 +21,7 @@ function UserProfile(){
 
      useEffect(() => {
         dispatch(getUserProfile(userId))
-     },[dispatch]);
+     },[dispatch, userId]);
 
     const [userStories, setUserStories] = useState(true);
     const [userComments, setUserComments] = useState(false);
@@ -34,8 +34,10 @@ function UserProfile(){
     };
 
     const handleCommentPage = () => {
-        setUserStories(false)
         setUserComments(true)
+        setUserBio(false)
+        setUserStories(false)
+
     };
 
     const handleAboutPage = () => {
@@ -56,31 +58,33 @@ function UserProfile(){
                     >
                     </img>)}
                 </div>
-                <h1 className="user-name">{userProfile.first_name}</h1>
-                <h3>Following: {userProfile.num_follows}</h3>
-                <h3>Followers: {userProfile.num_followers}</h3>
-            </div>
-            <nav className="toggle-container">
-                <div className="row">
-                    <div className="toggles">
-                        <button onClick={handleStoriesPage}>Stories</button>
-                        {currentUser?.id === userProfile.id &&
-                        <button onClick={handleCommentPage}>My Comments</button>
-                        }
-                       <button onClick={handleAboutPage}>About</button>
-                    </div>
+                <div className="details-container">
+                    <h1 className="user-name">{userProfile.first_name}</h1>
+                    <h3>Following: {userProfile.num_follows}</h3>
+                    <h3>Followers: {userProfile.num_followers}</h3>
                 </div>
-            </nav>
                 { currentUser?.id === userProfile.id &&
                 <div className="options-container">
                 <Link to="/new-story" className="write-link">Write</Link>
                 <EditProfileModal/>
                 </div>
                 }
+            </div>
+            <nav className="toggle-container">
+                <div className="row">
+                    <div className="toggles">
+                        <button className={userStories? "toggle-button-selected": "toggle-button"} onClick={handleStoriesPage}>Stories</button>
+                        {currentUser?.id === userProfile.id &&
+                        <button className={userComments? "toggle-button-selected": "toggle-button"} onClick={handleCommentPage}>My Comments</button>
+                        }
+                       <button className={userBio? "toggle-button-selected": "toggle-button"} onClick={handleAboutPage}>About</button>
+                    </div>
+                </div>
+            </nav>
             <div className="pages-container">
-                {/* <UserStoriesFeed stories={userProfile.Stories}/> */}
-                {userComments ===  true ? <UserComments comments={userProfile.Comments} sessionUserId={currentUser.id}/>: <UserStoriesFeed stories={userProfile.Stories}/>}
-                {userBio === true ?<UserBio bio={userProfile.bio}/> : <UserStoriesFeed stories={userProfile.Stories}/>}
+                {userStories? <UserStoriesFeed stories={userProfile.Stories}/> : null}
+                {userComments ===  true ? <UserComments comments={userProfile.Comments} sessionUserId={currentUser.id}/>: null}
+                {userBio? <UserBio bio={userProfile.bio}/> : null }
             </div>
         </div>
     );
