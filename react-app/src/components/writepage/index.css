@@ -57,6 +57,7 @@
   width: 10px;
   display: block;
   margin: auto;
+  justify-content: center;
 }
 
 .errors-msg {
@@ -73,4 +74,10 @@
 
 .page-container {
   justify-content: center;
+}
+
+.image-input-field {
+  width: 400px;
+  position: relative;
+  right: 185px;
 }
