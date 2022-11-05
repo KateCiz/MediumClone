@@ -4,9 +4,9 @@
     flex-direction: row;
     justify-content:  center;
     align-self: center;
-    width: 100%;
+    width: 10%;
     bottom: 0;
-    left: 0;
+    left: 40%;
 }
 
 .footer-container a {
