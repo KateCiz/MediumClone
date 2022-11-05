@@ -11,8 +11,6 @@ const GET_STORY_DETAILS = "GET_STORY_DETAILS";
 const CREATE_STORY = "CREATE_STORY";
 const UPDATE_STORY = "UPDATE_STORY";
 const DELETE_STORY = "DELETE_STORY";
-const LIKE_STORY = "LIKE_STORY";
-const UNLIKE_STORY = "UNLIKE_STORY";
 
 //ACTION CREATORS
 const getStories = (stories) => {
@@ -64,19 +62,6 @@ const deleteStory = (storyId) => {
   };
 };
 
-const LikeStory = (storyId) => {
-  return {
-    type: LIKE_STORY,
-    storyId,
-  };
-};
-
-const UnLikeStory = (storyId) => {
-  return {
-    type: UNLIKE_STORY,
-    storyId,
-  };
-};
 
 //Thunks
 

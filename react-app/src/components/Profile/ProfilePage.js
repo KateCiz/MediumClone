@@ -3,9 +3,14 @@ import { useEffect, useState } from "react";
 import { getUserProfile } from "../../store/profiles";
 import { useParams, Link, NavLink} from "react-router-dom";
 import EditProfileModal from "./editModal";
+import UserStoriesFeed from "./Pages/userStoriesFeed";
+
+//styles
 import "./profile.css"
-import AuthorStoryFeed from "./Feed";
-import AuthorStoryPreview from "./AuthorStoryPreview";
+import '../comments/Comment.css';
+import UserComments from "./Pages/userComments";
+import UserBio from "./Pages/userBio";
+
 
 function UserProfile(){
      const dispatch = useDispatch();
@@ -13,9 +18,31 @@ function UserProfile(){
      const userProfile = useSelector(state => state.profileState);
      const {userId} = useParams();
 
+
      useEffect(() => {
         dispatch(getUserProfile(userId))
      },[dispatch]);
+
+    const [userStories, setUserStories] = useState(true);
+    const [userComments, setUserComments] = useState(false);
+    const [userBio, setUserBio] = useState(false);
+
+    const handleStoriesPage = () => {
+        setUserStories(true)
+        setUserComments(false)
+        setUserBio(false)
+    };
+
+    const handleCommentPage = () => {
+        setUserStories(false)
+        setUserComments(true)
+    };
+
+    const handleAboutPage = () => {
+        setUserComments(false)
+        setUserStories(false)
+        setUserBio(true)
+    };
 
     return (
         <div className="user-profile-page">
@@ -36,13 +63,11 @@ function UserProfile(){
             <nav className="toggle-container">
                 <div className="row">
                     <div className="toggles">
-                        <a role="tab" href="">Stories</a>
+                        <button onClick={handleStoriesPage}>Stories</button>
                         {currentUser?.id === userProfile.id &&
-                        <a role="tab" href="">Comments</a>
+                        <button onClick={handleCommentPage}>My Comments</button>
                         }
-                        <a role="tab" rel="alternate" href="">
-                            <p>About</p>
-                        </a>
+                       <button onClick={handleAboutPage}>About</button>
                     </div>
                 </div>
             </nav>
@@ -52,18 +77,11 @@ function UserProfile(){
                 <EditProfileModal/>
                 </div>
                 }
-            {/* <AuthorStoryFeed stories={userProfile.Stories}/> */}
-            <div className="feed-div">
-        <div className="feed-preview-stories">
-          {userProfile.Stories?.map((story, i) => {
-              return (
-              <NavLink key={i} to={`/stories/${story.id}`} style={{ textDecoration: "none" }}>
-                 <AuthorStoryPreview story={story}/>
-              </NavLink>
-            );
-          })}
-        </div>
-      </div>
+            <div className="pages-container">
+                {/* <UserStoriesFeed stories={userProfile.Stories}/> */}
+                {userComments ===  true ? <UserComments comments={userProfile.Comments} sessionUserId={currentUser.id}/>: <UserStoriesFeed stories={userProfile.Stories}/>}
+                {userBio === true ?<UserBio bio={userProfile.bio}/> : <UserStoriesFeed stories={userProfile.Stories}/>}
+            </div>
         </div>
     );
 };

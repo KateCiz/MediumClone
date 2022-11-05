@@ -3,6 +3,7 @@ import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { likeStory, unlikeStory } from "../../../../store/likes";
 import { getSingleStory } from "../../../../store/stories";
+import LoginPopUpModal from "../../../auth/LoginPopUp";
 import "./index.css";
 
 const LikeStory = ({ story, storyId }) => {
@@ -23,12 +24,24 @@ const LikeStory = ({ story, storyId }) => {
     }
   };
 
+  let Like;
+
+  if(isLiked && sessionUser){
+    Like = <AiFillLike className="like-story-btn" onClick={handleLike} />
+  } else if(!isLiked && sessionUser){
+    Like = <AiOutlineLike className="like-story-btn" onClick={handleLike} />
+  } else if(!isLiked && !sessionUser){
+    Like = <LoginPopUpModal location='like' />
+  }
+
+
   return (
     <>
-      { isLiked ? ( <AiFillLike className="like-story-btn" onClick={handleLike} />):
+      {/* { isLiked ? ( <AiFillLike className="like-story-btn" onClick={handleLike} />):
        ( <AiOutlineLike className="like-story-btn" onClick={handleLike} />
       )
-     }
+     } */}
+     { Like }
     </>
   );
 };

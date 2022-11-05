@@ -32,7 +32,7 @@ def get_story_comments(story_Id):
 def get_comment_replies(comment_Id):
   comment = Comment.query.get(comment_Id)
   if comment:
-    res = comment.to_dict()
+    res = comment.to_dict(current_user.is_authenticated and current_user.id)
     res['replies'] = {reply.id: reply.to_dict(current_user.is_authenticated and current_user.id) for reply in comment.replies}
     return jsonify(res)
   else:

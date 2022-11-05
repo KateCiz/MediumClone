@@ -1,11 +1,7 @@
 import React from "react";
-// import { useSelector } from "react-redux";
-// import EditStoryBtn from "../StoryComponent/EditStory/EditStoryBtn";
-import { useHistory } from "react-router-dom";
-
 
 function AuthorStoryPreview({story}) {
-  const history = useHistory();
+
   return (
     <div className="story-preview-container">
         <div className="text-container">

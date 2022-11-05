@@ -1,14 +1,13 @@
 .test-editor {
-    max-width: 600px;
-    margin: auto;
-
+  max-width: 600px;
+  margin: auto;
 }
 
 .test-editor:focus {
   outline: none;
 }
 
-.ProseMirror{
+.ProseMirror {
   outline: none;
 }
 
@@ -17,13 +16,13 @@
 }
 
 .test-editor p {
-    font-size: 40px;
-    font-family: "Roboto Condensed", sans-serif;
+  font-size: 40px;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .large-editor p {
-    font-size: 25px;
-    font-family: "Roboto Condensed", sans-serif;
+  font-size: 25px;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .test-editor p.is-editor-empty:first-child::before {
@@ -42,23 +41,43 @@
   pointer-events: none;
 }
 
-
 .large-editor {
-    max-width: 600px;
-    margin: auto;
-    max-height: 1000px;
+  max-width: 600px;
+  margin: auto;
+  max-height: 1000px;
 }
-
 
 .open-close-btns {
   color: #292929;
   border: 1px solid #292929;
   border-radius: 50%;
-
 }
 
 .image-info {
   width: 10px;
   display: block;
   margin: auto;
+  justify-content: center;
+}
+
+.errors-msg {
+  margin: auto;
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.errors-msg p {
+  text-align: center;
+  line-height: 30px;
+}
+
+.page-container {
+  justify-content: center;
+}
+
+.image-input-field {
+  width: 400px;
+  position: relative;
+  right: 185px;
 }
