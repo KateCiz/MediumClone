@@ -1,13 +1,18 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./index.css";
 import ProfileButton from "./ProfileButton"
 import {SiMedium} from "react-icons/si"
 import ConfirmModal from "../../writepage/ConfirmModal/index";
 
 
+
 const WriteStoryNavBar = ({user, publish, filledState, update}) => {
 
+  const history= useHistory()
+  const handleCancel = () => {
+    history.push("/")
+  }
 
   return (
     <nav className="write-story-navbar-container">
@@ -22,8 +27,17 @@ const WriteStoryNavBar = ({user, publish, filledState, update}) => {
       </div>
 
       <ul>
+        {update === true ? (
+          <li>
+            <button onClick={handleCancel} className="cancel-btn-updatepage">Cancel</button>
+          </li>
+        ) : null}
         <li>
-          <ConfirmModal filledState={filledState} publish={publish} update={update}/>
+          <ConfirmModal
+            filledState={filledState}
+            publish={publish}
+            update={update}
+          />
         </li>
         <li>
           <ProfileButton user={user} />

@@ -63,3 +63,18 @@ a:visited {
   padding-bottom: 5px;
   font-family: 'Roboto Condensed', sans-serif;
 }
+
+.cancel-btn-updatepage {
+  align-items: center;
+  background-color: rgb(137, 40, 23);
+  border: 0;
+  color: white;
+  cursor: pointer;
+  justify-content: center;
+  border-radius: 100px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
