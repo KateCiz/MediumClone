@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 // import EditStoryBtn from "../StoryComponent/EditStory/EditStoryBtn";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import LikeStory from "../util/LikeButton/LikeStory/index"
 import Ellipse from "../util/EditEllipses/index";
 import CommentsButton from "../comments/CommentsButton";
@@ -54,6 +54,7 @@ function OneStory({ story, storyId }) {
     <div className="full-story-container">
       <div className="full-story-heading-container">
         <div className="full-story-author-container">
+        <NavLink to={`/profiles/${story?.Author?.id}`} style={{ textDecoration: "none" }}>
           <div
             className="full-story-profile-image-container"
             style={{
@@ -64,10 +65,13 @@ function OneStory({ story, storyId }) {
               }')`,
             }}
           ></div>
+           </NavLink>
           <div className="full-story-next-to-profile-pic">
+          <NavLink to={`/profiles/${story?.Author?.id}`} style={{ textDecoration: "none" }}>
             <div className="full-story-author-name">
               {`${story?.Author?.first_name} ${story?.Author?.last_name}`}
             </div>
+            </NavLink>
             <div className="full-story-dates">
               {CreatedDate}
               {EditedDate}
