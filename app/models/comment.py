@@ -48,6 +48,7 @@ class Comment(db.Model):
             'num_likes': len(self.comment_likes),
             'num_replies': num_replies,
             'parent_id': self.parent_id,
+            'story_id': self.story_id,
             'created_date': self.created_date,
             'updated_date': self.updated_date
         }
