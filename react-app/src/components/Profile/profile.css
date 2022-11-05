@@ -44,7 +44,8 @@
     display: flex;
     flex-direction: column;
     align-self:flex-end;
-    padding-top: 100px;
+    border-bottom: 0.25px solid #4e4e4e;
+    max-width: 100%;
 }
 
 .options-container{
@@ -67,4 +68,24 @@
   padding-top: 10px;
   padding-bottom: 10px;
   font-family: 'Roboto Condensed', sans-serif;
+}
+
+.toggle-button{
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-bottom: 10px;
+}
+
+.toggle-button:hover {
+  opacity: 0.8;
+}
+
+.toggle-button-selected{
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #292929;
+
 }

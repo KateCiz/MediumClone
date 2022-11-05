@@ -8,6 +8,7 @@
 
 .full-story-container {
     height: 100%;
+    width: 100%;
 }
 
 .full-page-story-details-div {
@@ -93,7 +94,19 @@
     margin-left: 5px;
 }
 
+.full-story-dates {
+    display:flex;
+}
 .full-story-created {
+    color: rgba(117, 117, 117, 1);
+    font-size: 12px;
+    margin-left: 5px;
+    align-items: center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.full-story-edited {
     color: rgba(117, 117, 117, 1);
     font-size: 12px;
     margin-left: 5px;
