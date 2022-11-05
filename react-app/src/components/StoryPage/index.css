@@ -37,6 +37,7 @@
 
 .author-side-div {
     height: 100%;
+    width: 30%;
     display: flex;
     align-items: center;
     padding-left: 3%;
@@ -59,6 +60,8 @@
     background-repeat: no-repeat;
     background-position: center center;
 }
+
+/* .full-story-title {} */
 
 .full-story-title-text {
     font-size: 32px;

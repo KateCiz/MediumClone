@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { followAUser } from "../../store/follows";
 import  FollowingModal from "../util/FollowModal/index.js";
 import  FollowButton from "../util/FollowButton/index"
@@ -30,6 +30,7 @@ function AuthorSideBar({ Author }) {
   return (
     <div className="author-side-bar-container">
       <div className="black-bar"> </div>
+      <NavLink to={`/profiles/${Author?.id}`} style={{ textDecoration: "none" }}>
       <div
         className="author-sidebar-profile-image-container"
         style={{
@@ -43,6 +44,7 @@ function AuthorSideBar({ Author }) {
       <div className="author-sidebar-name">
         {`${Author?.first_name} ${Author?.last_name}`}
       </div>
+      </NavLink>
       <div className="followers-count-container">
         {/* <p>{Author?.num_followers} Followers</p> */}
         <FollowingModal user={sessionUser} Author={Author} />
