@@ -21,9 +21,11 @@ const WriteStoryNavBar = ({user, publish, filledState, update}) => {
           {/* <img className="medium-logo-main" src={"../MediumLogo.ico"} alt="" /> */}
           <SiMedium className="medium-logo-write" />
         </NavLink>
+        {update ? <span className="name-header">Story by {user?.first_name} {user?.last_name}</span> :
         <span className="name-header">
           Draft in {user?.first_name} {user?.last_name}
         </span>
+}
       </div>
 
       <ul>

@@ -16,20 +16,17 @@ const EditPage = () => {
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
   const history = useHistory();
-   const [showImageInput, setShowImageInput] = useState(false);
+  const [showImageInput, setShowImageInput] = useState(false);
 
   // const story = useSelector((state) => {
   //   state?.storyState?.find((story) => String(story?.id) === storyId);
   // });
   useEffect(() => {
-      (async() => {
-        await dispatch(getSingleStory(storyId));
-        setLoaded(true);
-
-      })();
-    }, [dispatch]);
-
-
+    (async () => {
+      await dispatch(getSingleStory(storyId));
+      setLoaded(true);
+    })();
+  }, [dispatch]);
 
   const story = useSelector((state) => state.storyState[storyId]);
 
@@ -40,12 +37,25 @@ const EditPage = () => {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
   const [filledState, setFilledState] = useState(false);
+  const [titleErrors, setTitleErrors] = useState(false);
+  const [bodyErrors, setBodyErrors] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
 
   useEffect(() => {
     if (title.length > 0 && text.length > 0) {
       setFilledState(true);
     } else {
       setFilledState(false);
+    }
+    if (title.replaceAll(" ", "").length < 1) {
+      setTitleErrors(true);
+    } else {
+      setTitleErrors(false);
+    }
+    if (text.replaceAll(" ", "").length < 1) {
+      setBodyErrors(true);
+    } else {
+      setBodyErrors(false);
     }
   }, [title, text]);
 
@@ -82,44 +92,45 @@ const EditPage = () => {
   });
 
   useEffect(() => {
-    if(loaded) {
+    if (loaded) {
       // setTitle(story.title);
       // setText(story.content);
       editor.commands.insertContent(story.title);
       largeeditor.commands.insertContent(story.content);
-      setImage(story.image_url)
-      if(story){
-        if(sessionUser){
-          if (story.Author.id !== sessionUser.id){
-            history.push('/404')
+      setImage(story.image_url);
+      if (story) {
+        if (sessionUser) {
+          if (story.Author.id !== sessionUser.id) {
+            history.push("/404");
           }
         }
       }
     }
   }, [loaded]);
 
-
-
-
   const handlePublish = () => {
-    if (title.length > 1 && text.length > 1) {
+    if (bodyErrors && titleErrors) {
+          setShowErrors(true);
+      }
+
+    if (!bodyErrors && !titleErrors) {
       const story = {
         title: title,
         content: text,
         image_url: image,
       };
       dispatch(editStory(story, storyId));
+      history.push(`/stories/${storyId}`);
     }
-    history.push(`/stories/${storyId}`);
   };
 
-    const handleAddImage = () => {
-      setShowImageInput(!showImageInput);
-    };
+  const handleAddImage = () => {
+    setShowImageInput(!showImageInput);
+  };
 
-    const handleImageUpdate = (e) => {
-      setImage(e.target.value);
-    };
+  const handleImageUpdate = (e) => {
+    setImage(e.target.value);
+  };
 
   return (
     <>
@@ -131,20 +142,30 @@ const EditPage = () => {
             filledState={filledState}
             update={update}
           />
+          {titleErrors  && showErrors ? (
+            <div className="errors-msg">
+              <p>Must have atleast 1 character</p>
+            </div>
+          ) : null}
           <EditorContent editor={editor} className="test-editor" />
+          {bodyErrors && showErrors ? (
+            <div className="errors-msg">
+              <p>Must have atleast 1 character</p>
+            </div>
+          ) : null}
           <EditorContent editor={largeeditor} className="large-editor" />
           <div className="image-info">
             {showImageInput ? (
               <img
                 className="open-close-btns"
-                src={"../x-btn.svg"}
+                src={"/svgs/x-btn.svg"}
                 alt=""
                 onClick={handleAddImage}
               />
             ) : (
               <img
                 className="open-close-btns"
-                src={"../+-btn.svg"}
+                src={"/svgs/+-btn.svg"}
                 alt=""
                 onClick={handleAddImage}
               />
