@@ -12,25 +12,15 @@ function FullStoryPage() {
   const story = useSelector((state) => state.storyState[storyId]);
   const dispatch = useDispatch();
   const history = useHistory();
-  // const [loaded, setLoaded] = useState(false)
-
-  // if(!story){
-  //   history.push('/404');
-  // }
 
   useEffect(() => {
     (async() => {
       const res = await dispatch(getSingleStory(storyId));
-      // setLoaded(true);
       if (res.status === 404){
         history.push('/404')
       }
     })();
   }, [dispatch]);
-
-  // if (!loaded) {
-  //   return null;
-  // }
 
   return (
     <div className="full-page-story-div">

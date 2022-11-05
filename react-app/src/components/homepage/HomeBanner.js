@@ -1,4 +1,5 @@
 import React from "react"
+import LoginPopUpModal from "../auth/LoginPopUp";
 import "./HomeBanner.css"
 
 const HomeBanner = () => {
@@ -12,7 +13,8 @@ const HomeBanner = () => {
             <h2>Discover stories, thinking, and expertise</h2>
             <h2>from writeres on any topic.</h2>
           </div>
-          <button className="start-reading-btn">Start reading</button>
+          {/* <button className="start-reading-btn">Start reading</button> */}
+          <LoginPopUpModal location='start-reading' />
         </div>
         <div className="medium-img">
           <img className="medium-ms" src={"../homepageMs.svg"} alt="" />

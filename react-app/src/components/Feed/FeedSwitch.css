@@ -1,0 +1,32 @@
+.feed-switch-container{
+    margin: none;
+}
+.feed-btns {
+    margin-left: 10%;
+}
+
+.feed-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding-bottom: 10px;
+}
+
+.feed-btn-select {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #292929;
+}
+
+
+.feed-btn:hover {
+    border-bottom: 1px solid #292929;
+}
+
+.feed-btns {
+    border-bottom: 0.25px solid #4e4e4e;
+    max-width: 79px;
+
+}

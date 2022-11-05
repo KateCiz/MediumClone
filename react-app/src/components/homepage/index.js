@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import UserStoryFeed from '../Feed/UserStoryFeed';
 import AllStoriesFeed from '../Feed/AllStoriesFeed';
 import HomeBanner from "./HomeBanner"
+import FeedSwitch from '../Feed/FeedSwitch'
 
 const HomePage = () => {
     const sessionUser = useSelector((state) => state.session.user);
@@ -11,7 +12,8 @@ const HomePage = () => {
         <div>
             {sessionUser &&
             (
-            <UserStoryFeed user={sessionUser}/>
+            // <UserStoryFeed user={sessionUser}/>
+            <FeedSwitch user={sessionUser}/>
             )}
             {!sessionUser &&
             (

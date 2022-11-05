@@ -3,20 +3,36 @@ import { Modal } from "../../context/Modal";
 import LoginForm from "./LoginForm";
 import "./signinmodal/index.css";
 import SignUpForm from "./SignUpForm";
+import { AiOutlineLike } from "react-icons/ai";
 
 
-function WriteLoginFormModal() {
+function LoginPopUpModal({ location }) {
   const [showModal, setShowModal] = useState(false);
   const [switchPage, setSwitchPage] = useState(true);
 
+  let Click;
+    if(location === 'like'){
+        Click = <AiOutlineLike className="like-story-btn" onClick={() => setShowModal(true)} />;
+    }
+    if(location === 'comment'){
+        Click = <textarea className="comment-textarea" onClick={() => setShowModal(true)} ></textarea>
+    }
+    if(location === 'write'){
+       Click = <button
+            className="login-btn-homeScreen"
+            onClick={() => setShowModal(true)}
+          >
+            Write
+          </button>
+    }
+    if(location === 'start-reading'){
+        Click = <button className="start-reading-btn" onClick={() => setShowModal(true)}>Start reading</button>
+    }
+
+
   return (
     <>
-      <button
-        className="login-btn-homeScreen"
-        onClick={() => setShowModal(true)}
-      >
-        Write
-      </button>
+      {Click}
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           {switchPage ? (
@@ -36,4 +52,4 @@ function WriteLoginFormModal() {
   );
 }
 
-export default WriteLoginFormModal;
+export default LoginPopUpModal;

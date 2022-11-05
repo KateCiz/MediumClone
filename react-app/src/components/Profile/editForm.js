@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getUserProfile, updateUserProfile } from '../../store/profiles';
+import { updateUserProfile } from '../../store/profiles';
 import "./editForm.css"
 
 function EditProfileForm({closeModal}){

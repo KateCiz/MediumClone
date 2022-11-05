@@ -7,6 +7,11 @@ const ConfirmForm = ({closeModal, publish, update}) => {
       closeModal();
     };
 
+    const handleClick = () => {
+      publish()
+      exitFromModal()
+    }
+
     return (
       <div className="confirm-container">
         <button className="exit-icon" onClick={exitFromModal}>
@@ -18,11 +23,11 @@ const ConfirmForm = ({closeModal, publish, update}) => {
             cancel
           </button>
           {update === false ? (
-            <button className="publish-final-btn" onClick={publish}>
+            <button className="publish-final-btn" onClick={handleClick}>
               publish
             </button>
           ) : (
-            <button className="publish-final-btn" onClick={publish}>
+            <button className="publish-final-btn" onClick={handleClick}>
               update
             </button>
           )}
