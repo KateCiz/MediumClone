@@ -17,7 +17,7 @@ const HomeBanner = () => {
           <LoginPopUpModal location='start-reading' />
         </div>
         <div className="medium-img">
-          <img className="medium-ms" src={"../homepageMs.svg"} alt="" />
+          <img className="medium-ms" src={"/svgs/homepageMs.svg"} alt="" />
         </div>
       </div>
     );
