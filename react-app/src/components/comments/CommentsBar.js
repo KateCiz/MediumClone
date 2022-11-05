@@ -6,6 +6,7 @@ import LoginPopUpModal from "../auth/LoginPopUp";
 
 
 import { getAllComments, getAllReplies, createComment, createReply} from "../../store/comments";
+import {getSingleStory} from '../../store/stories';
 
 import './CommentsBar.css'
 
@@ -15,12 +16,14 @@ function CommentsBar ({id, type, setDisplay}) {
   const commentState = useSelector(state => state.commentState);
   // const display = commentState.display
   let comments = {};
-
+  let storyId;
 
     if(type === 'story') {
       comments = commentState.comments;
+      storyId = id;
     } else if(type === 'comment') {
       comments = commentState.replies[id]?.replies;
+      storyId = commentState.replies[id]?.story_id;
     }
 
 
@@ -63,8 +66,10 @@ function CommentsBar ({id, type, setDisplay}) {
     } else {
       if(type === 'story') {
         dispatch(createComment(payload, id));
+        dispatch(getSingleStory(storyId));
       } else if(type === 'comment') {
         dispatch(createReply(payload, id))
+        dispatch(getSingleStory(storyId));
       }
       setNewComment('');
     }
