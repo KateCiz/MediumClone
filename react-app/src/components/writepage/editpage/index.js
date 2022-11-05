@@ -40,6 +40,9 @@ const EditPage = () => {
   const [titleErrors, setTitleErrors] = useState(false);
   const [bodyErrors, setBodyErrors] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
+  const [imageErrors, setImageErrors] = useState(false);
+  const [isValidLink, setIsValidLink] = useState(true);
+  const urlEndings = ["jpg", "svg", "png", "gif", "peg"];
 
   useEffect(() => {
     if (title.length > 0 && text.length > 0) {
@@ -57,7 +60,24 @@ const EditPage = () => {
     } else {
       setBodyErrors(false);
     }
-  }, [title, text]);
+    if (image.length > 1) {
+      if (image.replaceAll(" ", "").length < 1) {
+        setImageErrors(true);
+      }
+    }
+    if (image.length > 1) {
+      if (image.replaceAll(" ", "").length > 1) {
+        const ending = image.slice(-3);
+        if (!urlEndings.includes(ending)) {
+          setIsValidLink(false);
+        } else {
+          setIsValidLink(true);
+        }
+      }
+    } else {
+      setImageErrors(false);
+    }
+  }, [title, text, image]);
 
   const editor = useEditor({
     extensions: [
@@ -109,11 +129,11 @@ const EditPage = () => {
   }, [loaded]);
 
   const handlePublish = () => {
-    if (bodyErrors && titleErrors) {
-          setShowErrors(true);
-      }
+    if (bodyErrors || titleErrors || imageErrors || !isValidLink) {
+      setShowErrors(true);
+    }
 
-    if (!bodyErrors && !titleErrors) {
+    if (!bodyErrors && !titleErrors && !imageErrors && isValidLink) {
       const story = {
         title: title,
         content: text,
@@ -142,7 +162,7 @@ const EditPage = () => {
             filledState={filledState}
             update={update}
           />
-          {titleErrors  && showErrors ? (
+          {titleErrors && showErrors ? (
             <div className="errors-msg">
               <p>Must have atleast 1 character</p>
             </div>
@@ -154,6 +174,16 @@ const EditPage = () => {
             </div>
           ) : null}
           <EditorContent editor={largeeditor} className="large-editor" />
+          {!isValidLink && showErrors ? (
+            <div className="errors-msg">
+              <p>Url must end in .jpg, .svg, or .png</p>
+            </div>
+          ) : null}
+          {imageErrors && showErrors ? (
+            <div className="errors-msg">
+              <p>Must contain atleast 1 character</p>
+            </div>
+          ) : null}
           <div className="image-info">
             {showImageInput ? (
               <img

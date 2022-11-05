@@ -9,7 +9,6 @@ import "./index.css";
 import { useDispatch } from "react-redux";
 import { createNewStory } from "../../store/stories";
 import { useHistory } from "react-router-dom";
-import { SiUfc } from "react-icons/si";
 
 const WritePage = () => {
   const dispatch = useDispatch();
@@ -22,6 +21,9 @@ const WritePage = () => {
   const [titleErrors, setTitleErrors] = useState(false);
   const [bodyErrors, setBodyErrors] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
+  const [imageErrors, setImageErrors] = useState(false);
+  const [isValidLink, setIsValidLink] = useState(true);
+  const urlEndings = ['jpg', 'svg', 'png', 'gif', 'peg']
 
   useEffect(() => {
     if (title.length > 0 && text.length > 0) {
@@ -39,7 +41,26 @@ const WritePage = () => {
     } else {
       setBodyErrors(false);
     }
-  }, [title, text]);
+    if (image.length > 1) {
+      if (image.replaceAll(" ", "").length < 1) {
+        setImageErrors(true);
+      }
+    }
+    if (image.length > 1){
+        if (image.replaceAll(" ", "").length > 1){
+
+          const ending = image.slice(-3);
+          if (!urlEndings.includes(ending)){
+            setIsValidLink(false)
+          } else {
+            setIsValidLink(true)
+          }
+        }
+    }
+    else {
+      setImageErrors(false);
+    }
+  }, [title, text, image]);
 
   const editor = useEditor({
     extensions: [
@@ -74,10 +95,10 @@ const WritePage = () => {
   const history = useHistory();
 
   const handlePublish = () => {
-    if( bodyErrors && titleErrors){
+    if (bodyErrors || titleErrors || imageErrors || !isValidLink) {
       setShowErrors(true);
     }
-    if (!bodyErrors && !titleErrors) {
+    if (!bodyErrors && !titleErrors && !imageErrors && isValidLink) {
       console.log(title, text);
       const story = {
         title: title,
@@ -117,6 +138,16 @@ const WritePage = () => {
         </div>
       ) : null}
       <EditorContent editor={largeeditor} className="large-editor" />
+      {!isValidLink && showErrors ? (
+        <div className="errors-msg">
+          <p>Url must end in .jpg, .svg, or .png</p>
+        </div>
+      ) : null}
+      {imageErrors && showErrors ? (
+        <div className="errors-msg">
+          <p>Must contain atleast 1 character</p>
+        </div>
+      ) : null}
       <div className="image-info">
         {showImageInput ? (
           <img

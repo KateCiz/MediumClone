@@ -55,7 +55,7 @@ function ProfileButton({ user }) {
           <li>
             <span>{user.email}</span>
           </li>
-          <li>
+          <li className="logout-btn">
             <LogoutButton />
           </li>
         </ul>
