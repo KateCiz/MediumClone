@@ -5,7 +5,7 @@ import "./FeedSwitch.css"
 
 const FeedSwitch = ({user}) => {
 
-    const [allFeed, setAllFeed] = useState(false)
+    const [allFeed, setAllFeed] = useState(true)
     const handleAllSwitch = () => {
         setAllFeed(true)
   }
