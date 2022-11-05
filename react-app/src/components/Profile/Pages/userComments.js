@@ -1,7 +1,7 @@
 import Comment from "../../comments/Comment";
 
 
-function UserComments({comments}){
+function UserComments({comments, sessionUserId}){
     return(
         <div className="comments-div">
                 {comments?.map((comment,i) => {
@@ -13,7 +13,7 @@ function UserComments({comments}){
                                 <button onClick={editComment}>Edit</button>
                                 <button onClick={() => destroyComment(comment.id, comment.parent_id)}>Delete</button>
                             </div> */}
-                            <Comment comment={comment} sessionUserId={currentUser.id}/>
+                            <Comment comment={comment} sessionUserId={sessionUserId}/>
                         </div>
                     );
                 })}

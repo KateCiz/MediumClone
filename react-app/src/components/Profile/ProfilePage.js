@@ -80,7 +80,7 @@ function UserProfile(){
                 }
             <div className="pages-container">
                 {/* <UserStoriesFeed stories={userProfile.Stories}/> */}
-                {userComments ===  true ? <UserComments comments={userProfile.Comments}/>: <UserStoriesFeed stories={userProfile.Stories}/>}
+                {userComments ===  true ? <UserComments comments={userProfile.Comments} sessionUserId={currentUser.id}/>: <UserStoriesFeed stories={userProfile.Stories}/>}
                 {userBio === true ?<UserBio bio={userProfile.bio}/> : <UserStoriesFeed stories={userProfile.Stories}/>}
             </div>
         </div>

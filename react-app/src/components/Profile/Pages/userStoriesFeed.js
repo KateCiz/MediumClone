@@ -1,4 +1,5 @@
-import AuthorStoryPreview from "./AuthorStoryPreview";
+import AuthorStoryPreview from "../AuthorStoryPreview"
+import {NavLink} from 'react-router-dom'
 
 function UserStoriesFeed({stories}){
     return (

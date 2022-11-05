@@ -1,7 +1,7 @@
 function UserBio({bio}){
     return(
         <div>
-
+            {bio}
         </div>
     );
 };
