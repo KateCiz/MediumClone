@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { editComment, deleteAComment } from "../../store/comments";
 import CommentsButton from "./CommentsButton";
@@ -14,7 +14,16 @@ function Comment ({comment, sessionUserId}) {
   const {author} = comment;
   const [showEdit, setShowEdit] = useState(false);
   const [newComment, setNewComment] = useState(comment.content)
+  const [errors, setErrors] = useState([]);
+  const [displayErrors, setDisplayErrors] = useState(false);
 
+  useEffect(() => {
+    const tempArr = []
+      if(newComment.split(' ').length === newComment.length+1 || newComment.length < 0) {
+        tempArr.push('Must contain at least one character')
+      }
+    setErrors(tempArr)
+  }, [newComment]);
 
   const destroyComment = async (e) => {
     e.preventDefault();
@@ -28,10 +37,24 @@ function Comment ({comment, sessionUserId}) {
     const payload = {
       content: newComment
     }
-
-    await dispatch(editComment(payload, comment.id, comment.parent_id));
-    setShowEdit(false);
+    if(errors.length) {
+      setDisplayErrors(true);
+    } else {
+      await dispatch(editComment(payload, comment.id, comment.parent_id));
+      setShowEdit(false);
+      setDisplayErrors(false);
+    }
   }
+
+  const errorsBox = (
+    <div className="comment-errors">
+      <ul>
+      {errors.map(err => (
+        <li key={err}>{err}</li>
+      ))}
+      </ul>
+    </div>
+  )
 
   if(showEdit) {
     return(
@@ -47,6 +70,7 @@ function Comment ({comment, sessionUserId}) {
       </div>
 
       <div className="comment-body edit-area">
+      {displayErrors && errors.length > 0 ? errorsBox: null}
       <textarea maxLength='200' rows='5' cols='40' wrap="hard" value={newComment} onChange={e => setNewComment(e.target.value)} className='edit-comment-textarea'></textarea>
       <button onClick={saveComment} className='publish-btn'>Save</button>
       <button onClick={destroyComment} className='cancel-btn-updatepage'>Delete</button>
