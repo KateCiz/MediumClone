@@ -4,6 +4,8 @@ import { editComment, deleteAComment } from "../../store/comments";
 import CommentsButton from "./CommentsButton";
 import LikeComment from "../util/LikeButton/LikeComment";
 import { Link } from "react-router-dom";
+import {getSingleStory} from '../../store/stories';
+
 
 
 import './Comment.css';
@@ -29,6 +31,7 @@ function Comment ({comment, sessionUserId}) {
     e.preventDefault();
 
     await dispatch(deleteAComment(comment.id, comment.parent_id));
+    dispatch(getSingleStory(comment.story_id))
     setShowEdit(false);
   }
 
