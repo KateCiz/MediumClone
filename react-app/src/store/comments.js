@@ -72,10 +72,8 @@ const deleteComment = (commentId, parentId) => {
     //GET ALL Comments
 export const getAllComments = (storyId) => async (dispatch) => {
     const res = await csrfFetch(`/api/stories/${storyId}/comments`);
-    console.log('runnung1')
     if(res.ok){
         const comments = await res.json();
-        console.log('runnung2', comments)
         dispatch(getComments(comments));
     }
     return res;
@@ -141,7 +139,6 @@ export const createReply = (comment, commentId) => async(dispatch) =>  {
     //UPDATE Comment
 export const editComment = (comment, commentId, parentId) => async(dispatch) =>  {
     const {content} = comment;
-  console.log(content);
     const res = await csrfFetch(`/api/comments/${commentId}`, {
         method: 'PUT',
         body: JSON.stringify({

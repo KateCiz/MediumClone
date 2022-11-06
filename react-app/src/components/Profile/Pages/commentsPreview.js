@@ -1,6 +1,7 @@
 import { useState} from "react";
 import { useDispatch } from "react-redux";
 import { editComment, deleteAComment } from "../../../store/comments";
+import { getUserProfile } from "../../../store/profiles";
 import { Link } from "react-router-dom";
 
 //styles
@@ -18,6 +19,7 @@ function CommentsPreview ({comment, sessionUserId}) {
     e.preventDefault();
 
     await dispatch(deleteAComment(comment.id, comment.parent_id));
+    dispatch(getUserProfile(sessionUserId))
     setShowEdit(false);
   }
 
@@ -28,6 +30,7 @@ function CommentsPreview ({comment, sessionUserId}) {
     }
 
     await dispatch(editComment(payload, comment.id, comment.parent_id));
+    dispatch(getUserProfile(sessionUserId))
     setShowEdit(false);
   }
 

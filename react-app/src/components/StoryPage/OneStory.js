@@ -23,7 +23,7 @@ function OneStory({ story, storyId }) {
 
   if (story?.updated_date !== story?.created_date) {
     const editedDate = new Date(story?.updated_date);
-    const editedDay = editedDate.getDay();
+    const editedDay = editedDate.getDate();
     const editedMonth = editedDate.toLocaleString("default", {
       month: "short",
     });
@@ -34,7 +34,7 @@ function OneStory({ story, storyId }) {
 
   if (story?.created_date) {
     const date = new Date(story?.created_date);
-    const createdDay = date.getDay();
+    const createdDay = date.getDate();
     const createdMonth = date.toLocaleString("default", { month: "short" });
     const createdYear = date.getFullYear();
     const createdStr = `${createdDay} ${createdMonth}, ${createdYear}`;

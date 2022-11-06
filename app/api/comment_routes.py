@@ -3,6 +3,7 @@ from app.forms import CommentForm
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, Comment, Story, Like, db
+from datetime import datetime
 
 comment_routes = Blueprint('comments', __name__)
 
@@ -96,6 +97,7 @@ def update_a_comment(comment_id):
       if comment.user_id == curr_user_id:
         print(form.data)
         comment.content = form.data['content'] or comment.content
+        comment.updated_date = datetime.now()
         db.session.add(comment)
         db.session.commit()
         return comment.to_dict(int(current_user.is_authenticated) and current_user.id)
