@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { updateUserProfile } from '../../store/profiles';
+import { getUserProfile } from '../../store/profiles';
 import "./editForm.css"
 
 function EditProfileForm({closeModal}){
@@ -18,9 +19,10 @@ function EditProfileForm({closeModal}){
         if(bio.length < 1 || bio.replaceAll(" ","").length < 1){
             setMessage("Fill out 'About' section or exit modal")
         }
-        else{
-            const data = await dispatch(updateUserProfile(user.id, bio, image_profile_url))
-            .then(exitFromModal)
+        else {
+            await dispatch(updateUserProfile(user.id, bio, image_profile_url))
+            dispatch(getUserProfile(user.id))
+            exitFromModal()
         }
     };
 

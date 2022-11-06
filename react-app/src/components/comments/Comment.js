@@ -98,7 +98,7 @@ function Comment ({comment, sessionUserId}) {
         }}>Edit</div>}
       </div>
       <div className="comment-body">{comment.content}</div>
-      {comment.created_date !== comment.updated_date && <div className="edited-comment">Edited</div>}
+      {/* {comment.created_date !== comment.updated_date && <div className="edited-comment">Edited</div>} */}
       <div className="comment-bottom">
         <div className="comment-like-btn">
           <div className="comment-count">

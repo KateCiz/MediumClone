@@ -59,6 +59,7 @@ const WritePage = () => {
     }
     else {
       setImageErrors(false);
+      setIsValidLink(true);
     }
   }, [title, text, image]);
 

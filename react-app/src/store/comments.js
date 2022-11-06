@@ -195,16 +195,16 @@ export default function commentsReducer(state = initialState, action){
             newState.replies[action.parentId].replies[action.reply.id] = action.reply
             return newState;
         case UPDATE_COMMENT:
-            if(action.parentId) {
+            if(action.parentId && newState.replies[action.parentId]) {
               newState.replies[action.parentId].replies[action.comment.id] = action.comment;
-            } else {
+            } else if(newState.comments[action.comment.id]) {
               newState.comments[action.comment.id] = action.comment;
             }
             return  newState;
         case DELETE_COMMENT:
-          if(action.parentId) {
+          if(action.parentId && newState.replies[action.parentId]) {
             delete newState.replies[action.parentId].replies[action.commentId]
-          } else {
+          } else if(newState.comments[action.commentId]) {
             delete newState.comments[action.commentId]
           }
             return newState;

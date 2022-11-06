@@ -92,7 +92,7 @@ function OneStory({ story, storyId }) {
         </div>
       </div>
       <div className="story-reactions-container">
-        <div classname="likes-count">
+        <div className="likes-count">
           <LikeStory story={story} storyId={storyId} />
         </div>
         <span className="reactions">{story?.num_likes}</span>

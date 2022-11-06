@@ -20,7 +20,7 @@ const FollowForm = ({Author, user}) => {
 
     return (
     <div className="followers-modal-container">
-        <span className="followers-header">Following</span>
+        <span className="followers-header">Followers</span>
         <div className="list-followers-container">
             {followers && (
                 Object.values(followers)?.map((follower,i) =>{

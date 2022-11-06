@@ -9,8 +9,8 @@ class Comment(db.Model):
     content = db.Column(db.String, nullable=False)
     story_id = db.Column(db.Integer, db.ForeignKey('stories.id'), nullable=False)
     parent_id = db.Column(db.Integer, db.ForeignKey('comments.id'))
-    created_date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
-    updated_date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
+    created_date = db.Column(db.Date, default=datetime.datetime.now, nullable=False)
+    updated_date = db.Column(db.Date, default=datetime.datetime.now, nullable=False)
 
     # relation to itself (replies)
     replies = db.relationship(
