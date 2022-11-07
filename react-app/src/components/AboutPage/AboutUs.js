@@ -4,31 +4,40 @@ import { FaReact, FaJsSquare, FaFlask, FaPython, FaMortarPestle, FaGithub } from
 function AboutUs() {
 
     const aboutUs = [
-        {'name': 'Austin Fenne',
-         'pic': 'https://res.cloudinary.com/dymmlu1dw/image/upload/v1667513682/MediumClone/Headshot_3_hm00nd.png',
-         'blurb': 'I love coding and will dive down the rabbit hole whenever I find code that interests me.',
-         'github': 'https://github.com/FenneAustin',
-         'linkedIn': 'https://www.linkedin.com/in/austin-fenne'
-        },
-        {'name': 'Kaitlin Cizewski',
-         'pic': 'https://res.cloudinary.com/dymmlu1dw/image/upload/v1667338766/MediumClone/kate-square-pic2_yybmtf.jpg',
-         'blurb': "Software engineer by night and single mom by day. I'm a small town girl from Pennsylvania who loves organizing code and writing.",
-         'github': 'https://github.com/KateCiz',
-         'linkedIn': 'https://www.linkedin.com/in/kaitlin-cizewski/'
-        },
-        {'name': 'Mariel Vaca',
-         'pic': 'https://res.cloudinary.com/dymmlu1dw/image/upload/v1667263842/MediumClone/mariel-pic_ddb9yk.jpg',
-         'blurb': "Hi! I'm currently residing in New Orleans and not afraid of a coding challenge. Looking to start my developer career and make new friends!",
-         'github': 'https://github.com/Marielvacacruz',
-         'linkedIn': 'https://www.linkedin.com/in/mariel-vaca-cruz-56604b16b/'
-        },
-        {'name': 'Peter Monahan',
-         'pic': 'https://res.cloudinary.com/dymmlu1dw/image/upload/v1667347397/MediumClone/pete-screenshot_aq9mwg.png',
-         'blurb': "Dedicated family man and full stack developer. If I can't fix it immediately, I tackle any problematic code with logic and research.",
-         'github': 'https://github.com/peter-monahan',
-         'linkedIn': ''
-        }
-    ]
+      {
+        name: "Austin Fenne",
+        pic: "https://res.cloudinary.com/dymmlu1dw/image/upload/v1667513682/MediumClone/Headshot_3_hm00nd.png",
+        blurb:
+          "I love coding and will dive down the rabbit hole whenever I find code that interests me.",
+        github: "https://github.com/FenneAustin",
+        linkedIn: "https://www.linkedin.com/in/austin-fenne",
+      },
+      {
+        name: "Kaitlin Cizewski",
+        pic: "https://res.cloudinary.com/dymmlu1dw/image/upload/v1667338766/MediumClone/kate-square-pic2_yybmtf.jpg",
+        blurb:
+          "Software engineer by night and single mom by day. I'm a small town girl from Pennsylvania who loves organizing code and writing.",
+        github: "https://github.com/KateCiz",
+        linkedIn: "https://www.linkedin.com/in/kaitlin-cizewski/",
+      },
+      {
+        name: "Mariel Vaca",
+        pic: "https://res.cloudinary.com/dymmlu1dw/image/upload/v1667263842/MediumClone/mariel-pic_ddb9yk.jpg",
+        blurb:
+          "Hi! I'm currently residing in New Orleans and not afraid of a coding challenge. Looking to start my developer career and make new friends!",
+        github: "https://github.com/Marielvacacruz",
+        linkedIn: "https://www.linkedin.com/in/mariel-vaca-cruz-56604b16b/",
+      },
+      {
+        name: "Peter Monahan",
+        pic: "https://res.cloudinary.com/dymmlu1dw/image/upload/v1667347397/MediumClone/pete-screenshot_aq9mwg.png",
+        blurb:
+          "Dedicated family man and full stack developer. If I can't fix it immediately, I tackle any problematic code with logic and research.",
+        github: "https://github.com/peter-monahan",
+        linkedIn:
+          "https://www.linkedin.com/search/results/all/?keywords=peter%20monahan&origin=GLOBAL_SEARCH_HEADER&sid=o%2C9",
+      },
+    ];
 
     const icons = [
         {'tech-icon': <FaReact className='fa-5x'/>, 'name': 'React'},
@@ -75,5 +84,5 @@ function AboutUs() {
       </>
     );
   }
-  
+
   export default AboutUs;
