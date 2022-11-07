@@ -5,7 +5,7 @@ function StoryPreview({ story }) {
 
     if(story?.created_date){
         const date = new Date(story?.created_date);
-        const createdDay = date.getDay();
+        const createdDay = date.getDate();
         const createdMonth = date.toLocaleString('default', { month: 'short'});
         const createdYear = date.getFullYear();
         const createdStr = `${createdDay} ${createdMonth}, ${createdYear}`;

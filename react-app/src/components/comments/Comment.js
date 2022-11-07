@@ -4,6 +4,9 @@ import { editComment, deleteAComment } from "../../store/comments";
 import CommentsButton from "./CommentsButton";
 import LikeComment from "../util/LikeButton/LikeComment";
 import { Link } from "react-router-dom";
+import {getSingleStory} from '../../store/stories';
+import LoginPopUpModal from "../auth/LoginPopUp";
+
 
 
 import './Comment.css';
@@ -29,6 +32,7 @@ function Comment ({comment, sessionUserId}) {
     e.preventDefault();
 
     await dispatch(deleteAComment(comment.id, comment.parent_id));
+    dispatch(getSingleStory(comment.story_id))
     setShowEdit(false);
   }
 
@@ -94,11 +98,12 @@ function Comment ({comment, sessionUserId}) {
         }}>Edit</div>}
       </div>
       <div className="comment-body">{comment.content}</div>
-      {comment.createdAt !== comment.updatedAt && <div className="edited-comment">Edited</div>}
+      {/* {comment.created_date !== comment.updated_date && <div className="edited-comment">Edited</div>} */}
       <div className="comment-bottom">
         <div className="comment-like-btn">
           <div className="comment-count">
-            <LikeComment comment={comment} commentId={comment.id} sessionUserId={sessionUserId} />
+            {sessionUserId !== null ? <LikeComment comment={comment} commentId={comment.id} sessionUserId={sessionUserId} /> :
+             <LoginPopUpModal location={'like-comment'} />}
           </div>
           <span className="reactions">{comment?.num_likes}</span>
         </div>

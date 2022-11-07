@@ -60,8 +60,8 @@ function UserProfile(){
                 </div>
                 <div className="details-container">
                     <h1 className="user-name">{userProfile.first_name}</h1>
-                    <h3>Following: {userProfile.num_follows}</h3>
-                    <h3>Followers: {userProfile.num_followers}</h3>
+                    <h3>Following: {userProfile.num_followers}</h3>
+                    <h3>Followers: {userProfile.num_follows}</h3>
                 </div>
                 { currentUser?.id === userProfile.id &&
                 <div className="options-container">

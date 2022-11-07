@@ -28,7 +28,9 @@ function LoginPopUpModal({ location }) {
     if(location === 'start-reading'){
         Click = <button className="start-reading-btn" onClick={() => setShowModal(true)}>Start reading</button>
     }
-
+    if(location === 'like-comment'){
+      Click = <AiOutlineLike className="like-comment-btn" onClick={() => setShowModal(true)} />;
+    }
 
   return (
     <>

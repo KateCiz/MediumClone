@@ -100,21 +100,30 @@ The application will now be running at http://localhost:3000/
         - View how many likes a story has
 
 ## Features
-### Stories
-#### <img width="545" alt="image" src="">
+
+### Home Page
+#### <img width="545" alt="image" src="./images/SplashPage.png">
+
+### Login Modal
+#### <img width="545" alt="image" src="./images/LoginModal.png">
+
+### Stories/Feed
+#### <img width="545" alt="image" src="./images/Feed.png">
+
 * View a story
+#### <img width="545" alt="image" src="./images/SingleArticle.png">
+
 
 ### Comments
-#### <img width="545" alt="image" src="">
-* Accept or deny incoming friend requests
-* Cancel sent friend request
+#### <img width="545" alt="image" src="./images/Comments.png">
+* Comment on a Story  and other comments, like comments
 
 ### Follows
-#### <img width="545" alt="image" src="">
+#### <img width="545" alt="image" src="./images/Follows.png">
 
 
-### Likes
-#### <img width="545" alt="image" src="">
+### User Profile
+#### <img width="545" alt="image" src="./images/UserProfile.png">
 
 
 
@@ -126,3 +135,4 @@ This clone is a work in progress, these features will be available in the future
 -  Allow for adding tags to stories to personalize the for you page a bit more
 -  allow users to style there profiles
 -  add a search bar to search for stories
+-  Pagination for Feeds
