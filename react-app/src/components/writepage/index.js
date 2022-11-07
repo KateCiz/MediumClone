@@ -59,6 +59,7 @@ const WritePage = () => {
     }
     else {
       setImageErrors(false);
+      setIsValidLink(true);
     }
   }, [title, text, image]);
 
@@ -99,7 +100,6 @@ const WritePage = () => {
       setShowErrors(true);
     }
     if (!bodyErrors && !titleErrors && !imageErrors && isValidLink) {
-      console.log(title, text);
       const story = {
         title: title,
         content: text,
