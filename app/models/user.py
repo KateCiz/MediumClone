@@ -4,6 +4,9 @@ from flask_login import UserMixin
 import datetime
 from .story import Story
 
+
+
+
 follows = db.Table(
     "follows",
     db.Column("followed_user_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'))),
@@ -12,6 +15,7 @@ follows = db.Table(
 
 if environment == "production":
     follows.schema = SCHEMA
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
