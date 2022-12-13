@@ -5,14 +5,16 @@ import datetime
 from .story import Story
 
 
-if environment == "production":
-    User.schema = SCHEMA
+
 
 follows = db.Table(
     "follows",
     db.Column("followed_user_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'))),
     db.Column("user_id", db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'))),
 )
+
+if environment == "production":
+    follows.schema = SCHEMA
 
 
 class User(db.Model, UserMixin):
