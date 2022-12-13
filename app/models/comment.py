@@ -1,14 +1,16 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 import datetime
 from .like import Like
 
 class Comment(db.Model):
     __tablename__ = 'comments'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     content = db.Column(db.String, nullable=False)
-    story_id = db.Column(db.Integer, db.ForeignKey('stories.id'), nullable=False)
-    parent_id = db.Column(db.Integer, db.ForeignKey('comments.id'))
+    story_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('stories.id')), nullable=False)
+    parent_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('comments.id')))
     created_date = db.Column(db.Date, default=datetime.datetime.now, nullable=False)
     updated_date = db.Column(db.Date, default=datetime.datetime.now, nullable=False)
 
