@@ -18,7 +18,7 @@ from .seeds import seed_commands
 
 from .config import Config
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
 # Setup login manager
 login = LoginManager(app)

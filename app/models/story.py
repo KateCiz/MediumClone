@@ -1,10 +1,12 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 import datetime
 
 class Story(db.Model):
     __tablename__ = 'stories'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     title = db.Column(db.String(50), nullable=False)
     content = db.Column(db.Text(), nullable=False)
     image_url = db.Column(db.String(300))
