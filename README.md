@@ -3,7 +3,7 @@
 **medium-clone** aims to replicate those features both on the front and backend.
 
 ## Live site
-[Open medium-clone](https://medium-clone-callback.herokuapp.com/)
+[Open medium-clone](https://mediumclone.onrender.com)
 
 ## Technologies used
 ### Frontend
