@@ -9,21 +9,21 @@ import "./index.css";
 import { useDispatch } from "react-redux";
 import { createNewStory } from "../../store/stories";
 import { useHistory } from "react-router-dom";
+import AddImage from "./addimage/index";
+import { Modal } from "../../context/Modal";
 
 const WritePage = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState();
   const [filledState, setFilledState] = useState(false);
   const [showImageInput, setShowImageInput] = useState(false);
   const [titleErrors, setTitleErrors] = useState(false);
   const [bodyErrors, setBodyErrors] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
-  const [imageErrors, setImageErrors] = useState(false);
-  const [isValidLink, setIsValidLink] = useState(true);
-  const urlEndings = ['jpg', 'svg', 'png', 'gif', 'peg']
+
 
   useEffect(() => {
     if (title.length > 0 && text.length > 0) {
@@ -41,27 +41,7 @@ const WritePage = () => {
     } else {
       setBodyErrors(false);
     }
-    if (image.length > 1) {
-      if (image.replaceAll(" ", "").length < 1) {
-        setImageErrors(true);
-      }
-    }
-    if (image.length > 1){
-        if (image.replaceAll(" ", "").length > 1){
-
-          const ending = image.slice(-3);
-          if (!urlEndings.includes(ending)){
-            setIsValidLink(false)
-          } else {
-            setIsValidLink(true)
-          }
-        }
-    }
-    else {
-      setImageErrors(false);
-      setIsValidLink(true);
-    }
-  }, [title, text, image]);
+  }, [title, text]);
 
   const editor = useEditor({
     extensions: [
@@ -96,14 +76,15 @@ const WritePage = () => {
   const history = useHistory();
 
   const handlePublish = () => {
-    if (bodyErrors || titleErrors || imageErrors || !isValidLink) {
+    if (bodyErrors || titleErrors ) {
       setShowErrors(true);
     }
-    if (!bodyErrors && !titleErrors && !imageErrors && isValidLink) {
+    if (!bodyErrors && !titleErrors ) {
+
       const story = {
         title: title,
         content: text,
-        image_url: image,
+        image: image,
       };
       dispatch(createNewStory(story));
       history.push("/");
@@ -114,8 +95,9 @@ const WritePage = () => {
     setShowImageInput(!showImageInput);
   };
 
-  const handleImageUpdate = (e) => {
-    setImage(e.target.value);
+  const handleImageUpdate = (file) => {
+    setImage(file);
+    console.log(image)
   };
 
   return (
@@ -138,25 +120,18 @@ const WritePage = () => {
         </div>
       ) : null}
       <EditorContent editor={largeeditor} className="large-editor" />
-      {!isValidLink && showErrors ? (
+      {showErrors ? (
         <div className="errors-msg">
           <p>Url must end in .jpg, .svg, or .png</p>
         </div>
       ) : null}
-      {imageErrors && showErrors ? (
+      {showErrors ? (
         <div className="errors-msg">
           <p>Must contain atleast 1 character</p>
         </div>
       ) : null}
       <div className="image-info">
-        {showImageInput ? (
-          <img
-            className="open-close-btns"
-            src={"/svgs/x-btn.svg"}
-            alt=""
-            onClick={handleAddImage}
-          />
-        ) : (
+        {showImageInput ? null : (
           <img
             className="open-close-btns"
             src={"/svgs/+-btn.svg"}
@@ -165,13 +140,13 @@ const WritePage = () => {
           />
         )}
         {showImageInput ? (
-          <input
-            className="image-input-field"
-            placeholder="add link to image"
-            maxLength={300}
-            value={image}
-            onChange={handleImageUpdate}
-          ></input>
+          <Modal closeModal={() => setShowImageInput(false)}>
+            <AddImage
+              closeModal={() => setShowImageInput(false)}
+              image={image}
+              handleImageUpdate={(file) => handleImageUpdate(file)}
+            />
+          </Modal>
         ) : null}
       </div>
     </div>

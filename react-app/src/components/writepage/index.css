@@ -15,6 +15,10 @@
   outline: none;
 }
 
+.image-info {
+  cursor: pointer;
+}
+
 .test-editor p {
   font-size: 40px;
   font-family: "Roboto Condensed", sans-serif;

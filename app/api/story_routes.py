@@ -4,6 +4,7 @@ from app.forms import StoryEditorForm
 from app.models import db, Story, User, Comment, Like
 from sqlalchemy.orm import joinedload
 from datetime import datetime
+from app.aws import (upload_file_to_s3, allowed_file, get_unique_filename)
 
 story_routes = Blueprint('stories', __name__)
 
@@ -23,12 +24,25 @@ def get_all_stories():
 def create_story():
     form = StoryEditorForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    url = None
+    if 'image' in request.files:
+        image =  request.files["image"]
+        if image:
+            if not allowed_file(image.filename):
+                return {"errors": "file type not permitted"}, 409
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            if "url" not in upload:
+                return upload, 400
+            url = upload["url"]
+            print(url)
+    print(form.data['title'])
     if form.validate_on_submit():
         story = Story(
             user_id=current_user.id,
             title=form.data['title'],
             content=form.data['content'],
-            image_url=form.data['image_url']
+            image_url=url
         )
         db.session.add(story)
         db.session.commit()

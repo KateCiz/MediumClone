@@ -27,6 +27,9 @@ greenlet = "==1.1.0"
 Mako = "==1.1.4"
 email-validator = "*"
 future = "*"
+eventlet = "*"
+botocore = "*"
+boto3 = "*"
 
 [dev-packages]
 
