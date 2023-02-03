@@ -35,8 +35,6 @@ def create_story():
             if "url" not in upload:
                 return upload, 400
             url = upload["url"]
-            print(url)
-    print(form.data['title'])
     if form.validate_on_submit():
         story = Story(
             user_id=current_user.id,
@@ -73,10 +71,21 @@ def update_one_story(story_id):
         story = Story.query.filter(Story.id == story_id).first()
         if story:
             if story.user_id == current_user.id:
+                url=None
+                if 'image' in request.files:
+                    image =  request.files["image"]
+                    if image:
+                        if not allowed_file(image.filename):
+                            return {"errors": "file type not permitted"}, 409
+                        image.filename = get_unique_filename(image.filename)
+                        upload = upload_file_to_s3(image)
+                        if "url" not in upload:
+                            return upload, 400
+                        url = upload["url"]
                 if form.validate_on_submit():
                     story.title = form.data['title'] or story.title
                     story.content=form.data['content'] or story.content
-                    story.image_url=form.data['image_url'] or story.image_url
+                    story.image_url=url or story.image_url
                     story.updated_date = datetime.now()
                     db.session.add(story)
                     db.session.commit()

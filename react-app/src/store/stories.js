@@ -130,9 +130,16 @@ export const createNewStory = (story) => async (dispatch) => {
 
 //UPDATE STORY
 export const editStory = (story, id) => async (dispatch) => {
-  const res = await csrfFetch(`/api/stories/${id}`, {
+
+    const { title, content, image } = story;
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("image", image);
+
+  const res = await fetch(`/api/stories/${id}`, {
     method: "PUT",
-    body: JSON.stringify(story),
+    body: formData
   });
 
   if (res.ok) {

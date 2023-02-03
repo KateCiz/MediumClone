@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import storyReducer, { editStory } from "../../../store/stories";
 import { useHistory, useParams } from "react-router-dom";
 import { getSingleStory } from "../../../store/stories";
+import { Modal } from "../../../context/Modal";
+import AddImage from "../addimage/index";
 
 const EditPage = () => {
   const { storyId } = useParams();
@@ -18,9 +20,6 @@ const EditPage = () => {
   const history = useHistory();
   const [showImageInput, setShowImageInput] = useState(false);
 
-  // const story = useSelector((state) => {
-  //   state?.storyState?.find((story) => String(story?.id) === storyId);
-  // });
   useEffect(() => {
     (async () => {
       await dispatch(getSingleStory(storyId));
@@ -40,9 +39,7 @@ const EditPage = () => {
   const [titleErrors, setTitleErrors] = useState(false);
   const [bodyErrors, setBodyErrors] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
-  const [imageErrors, setImageErrors] = useState(false);
-  const [isValidLink, setIsValidLink] = useState(true);
-  const urlEndings = ["jpg", "svg", "png", "gif", "peg"];
+
 
   useEffect(() => {
     if (title.length > 0 && text.length > 0) {
@@ -60,24 +57,7 @@ const EditPage = () => {
     } else {
       setBodyErrors(false);
     }
-    if (image.length > 1) {
-      if (image.replaceAll(" ", "").length < 1) {
-        setImageErrors(true);
-      }
-    }
-    if (image.length > 1) {
-      if (image.replaceAll(" ", "").length > 1) {
-        const ending = image.slice(-3);
-        if (!urlEndings.includes(ending)) {
-          setIsValidLink(false);
-        } else {
-          setIsValidLink(true);
-        }
-      }
-    } else {
-      setImageErrors(false);
-    }
-  }, [title, text, image]);
+  }, [title, text]);
 
   const editor = useEditor({
     extensions: [
@@ -129,15 +109,15 @@ const EditPage = () => {
   }, [loaded]);
 
   const handlePublish = () => {
-    if (bodyErrors || titleErrors || imageErrors || !isValidLink) {
+    if (bodyErrors || titleErrors ) {
       setShowErrors(true);
     }
 
-    if (!bodyErrors && !titleErrors && !imageErrors && isValidLink) {
+    if (!bodyErrors && !titleErrors ) {
       const story = {
         title: title,
         content: text,
-        image_url: image,
+        image: image,
       };
       dispatch(editStory(story, storyId));
       history.push(`/stories/${storyId}`);
@@ -148,8 +128,8 @@ const EditPage = () => {
     setShowImageInput(!showImageInput);
   };
 
-  const handleImageUpdate = (e) => {
-    setImage(e.target.value);
+  const handleImageUpdate = (file) => {
+    setImage(file);
   };
 
   return (
@@ -174,25 +154,8 @@ const EditPage = () => {
             </div>
           ) : null}
           <EditorContent editor={largeeditor} className="large-editor" />
-          {!isValidLink && showErrors ? (
-            <div className="errors-msg">
-              <p>Url must end in .jpg, .svg, or .png</p>
-            </div>
-          ) : null}
-          {imageErrors && showErrors ? (
-            <div className="errors-msg">
-              <p>Must contain atleast 1 character</p>
-            </div>
-          ) : null}
           <div className="image-info">
-            {showImageInput ? (
-              <img
-                className="open-close-btns"
-                src={"/svgs/x-btn.svg"}
-                alt=""
-                onClick={handleAddImage}
-              />
-            ) : (
+            {showImageInput ? null : (
               <img
                 className="open-close-btns"
                 src={"/svgs/+-btn.svg"}
@@ -201,13 +164,13 @@ const EditPage = () => {
               />
             )}
             {showImageInput ? (
-              <input
-                className="image-input-field"
-                placeholder="add link to image"
-                maxLength={300}
-                value={image}
-                onChange={handleImageUpdate}
-              ></input>
+              <Modal closeModal={() => setShowImageInput(false)}>
+                <AddImage
+                  closeModal={() => setShowImageInput(false)}
+                  image={image}
+                  handleImageUpdate={(file) => handleImageUpdate(file)}
+                />
+              </Modal>
             ) : null}
           </div>
         </>

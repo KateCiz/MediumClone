@@ -97,7 +97,6 @@ const WritePage = () => {
 
   const handleImageUpdate = (file) => {
     setImage(file);
-    console.log(image)
   };
 
   return (
