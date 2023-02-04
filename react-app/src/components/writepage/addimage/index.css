@@ -82,3 +82,27 @@ input[type=file]::file-selector-button:hover {
     margin-left: 20px;
     margin-top: 10px;
 }
+
+
+.save-img-story{
+  align-items: center;
+  background-color: rgb(26,137,23);
+  border: 0;
+  color: white;
+  cursor: pointer;
+  justify-content: center;
+  border-radius: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+.change-profile-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+}

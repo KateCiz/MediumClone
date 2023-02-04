@@ -10,6 +10,7 @@
     border-radius: 5px;
 }
 
+
 .modal-heading {
   font-family: "Roboto Condensed", sans-serif;
   font-size: 28px;
@@ -22,7 +23,23 @@
 
 .update-profile-button{
   align-self: flex-end;
-  background-color: #292929;
+  background-color: #badcba;
+  border: 0px;
+  color: white;
+  cursor: pointer;
+  justify-content: center;
+  border-radius: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-left: 15px;
+}
+
+.updates-profile-button {
+  align-self: flex-end;
+  background-color: #497a4c;
   border: 0px;
   color: white;
   cursor: pointer;
@@ -37,11 +54,63 @@
 }
 
 [type=text] {
-  width: 50%;
+  width: 85%;
   padding: 12px 20px;
-  margin: 8px 150px;
+  margin: auto;
   display: flex;
-  border: 1px solid #ccc;
+  border:none;
+  border-bottom: 1px solid #ccc;
   box-sizing: border-box;
   align-self: center;
+}
+
+
+.edit-profile-pic-btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.update-btn-profile-pic {
+  background-color: none;
+  background: none;
+  color: #497a4c;
+  border: none;
+  cursor: pointer;
+}
+
+
+.delete-profile-pic-btn {
+  background-color: none;
+  background: none;
+  color: red;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-photo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.user-bio {
+
+}
+
+
+.cancel-profile-button {
+  align-self: flex-end;
+  background-color: white;
+  border: 0px;
+  color: #497a4c;
+  cursor: pointer;
+  justify-content: center;
+  border-radius: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: 'Roboto Condensed', sans-serif;
+  border: 1px solid #497a4c;
 }

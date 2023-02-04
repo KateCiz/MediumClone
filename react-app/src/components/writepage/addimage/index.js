@@ -40,8 +40,8 @@ const AddImage = ({ closeModal, handleImageUpdate}) => {
         />
       </label>
       <div className="change-profile-container">
-        <button onClick={(e) => handleSubmit(e)}>
-          Submit
+        <button className="save-img-story" onClick={(e) => handleSubmit(e)}>
+          Save
         </button>
       </div>
     </div>

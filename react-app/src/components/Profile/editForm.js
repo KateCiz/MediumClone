@@ -38,47 +38,70 @@ function EditProfileForm({closeModal}){
         closeModal();
     };
 
- return(
-    <div className='edit-profile-container'>
-            <button className="exit-icon" onClick={exitFromModal}>
-                <i className="fa-solid fa-xmark"></i>
-            </button>
-            <span className="modal-heading">Profile Information</span>
-            <form onSubmit={onEdit} className='edit-profile-form'>
-                <div>
-                   {message &&(<div>{message}</div>)}
-                </div>
-                <div  className='form-inputs-container'>
-                    <label htmlFor='bio' className='user-bio'>
-                        About
-                    </label>
-                    <input
-                        className='user-bio-input'
-                        name='bio'
-                        type='text'
-                        value= {bio}
-                        onChange={updateBio}
-                    />
-                </div>
-                <div>
-                    <label htmlFor='image' className='user-image'>
-                        Photo
-                    </label>
-                    <input
-                        className='user-image-input'
-                        name='image_profile_url'
-                        type='text'
-                        value= {image_profile_url}
-                        onChange={updateImage}
-                    />
-                </div>
-                <button type='submit' className='update-profile-button'>
-                    Save
-                </button>
-            </form>
+      let profilePic;
 
-        </div>
-    );
+      if (!user?.image_profile_url) {
+        profilePic =
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU";
+      } else {
+        profilePic = user?.image_profile_url;
+      }
+
+ return (
+   <div className="edit-profile-container">
+     <button className="exit-icon" onClick={exitFromModal}>
+       <i className="fa-solid fa-xmark"></i>
+     </button>
+     <span className="modal-heading">Profile Information</span>
+     <div className="edit-photo-container">
+       <div>
+         <div>Photo</div>
+         <img className="user-pic" src={profilePic} alt="profile photo" />
+       </div>
+       <div>
+         <div className="edit-profile-pic-btns">
+           <button className="update-btn-profile-pic">Update</button>
+           <button className="delete-profile-pic-btn">Delete</button>
+         </div>
+         <div>
+           Recommended: Square JPG, PNG, or GIF, at least 1,000 pixels per side.
+         </div>
+       </div>
+     </div>
+     <form onSubmit={onEdit} className="edit-profile-form">
+       <div>{message && <div>{message}</div>}</div>
+       <div className="form-inputs-container">
+         <div className="form-inputs-container">
+           <label htmlFor="bio" className="user-bio">
+             Name*
+           </label>
+           <input
+             className="user-bio-input"
+             name="bio"
+             type="text"
+             value={bio}
+           />
+           <div>Appears on your Profile page, as your byline, and in your responses</div>
+         </div>
+         <label htmlFor="bio" className="user-bio">
+           Bio
+         </label>
+         <input
+           className="user-bio-input"
+           name="bio"
+           type="text"
+           value={bio}
+           onChange={updateBio}
+         />
+         <div>Appears on your Profile and next to yuor stories</div>
+       </div>
+       <button className="cancel-profile-button">Cancel</button>
+       <button type="submit" className="update-profile-button">
+         Save
+       </button>
+     </form>
+   </div>
+ );
 
 };
 

@@ -40,8 +40,13 @@ const VerticalNavBar = ({ user }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/new-story" exact={true} activeClassName="active" style={{ textDecoration: "none" }}>
-              <FiEdit className="navbaricon" />
+            <NavLink
+              to="/new-story"
+              exact={true}
+              activeClassName="active"
+              style={{ textDecoration: "none" }}
+            >
+              <img className="navbaricon" src={"/svgs/Write.svg"} alt="" />
             </NavLink>
           </li>
         </ul>
