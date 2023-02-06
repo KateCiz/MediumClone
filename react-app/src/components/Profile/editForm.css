@@ -10,15 +10,44 @@
     border-radius: 5px;
 }
 
+.heading-containier-edit-profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+
+}
+
+.user-bio {
+  align-items: left;
+  text-align: left;
+  justify-content: left;
+  font-size: 14px;
+  color: gray;
+}
+
+.user-bio-container, .input-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  width: 85%;
+  margin: auto;
+}
+
+.user-bio-input {
+  width: 80%;
+}
 
 .modal-heading {
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 28px;
-  margin-top: 60px;
+  font-size: 24px;
+  margin-top: 10px;
   margin-bottom: 30px;
-  display: block;
-  width: 100%;
-  text-align: center;
+  text-align: left;
+  margin-left: 10%;
+  font-weight: bold;
 }
 
 .update-profile-button{
@@ -64,6 +93,10 @@
   align-self: center;
 }
 
+.form-inputs-container {
+  margin-bottom: 40px;
+}
+
 
 .edit-profile-pic-btns{
   display: flex;
@@ -94,8 +127,9 @@
   justify-content: center;
 }
 
-.user-bio {
-
+.user-bio-input:focus {
+  outline: none;
+  border-bottom: 1px solid rgb(67, 67, 67);
 }
 
 
@@ -113,4 +147,24 @@
   padding-bottom: 10px;
   font-family: 'Roboto Condensed', sans-serif;
   border: 1px solid #497a4c;
+}
+
+
+.user-pic-preview {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 30px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 999;
+}
+
+
+.info-text {
+  font-size: 14px;
+  color: gray;
+  text-align: left;
+  margin-bottom: 10px;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { updateUserProfile } from '../../store/profiles';
@@ -7,6 +7,10 @@ import "./editForm.css"
 
 function EditProfileForm({closeModal}){
     const [bio, setBio] = useState('');
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
+    const [namelength, setNameLength] = useState(0);
+    const [biolength, setBioLength] = useState(0);
     const [image_profile_url, setImageProfileURL] = useState('');
     const [message, setMessage] = useState("");
 
@@ -26,9 +30,21 @@ function EditProfileForm({closeModal}){
         }
     };
 
+    useEffect (() => {
+
+    })
+
     const updateBio = (e) => {
         setBio(e.target.value);
     };
+
+    const  updateFirstName = (e) => {
+        setFirstName(e.target.value);
+    };
+
+    const updateLastName = (e) => {
+          setLastName(e.target.value);
+  };
 
     const updateImage = (e) => {
         setImageProfileURL(e.target.value);
@@ -52,16 +68,22 @@ function EditProfileForm({closeModal}){
      <button className="exit-icon" onClick={exitFromModal}>
        <i className="fa-solid fa-xmark"></i>
      </button>
-     <span className="modal-heading">Profile Information</span>
+     <div className="heading-container-edit-profile">
+       <div className="modal-heading">Profile Information</div>
+     </div>
      <div className="edit-photo-container">
        <div>
          <div>Photo</div>
-         <img className="user-pic" src={profilePic} alt="profile photo" />
+         <img
+           className="user-pic-preview"
+           src={profilePic}
+           alt="profile photo"
+         />
        </div>
        <div>
          <div className="edit-profile-pic-btns">
            <button className="update-btn-profile-pic">Update</button>
-           <button className="delete-profile-pic-btn">Delete</button>
+           <button className="delete-profile-pic-btn">Remove</button>
          </div>
          <div>
            Recommended: Square JPG, PNG, or GIF, at least 1,000 pixels per side.
@@ -72,30 +94,59 @@ function EditProfileForm({closeModal}){
        <div>{message && <div>{message}</div>}</div>
        <div className="form-inputs-container">
          <div className="form-inputs-container">
-           <label htmlFor="bio" className="user-bio">
-             Name*
-           </label>
+           <div className="user-bio-container">
+             <div className="user-bio">First Name*</div>
+           </div>
+           <input
+             className="user-bio-input"
+             name="bio"
+             type="text"
+             value={firstname}
+             onChange={updateFirstName}
+           />
+           <div className="input-info-container">
+             <div className="info-text">
+               Appears on your Profile page, as your byline, and in your
+               responses
+             </div>
+           </div>
+           <div className="user-bio-container">
+             <div className="user-bio">Last Name*</div>
+           </div>
+           <input
+             className="user-bio-input"
+             name="bio"
+             type="text"
+             value={lastname}
+             onChange={updateLastName}
+           />
+           <div className="input-info-container">
+             <div className="info-text">
+               Appears on your Profile page, as your byline, and in your
+               responses
+             </div>
+           </div>
+
+           <div className="user-bio-container">
+             <div className="user-bio">Bio</div>
+           </div>
            <input
              className="user-bio-input"
              name="bio"
              type="text"
              value={bio}
+             onChange={updateBio}
            />
-           <div>Appears on your Profile page, as your byline, and in your responses</div>
+           <div className="input-info-container">
+             <div className="info-text">
+               Appears on your Profile and next to your stories
+             </div>
+           </div>
          </div>
-         <label htmlFor="bio" className="user-bio">
-           Bio
-         </label>
-         <input
-           className="user-bio-input"
-           name="bio"
-           type="text"
-           value={bio}
-           onChange={updateBio}
-         />
-         <div>Appears on your Profile and next to yuor stories</div>
        </div>
-       <button className="cancel-profile-button">Cancel</button>
+       <button className="cancel-profile-button" onClick={exitFromModal}>
+         Cancel
+       </button>
        <button type="submit" className="update-profile-button">
          Save
        </button>
