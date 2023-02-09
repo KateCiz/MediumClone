@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { refreshUser } from '../../store/session';
 import { updateUserProfile } from '../../store/profiles';
 import { getUserProfile } from '../../store/profiles';
 import "./editForm.css"
@@ -34,6 +34,7 @@ function EditProfileForm({closeModal}){
             let userId = user.id
             await dispatch(updateUserProfile(userId, firstname, lastname, bio, image))
             dispatch(getUserProfile(user.id))
+            dispatch(refreshUser())
             exitFromModal()
         }
     };
@@ -83,12 +84,12 @@ function EditProfileForm({closeModal}){
 
   const removeImage = async (e) => {
     e.preventDefault();
+    setHasChanges(true);
     setImage(
       "https://riverlegacy.org/wp-content/uploads/2021/07/blank-profile-photo.jpeg"
     );
-    setProfilePic(
-      "https://riverlegacy.org/wp-content/uploads/2021/07/blank-profile-photo.jpeg"
-    );
+    setProfilePic("https://riverlegacy.org/wp-content/uploads/2021/07/blank-profile-photo.jpeg");
+
   }
 
 
@@ -229,7 +230,7 @@ function EditProfileForm({closeModal}){
            onClick={onEdit}
            type="submit"
            className={
-             hasChanges || imageChanges? "updates-profile-button" : "update-profile-button"
+              (hasChanges || imageChanges)? "updates-profile-button" : "update-profile-button"
            }
          >
            Save

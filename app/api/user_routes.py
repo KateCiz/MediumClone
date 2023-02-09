@@ -53,7 +53,10 @@ def edit_user_profile(id):
             user.first_name = form.data['first_name'] or user.first_name
             user.last_name = form.data['last_name'] or user.last_name
             user.bio = form.data['bio'] or user.bio
-            user.image_profile_url = url or user.image_profile_url
+            if (form.data['image'] == 'https://riverlegacy.org/wp-content/uploads/2021/07/blank-profile-photo.jpeg'):
+                user.image_profile_url = 'https://riverlegacy.org/wp-content/uploads/2021/07/blank-profile-photo.jpeg'
+            else:
+                user.image_profile_url = url or form.data['image'] or user.image_profile_url
             db.session.commit()
             return jsonify({'message': 'User Updated'}), 200
         else:
