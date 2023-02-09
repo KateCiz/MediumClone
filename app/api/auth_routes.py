@@ -66,7 +66,8 @@ def sign_up():
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            image_profile_url="https://riverlegacy.org/wp-content/uploads/2021/07/blank-profile-photo.jpeg",
         )
         db.session.add(user)
         db.session.commit()

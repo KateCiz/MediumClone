@@ -37,6 +37,7 @@ const AddImage = ({ closeModal, handleImageUpdate}) => {
           name="file"
           onChange={e => updateImage(e)}
           required
+          className="upload-img-story"
         />
       </label>
       <div className="change-profile-container">

@@ -25,12 +25,17 @@
   justify-content: left;
   font-size: 14px;
   color: gray;
+  margin-top: 10px;
+}
+
+.input-length {
+  display: flex;
 }
 
 .user-bio-container, .input-info-container {
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: space-between;
   align-items: left;
   width: 85%;
   margin: auto;
@@ -40,14 +45,34 @@
   width: 80%;
 }
 
+.max-length-number {
+  color: gray;
+}
+
 .modal-heading {
   font-family: "Roboto Condensed", sans-serif;
   font-size: 24px;
-  margin-top: 10px;
-  margin-bottom: 30px;
   text-align: left;
-  margin-left: 10%;
+  width: 85%;
+  margin: auto;
+  margin-bottom: 20px;
   font-weight: bold;
+}
+
+.update-img-info-container {
+  align-items: left;
+  display: flex;
+  width: 78%;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.recommended-txt {
+  font-size: 14px;
+  color: gray;
+  text-align: left;
 }
 
 .update-profile-button{
@@ -55,13 +80,13 @@
   background-color: #badcba;
   border: 0px;
   color: white;
-  cursor: pointer;
+  cursor: not-allowed;
   justify-content: center;
   border-radius: 100px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-left: 29px;
+  padding-right: 29px;
+  padding-top: 13px;
+  padding-bottom: 13px;
   font-family: 'Roboto Condensed', sans-serif;
   margin-left: 15px;
 }
@@ -74,23 +99,25 @@
   cursor: pointer;
   justify-content: center;
   border-radius: 100px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-left: 29px;
+  padding-right: 29px;
+  padding-top: 13px;
+  padding-bottom: 13px;
   font-family: 'Roboto Condensed', sans-serif;
 
 }
 
 [type=text] {
   width: 85%;
-  padding: 12px 20px;
+  /* padding: 12px 20px; */
+  padding-bottom: 8px;
   margin: auto;
   display: flex;
   border:none;
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;
   align-self: center;
+  margin-top: 1rem;
 }
 
 .form-inputs-container {
@@ -101,8 +128,12 @@
 .edit-profile-pic-btns{
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
+  text-align: center;
+  margin: none;
+  padding: none;
+  width: 30%;
 }
 
 .update-btn-profile-pic {
@@ -111,6 +142,33 @@
   color: #497a4c;
   border: none;
   cursor: pointer;
+  margin: none;
+  padding: none;
+  text-align: left;
+  justify-content: left;
+}
+
+.btn-upload-profile {
+  background-color: none;
+  background: none;
+  color: #497a4c;
+  border: none;
+  cursor: pointer;
+  margin: none;
+  padding: none;
+  text-align: left;
+  justify-content: left;
+}
+.update-btn-profile-pic::file-selector-button {
+  background-color: none;
+  background: none;
+  color: #497a4c;
+  border: none;
+  cursor: pointer;
+  margin: none;
+  padding: none;
+  text-align: left;
+  justify-content: left;
 }
 
 
@@ -124,7 +182,9 @@
 
 .edit-photo-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 85%;
+  margin: auto;
 }
 
 .user-bio-input:focus {
@@ -141,18 +201,18 @@
   cursor: pointer;
   justify-content: center;
   border-radius: 100px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-left: 29px;
+  padding-right: 29px;
+  padding-top: 13px;
+  padding-bottom: 13px;
   font-family: 'Roboto Condensed', sans-serif;
   border: 1px solid #497a4c;
 }
 
 
 .user-pic-preview {
-  width: 70px;
-  height: 70px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   margin-bottom: 30px;
   background-size: cover;
@@ -161,10 +221,29 @@
   z-index: 999;
 }
 
+.photo-heading {
+  font-size: 14px;
+  color: gray;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
 
 .info-text {
   font-size: 14px;
   color: gray;
   text-align: left;
   margin-bottom: 10px;
+}
+
+
+.update-profile-btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+  width: 85%;
+  margin: auto;
 }

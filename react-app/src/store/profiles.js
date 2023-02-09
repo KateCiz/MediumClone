@@ -27,16 +27,18 @@ export const getUserProfile = (userId) => async(dispatch) => {
     }
 };
 
-export const updateUserProfile = (userId, bio, image_profile_url) => async(dispatch) => {
+export const updateUserProfile = (userId,firstname, lastname, bio, image) => async(dispatch) => {
+
+  const formData = new FormData();
+  formData.append("first_name", firstname);
+  formData.append("last_name", lastname);
+  formData.append("bio", bio);
+  formData.append("image", image);
+
+
   const res = await fetch(`/api/users/profile/${userId}/edit`, {
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      bio,
-      image_profile_url
-    }),
+    body: formData,
   });
   if(res.ok){
     const data = await res.json();
