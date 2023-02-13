@@ -69,6 +69,22 @@ export const logout = () => async (dispatch) => {
   }
 };
 
+//create a think to refresh the current users details
+export const refreshUser = () => async (dispatch) => {
+  const response = await fetch('/api/auth/refresh', {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+  }
+}
+
+
+
 
 export const signUp = (first_name, last_name, email, password) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
