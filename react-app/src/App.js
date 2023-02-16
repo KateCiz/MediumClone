@@ -5,14 +5,13 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from "./components/navbar/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import { authenticate } from "./store/session";
+import { authenticate, refreshUser } from "./store/session";
 import HomePage from "./components/homepage/index";
 import WritePage from "./components/writepage/index";
 import EditPage from "./components/writepage/editpage/index";
 import FullStoryPage from "./components/StoryPage/FullStoryPage";
 import AboutUs from "./components/AboutPage/AboutUs";
 import NotFound from "./components/NotFound/NotFound";
-import * as sessionActions from "./store/session";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -20,14 +19,8 @@ function App() {
 
 
   useEffect(() => {
-    (async () => {
-      await dispatch(authenticate());
-      setLoaded(true);
-    })();
-  }, [dispatch]);
-
-  useEffect(() => {
-      dispatch(sessionActions.refreshUser()).then(() => setLoaded(true));
+      dispatch(authenticate());
+      dispatch(refreshUser()).then(() => setLoaded(true));
   }, [dispatch]);
 
   if (!loaded) {
