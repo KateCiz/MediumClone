@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from "./components/navbar/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import { authenticate, refreshUser } from "./store/session";
+import { authenticate } from "./store/session";
 import HomePage from "./components/homepage/index";
 import WritePage from "./components/writepage/index";
 import EditPage from "./components/writepage/editpage/index";
@@ -19,8 +19,10 @@ function App() {
 
 
   useEffect(() => {
-      dispatch(authenticate());
-      dispatch(refreshUser()).then(() => setLoaded(true));
+    (async () => {
+      await dispatch(authenticate());
+      setLoaded(true);
+    })();
   }, [dispatch]);
 
   if (!loaded) {
