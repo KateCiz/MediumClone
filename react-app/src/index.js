@@ -7,19 +7,10 @@ import configureStore from './store';
 import { ModalProvider } from './context/Modal';
 import { SmallModalProvider } from './context/smallModal';
 import { FollowModalProvider} from './context/followModal'
-import { BrowserRouter } from 'react-router-dom';
-import { restoreCSRF, csrfFetch } from "./store/csrf";
-import * as sessionActions from './store/session';
+// import { restoreCSRF, csrfFetch } from "./store/csrf";
+// import * as sessionActions from './store/session';
 
 const store = configureStore();
-
-if (process.env.NODE_ENV !== "production") {
-  restoreCSRF();
-
-  window.csrfFetch = csrfFetch;
-  window.store = store;
-  window.sessionActions = sessionActions;
-}
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,9 +18,7 @@ ReactDOM.render(
       <FollowModalProvider>
       <ModalProvider>
         <SmallModalProvider>
-          <BrowserRouter>
             <App />
-          </BrowserRouter>
         </SmallModalProvider>
       </ModalProvider>
       </FollowModalProvider>
