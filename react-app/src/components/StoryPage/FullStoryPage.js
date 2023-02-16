@@ -20,7 +20,7 @@ function FullStoryPage() {
         history.push('/404')
       }
     })();
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="full-page-story-div">
