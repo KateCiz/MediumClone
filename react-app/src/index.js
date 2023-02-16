@@ -7,6 +7,7 @@ import configureStore from './store';
 import { ModalProvider } from './context/Modal';
 import { SmallModalProvider } from './context/smallModal';
 import { FollowModalProvider} from './context/followModal'
+import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore();
 
@@ -16,7 +17,9 @@ ReactDOM.render(
       <FollowModalProvider>
       <ModalProvider>
         <SmallModalProvider>
+          <BrowserRouter>
             <App />
+          </BrowserRouter>
         </SmallModalProvider>
       </ModalProvider>
       </FollowModalProvider>

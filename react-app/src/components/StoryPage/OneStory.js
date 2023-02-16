@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 // import EditStoryBtn from "../StoryComponent/EditStory/EditStoryBtn";
-import { useHistory, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import LikeStory from "../util/LikeButton/LikeStory/index"
 import Ellipse from "../util/EditEllipses/index";
 import CommentsButton from "../comments/CommentsButton";
 
 function OneStory({ story, storyId }) {
-  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
 
   let EditedDate;

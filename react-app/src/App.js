@@ -31,7 +31,6 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
         {loaded && (
           <>
             <Switch>
@@ -61,7 +60,6 @@ function App() {
             <NavBar />
           </>
         )}
-      </BrowserRouter>
     </>
   );
 }
